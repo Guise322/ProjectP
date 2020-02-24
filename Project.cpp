@@ -1,15 +1,13 @@
 #include <iostream>
-#include <vector>
-#include <string>
+#include <fstream>
 
 using namespace std;
 
 int main()
 {
-    string msg = "Hello";
-
-    
-        cout << msg;
-    
-    cout << endl;
+    ofstream file;
+    file.open ("text.txt");
+    file << "Some text";
+    file.close();
+    return 0;
 }
