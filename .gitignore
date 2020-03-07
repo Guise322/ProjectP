@@ -1,2 +1,9 @@
 .vscode/
 Project.exe
+.vs/
+Debug/
+ProjectP.sln
+ProjectP.vcxproj
+ProjectP.vcxproj.filters
+ProjectP.vcxproj.user
+

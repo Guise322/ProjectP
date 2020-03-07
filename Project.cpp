@@ -1,47 +1,60 @@
 #include <iostream>
 #include <fstream>
 #include <array>
+#include <string>
 
 using namespace std;
 
 int main()
 {
+    int cnt = 0;
     int valueForEnter;
+    string word[5000];
     string takenText = "";
-
-    string writenText;
+    string writenText = "";
 
     ofstream fileOf;
 
-        fileOf.open ("text.txt");
-        cout<< "Write some text below endl";
+    fileOf.open ("text.txt");
+    if (fileOf.is_open())
+    {
+        cout << "Write some text below \n";
         getline(cin, writenText);
         fileOf << writenText;
         fileOf.close();
+    }
+    else
+        cout << "File could not open";
 
     ifstream fileIf;
     fileIf.open ("text.txt");
-        cout << "Words:";
-    int cnt=0;
-    string word[16];
 
-    while(fileIf >> takenText)
+    if (fileIf.is_open())
     {
-        //a straintforward sequence of statements don't worked because char is not printable type, 
-        //introduce the below transformation sequence
-        word[cnt] = takenText;
-        cnt++;
-    }
-for (int i = 0; i < 16; i++)
-{
-    cout<<word[i]<<endl;
-}
+        //....getline() and ....get() these functions don't had worked, because of that, prefere next method
+        while (fileIf >> takenText)
+        {
+            //a straintforward sequence of statements don't worked because char is not printable type, 
+            //introduce the below transformation sequence
+            word[cnt] = takenText;
+            cnt++;
+        }
 
+        cout << "Words:" << endl;
+
+        for (int i = 0; i < cnt; i++)
+        {
+            cout << word[i] << endl;
+        }
+
+        fileIf.close();
+    }
+    else
+        cout << "File could not open" << endl;
     
-    
-        //Statement for breaking the execution
-        cout<< "\nPress enter for exit";
-        cin>>valueForEnter;
+    //Statement for breaking the execution
+    cout<< "Press enter for exit";
+    cin>>valueForEnter;
 
     return 0;
 }
