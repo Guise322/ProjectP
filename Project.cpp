@@ -12,6 +12,8 @@ int main()
     string word[5000];
     string takenText = "";
     string writenText = "";
+    string wordForSearching = "";
+    string resultOfsearching = "";
 
     ofstream fileOf;
 
@@ -52,8 +54,17 @@ int main()
     else
         cout << "File could not open" << endl;
     
+    cout << "Write word for searching" << endl;
+    getline(cin, wordForSearching);
+
+    resultOfsearching; //Write a statement for searching the word
+
+    cout << "Result of the searching:" << endl;
+    cout << resultOfsearching << endl;
+
+
     //Statement for breaking the execution
-    cout<< "Press enter for exit";
+    cout<< "Press any kay and then Enter for exit";
     cin>>valueForEnter;
 
     return 0;
