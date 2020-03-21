@@ -20,10 +20,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileWriteRead.h">
+    <ClInclude Include="FileReplacement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileSearch.h">
+    <ClInclude Include="FileSearching.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileWritingReading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

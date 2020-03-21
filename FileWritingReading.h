@@ -1,24 +1,26 @@
 #pragma once
 #include <fstream>
 #include <iostream>
+#include <vector>
 #include <string>
 #include <algorithm>
 
 using namespace std;
 
-class FileWriteRead
+class FileWritingReading
 {
 private:
+    int cntOfWords = 0;
     string writenText = "";
     string takenText = "";
 
 public:
+    static int amountOfWords;
     static int cnt;
-    static std::string word[];
+    static vector<string> word;
 
     void writeToFile()
-    {
-        
+    {   
         ofstream fileOf;
 
         fileOf.open("text.txt");
@@ -38,14 +40,15 @@ public:
         fileIf.open("text.txt");
 
         if (fileIf.is_open())
-        {
+        {            
             //....getline() and ....get() these functions don't had worked, because of that, prefere next method
             while (fileIf >> takenText)
             {
                 //a straintforward sequence of statements don't worked because char is not printable type, 
-                //introduce the below transformation sequence
-                word[cnt] = takenText;
+                //introduce a below transformation sequence
                 cnt++;
+                word.resize(cnt);
+                word[cnt-1] = takenText;
             }
 
             cout << "Words:" << endl;

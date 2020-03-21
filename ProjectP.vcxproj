@@ -143,8 +143,9 @@
     <ClCompile Include="Project.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileSearch.h" />
-    <ClInclude Include="FileWriteRead.h" />
+    <ClInclude Include="FileReplacement.h" />
+    <ClInclude Include="FileSearching.h" />
+    <ClInclude Include="FileWritingReading.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

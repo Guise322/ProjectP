@@ -1,16 +1,14 @@
 #pragma once
 #include <cctype>
-#include "FileWriteRead.h"
+#include "FileWritingReading.h"
 
 class FileSearch:
-    public FileWriteRead
+    public FileWritingReading
 {
 private:
-    int amountOfWords = 0;
     string wordForSearching = "";
     string resultOfsearching = "";
     string wordNumber = "";
-
 public:
 
 	void fileSearch()
@@ -25,20 +23,19 @@ public:
         {
             if (wordForSearching.compare(word[i]) == 0)
             {
+                amountOfWords++;
                 string comparedWord = to_string(i + 1);
-                if (i == (cnt - 1))
+                if (i == (cnt - 1) || 0)
                 {
                     wordNumber += comparedWord + ".";
-                    amountOfWords++;
                 }
                 else
                 {
                     wordNumber += comparedWord + ", ";
-                    amountOfWords++;
                 }
             }
         }
-        if (wordNumber=="")
+        if (wordNumber == "")
         {
             cout << "The word number is 0" << endl;
         }
