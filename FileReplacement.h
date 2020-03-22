@@ -9,7 +9,7 @@ class FileReplacement:
 {
 private:
 	vector<string> vectorOfReplacement;
-	string wordToReplace = "ddd";
+	string wordToReplace = "dimon";
 	int numberOfWord = 0;
 
 public:
@@ -17,12 +17,12 @@ public:
 	{
 		for (int i = 0; i < cnt; i++)
 		{
-			if (wordToReplace.compare(word[i]) == 0)
+			if (wordToReplace.compare(wordsVector[i]) == 0)
 			{
-				word[i] = "word";
+				wordsVector[i] = "the bear";
 				numberOfWord = i + 1;
+				cout << numberOfWord;
 			}
 		}
-		cout << numberOfWord << endl;
 	}
 };

@@ -17,17 +17,21 @@ private:
 public:
     static int amountOfWords;
     static int cnt;
-    static vector<string> word;
+    static vector<string> wordsVector;
 
     void writeToFile()
     {   
-        ofstream fileOf("text.txt", ios::in | ios::trunc);
-        //fileOf.open("text.txt");
-
+        writenText = "";
+        ofstream fileOf("text.txt", ios::in);
+        
         if (fileOf.is_open())
         {
-            cout << "Write some text below" << endl;
-            getline(cin, writenText);
+            //cout << "Write some text below" << endl;
+            //getline(cin, writenText);
+            for (int i = 0; i < cnt; i++)
+            {
+                writenText += wordsVector[i] + ' ';
+            }
             fileOf << writenText;
             fileOf.close();
         }
@@ -44,20 +48,20 @@ public:
             //....getline() and ....get() these functions don't had worked, because of that, prefere next method
             while (!fileIf.eof())
             {
-                if ((cnt) == word.size())
+                if ((cnt) == wordsVector.size())
                 {
-                    word.resize(cnt + 10);
+                    wordsVector.resize(cnt + 10);
                 }
-                getline(fileIf, word[cnt], ' ');
+                getline(fileIf, wordsVector[cnt], ' ');
                 cnt++;
             }
 
-            cout << "Words:" << endl;
+            //cout << "Words:" << endl;
 
             for (int i = 0; i < cnt; i++)
             {
-                transform(word[i].begin(), word[i].end(), word[i].begin(), ::tolower);
-                cout << word[i] << endl;
+                transform(wordsVector[i].begin(), wordsVector[i].end(), wordsVector[i].begin(), ::tolower);
+            //    cout << wordsVector[i] << endl;
             }
             fileIf.close();
         }

@@ -21,7 +21,7 @@ public:
 
         for (int i = 0; i < cnt; i++)
         {
-            if (wordForSearching.compare(word[i]) == 0)
+            if (wordForSearching.compare(wordsVector[i]) == 0)
             {
                 amountOfWords++;
                 string comparedWord = to_string(i + 1);
