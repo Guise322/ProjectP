@@ -20,7 +20,7 @@ public:
 			if (wordToReplace.compare(word[i]) == 0)
 			{
 				word[i] = "word";
-				numberOfWord = i;
+				numberOfWord = i + 1;
 			}
 		}
 		cout << numberOfWord << endl;

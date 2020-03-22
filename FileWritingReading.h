@@ -21,9 +21,9 @@ public:
 
     void writeToFile()
     {   
-        ofstream fileOf;
+        ofstream fileOf("text.txt", ios::in | ios::trunc);
+        //fileOf.open("text.txt");
 
-        fileOf.open("text.txt");
         if (fileOf.is_open())
         {
             cout << "Write some text below" << endl;
@@ -36,19 +36,20 @@ public:
     }
     void readFromFile()
     {
-        ifstream fileIf;
-        fileIf.open("text.txt");
+        ifstream fileIf("text.txt",ios::out);
+        //fileIf.open("text.txt");
 
         if (fileIf.is_open())
         {            
             //....getline() and ....get() these functions don't had worked, because of that, prefere next method
-            while (fileIf >> takenText)
+            while (!fileIf.eof())
             {
-                //a straintforward sequence of statements don't worked because char is not printable type, 
-                //introduce a below transformation sequence
+                if ((cnt) == word.size())
+                {
+                    word.resize(cnt + 10);
+                }
+                getline(fileIf, word[cnt], ' ');
                 cnt++;
-                word.resize(cnt);
-                word[cnt-1] = takenText;
             }
 
             cout << "Words:" << endl;
