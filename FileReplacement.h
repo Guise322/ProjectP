@@ -9,12 +9,13 @@ class FileReplacement:
 {
 private:
 	vector<string> vectorOfReplacement;
-	string wordToReplace = "dimon";
+	string wordToReplace = "Dimon";
 	int numberOfWord = 0;
 
 public:
 	void replaceWord()
 	{
+		transform(wordToReplace.begin(), wordToReplace.end(), wordToReplace.begin(), ::tolower);
 		for (int i = 0; i < cnt; i++)
 		{
 			if (wordToReplace.compare(wordsVector[i]) == 0)

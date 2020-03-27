@@ -36,7 +36,7 @@ public:
             fileOf.close();
         }
         else
-            cout << "File could not open";
+            cout << "File could not opened";
     }
     void readFromFile()
     {
@@ -66,6 +66,6 @@ public:
             fileIf.close();
         }
         else
-            cout << "File could not open" << endl;
+            cout << "File could not opened" << endl;
     }
 };

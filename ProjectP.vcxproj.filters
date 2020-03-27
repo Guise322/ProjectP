@@ -29,7 +29,7 @@
     <ClInclude Include="FileWritingReading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
+    <ClInclude Include="TitleForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

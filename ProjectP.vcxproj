@@ -146,7 +146,7 @@
     <ClInclude Include="FileReplacement.h" />
     <ClInclude Include="FileSearching.h" />
     <ClInclude Include="FileWritingReading.h" />
-    <ClInclude Include="Timer.h" />
+    <ClInclude Include="TitleForm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
