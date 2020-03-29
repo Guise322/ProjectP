@@ -2,12 +2,49 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <thread>
 
 class TitleForm
 {
 private:
+	string writtenName = "";
 	string title = "TitleOfForm";
 	vector<string> whiteSpace[2];
+	ofstream fileOf;
+	enum enumWhiteSpace
+	{
+		spaces = 0,
+		newLines = 1
+	};
+
+	void gettingWhiteSpace(enumWhiteSpace typeOfWP, int amountOfSpace)
+	{
+		if (fileOf.is_open())
+		{
+			if (typeOfWP == spaces)
+			{
+				whiteSpace[spaces].resize(amountOfSpace, " ");
+
+				for (int i = 0; i < whiteSpace[spaces].size(); i++)
+				{
+					fileOf << whiteSpace[spaces][i];
+				}
+			}
+
+			if (typeOfWP == newLines)
+			{
+				whiteSpace[newLines].resize(amountOfSpace, "\n");
+
+				for (int i = 0; i < whiteSpace[newLines].size(); i++)
+				{
+					fileOf << whiteSpace[newLines][i];
+				}
+			}
+		}
+		else
+			cout << "File can not opened";
+	}
+
 public:
 	void writeIntoFile()
 	{
@@ -16,31 +53,34 @@ public:
 
 	bool writeTitleForm()
 	{
-		ofstream fileOf("title.txt", ios::in);
+		cout << "Write your name: ";
+		getline(cin, writtenName);
+		cout << endl;
+
+		fileOf.open("title.txt");
 
 		if (fileOf.is_open())
 		{
-			whiteSpace[0].resize(5, "\n");
-			whiteSpace[1].resize(5, " ");
+			gettingWhiteSpace(spaces, 10);
 
 			fileOf << "writtenTitleForm";
 
-			for (int i = 0; i < whiteSpace[0].size(); i++)
-			{
-				fileOf << whiteSpace[0][i];
-			}
+			gettingWhiteSpace(newLines, 20);
 
-			for (int i = 0; i < whiteSpace[1].size(); i++)
-			{
-				fileOf << whiteSpace[1][i];
-			}
+			fileOf << "Name:";
 
-			fileOf << "writtenTitleForm";
+			gettingWhiteSpace(spaces, 20);
+
+			fileOf << writtenName;
 		}
 		else
-			cout << "File could not opened";
+			cout << "File can not opened";
 
 		fileOf.close();
+
+		this_thread::sleep_for(2s);
+
+		cout << "Your title form is writen in" << endl;
 		
 		return true;
 	}

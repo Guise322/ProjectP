@@ -27,7 +27,7 @@ int main()
     cout << "Choose a mode of work:" << endl << "1 - Replacing particular words in the text;"
         << endl << "2 - Searching a word from the file" << endl << "3 - Writting the title list form;"
         << endl << endl;
-    cout << "Write the number of the mode:";
+    cout << "Write the number of the mode: ";
     
     getline(cin, choosenMode);
 

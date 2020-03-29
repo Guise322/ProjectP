@@ -22,8 +22,10 @@ public:
     void writeToFile()
     {   
         writenText = "";
-        ofstream fileOf("text.txt", ios::in);
+        ofstream fileOf;
         
+        fileOf.open("text.txt");
+
         if (fileOf.is_open())
         {
             //cout << "Write some text below" << endl;
@@ -40,8 +42,10 @@ public:
     }
     void readFromFile()
     {
-        ifstream fileIf("text.txt",ios::out);
+        ifstream fileIf;
         //fileIf.open("text.txt");
+
+        fileIf.open("text.txt");
 
         if (fileIf.is_open())
         {            
@@ -63,6 +67,7 @@ public:
                 transform(wordsVector[i].begin(), wordsVector[i].end(), wordsVector[i].begin(), ::tolower);
             //    cout << wordsVector[i] << endl;
             }
+
             fileIf.close();
         }
         else
