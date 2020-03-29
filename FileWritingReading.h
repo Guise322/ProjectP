@@ -10,9 +10,7 @@ using namespace std;
 class FileWritingReading
 {
 private:
-    int cntOfWords = 0;
-    string writenText = "";
-    string takenText = "";
+    
 
 public:
     static int amountOfWords;
@@ -21,6 +19,8 @@ public:
 
     void writeToFile()
     {   
+        string writenText = "";
+
         writenText = "";
         ofstream fileOf;
         
@@ -38,7 +38,7 @@ public:
             fileOf.close();
         }
         else
-            cout << "File could not opened";
+            cout << "The file can't be opened";
     }
     void readFromFile()
     {
@@ -71,6 +71,33 @@ public:
             fileIf.close();
         }
         else
-            cout << "File could not opened" << endl;
+            cout << "The file can't be opened" << endl;
+    }
+
+    void dictionaryWritting()
+    {
+        string takenDictWord = "";
+        string replacedWord = "";
+
+        ofstream fileOf("Dictionari Data.txt", ios::in);
+
+        if (fileOf.is_open())
+        {
+            cout << "Write a word to insert it into the dictionary: ";
+
+            getline(cin, takenDictWord);
+
+            cout << "Write a word that is replaced by that word: ";
+
+            getline(cin, replacedWord);
+
+            fileOf << takenDictWord << "\t" << replacedWord << "\t";
+
+            cout << endl << "The words was written" << endl;
+        }
+        else
+            cout << "The file can't be opened";
+
+        fileOf.close();
     }
 };

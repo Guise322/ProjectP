@@ -74,7 +74,7 @@ public:
 			fileOf << writtenName;
 		}
 		else
-			cout << "File can not opened";
+			cout << "The file can't be opened";
 
 		fileOf.close();
 

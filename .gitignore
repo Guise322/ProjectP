@@ -1,5 +1,6 @@
 Project.exe
 .vs/
 Debug/
-*.txt
+text.txt
+title.txt
 

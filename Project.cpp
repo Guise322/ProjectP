@@ -18,24 +18,24 @@ vector<string> FileWritingReading::wordsVector;
 string choosenMode = "";
 enum mode
 {
-    writeForm, searchInFile, writeTitleForm
+    writtingForm, searchingInFile, writtingTitleForm, writtingIntoDict, idle
 };
-enum mode currMode;
+enum mode currMode = mode::idle;
 
 int main()
 {
     cout << "Choose a mode of work:" << endl << "1 - Replacing particular words in the text;"
-        << endl << "2 - Searching a word from the file" << endl << "3 - Writting the title list form;"
-        << endl << endl;
+        << endl << "2 - Searching a word from the file;" << endl << "3 - Writting the title list form;"
+        << endl <<"4 - Write a word into the dictionary" << endl << endl;
     cout << "Write the number of the mode: ";
     
     getline(cin, choosenMode);
 
     if (choosenMode == "1")
     {
-        currMode = writeForm;
+        currMode = mode::writtingForm;
 
-        FileWritingReading fileWriteRead;
+        FileWritingReading fileWrittingReading;
         FileReplacement fileReplacement;
 
         cout << "Write into the text.txt file" << endl;
@@ -47,32 +47,44 @@ int main()
             FileWritingReading::wordsVector.resize(0);
             this_thread::sleep_for(1s);
 
-            fileWriteRead.readFromFile();
+            fileWrittingReading.readFromFile();
 
             fileReplacement.replaceWord();
 
-            fileWriteRead.writeToFile();
+            fileWrittingReading.writeToFile();
         }
 
         //FileSearch fileSearch;
 
         //fileSearch.fileSearch();
-
     }
 
     else if (choosenMode == "3")
     {
         cout << endl;
 
-        currMode = writeTitleForm;
+        currMode = mode::writtingTitleForm;
 
         TitleForm titleForm;
 
         titleForm.writeTitleForm();
+
+        ~titleForm.writeTitleForm();
     }
-    
+
+    else if (choosenMode == "4")
+    {
+        currMode = mode::writtingIntoDict;
+
+        FileWritingReading fileWrittingReading;
+
+        fileWrittingReading.dictionaryWritting();
+    }
+
+    currMode = mode::idle;
+
     //Statement for breaking the execution
-    cout <<endl << "Press any key and then Enter for exit";
+    cout << endl << "Press any key and then Enter for exit" << endl;
     cin >> valueForEnter;
 
     return 0;
