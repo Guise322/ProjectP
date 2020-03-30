@@ -40,10 +40,10 @@ public:
 			{
 				transform(vectorToRelace[i].begin(), vectorToRelace[i].end(), vectorToRelace[i].begin(), ::tolower);
 			}
-			
+
 			for (int i = 0; i < cnt; i++)
 			{
-				for (int j = 2; j < cntOfWords; j += 2)
+				for (int j = 1; j < cntOfWords; j += 2)
 				{
 					if (vectorToRelace[j].compare(wordsVector[i]) == 0)
 					{
@@ -51,8 +51,8 @@ public:
 					}
 				}
 				numberOfWord = i + 1;
-				cout << numberOfWord;
 			}
+			cout << numberOfWord;
 		}
 		else
 			cout << "The file can't be opened";

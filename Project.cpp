@@ -20,7 +20,7 @@ enum mode
 {
     writtingForm, searchingInFile, writtingTitleForm, writtingIntoDict, idle
 };
-enum mode currMode = mode::idle;
+enum mode currMode;
 
 int main()
 {
@@ -43,6 +43,7 @@ int main()
         while (true)
         //for (int i = 0; i < 60; i++)
         {
+            
             FileWritingReading::cnt = 0;
             FileWritingReading::wordsVector.resize(0);
             this_thread::sleep_for(1s);
