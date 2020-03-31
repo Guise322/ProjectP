@@ -3,14 +3,21 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
+#include <ctime>
 
 class TitleForm
 {
 private:
-	string writtenName = "";
 	string title = "TitleOfForm";
 	vector<string> whiteSpace[2];
 	ofstream fileOf;
+
+	//variables for a memorandum
+	string toWho = "";
+	string fromWho = "";
+	string currDate = "";
+	string memoSubj = "";
+
 	enum enumWhiteSpace
 	{
 		spaces = 0,
@@ -25,7 +32,7 @@ private:
 			{
 				whiteSpace[spaces].resize(amountOfSpace, " ");
 
-				for (int i = 0; i < whiteSpace[spaces].size(); i++)
+				for (int unsigned i = 0; i < whiteSpace[spaces].size(); i++)
 				{
 					fileOf << whiteSpace[spaces][i];
 				}
@@ -35,7 +42,7 @@ private:
 			{
 				whiteSpace[newLines].resize(amountOfSpace, "\n");
 
-				for (int i = 0; i < whiteSpace[newLines].size(); i++)
+				for (int unsigned i = 0; i < whiteSpace[newLines].size(); i++)
 				{
 					fileOf << whiteSpace[newLines][i];
 				}
@@ -45,15 +52,40 @@ private:
 			cout << "File can not opened";
 	}
 
-public:
-	void writeIntoFile()
+	string gettingDate()
 	{
+		time_t now = time(0);
+		tm* gotTime = localtime(&now);
+		int currYear = 1900 + gotTime->tm_year;
 
+		return to_string(gotTime->tm_mday) + "." + to_string(gotTime->tm_mon)
+			+ "." + to_string(currYear);
 	}
 
-	bool writeTitleForm()
+	void gettingMemoData()
+	{
+		cout << endl << "Write who you are sending this memorandum: ";
+		getline(cin, toWho);
+
+		cout << endl << "Write your surname and initials: ";
+		getline(cin, fromWho);
+
+		currDate = gettingDate();
+
+		cout << endl << "Write the subject of the memorandum: ";
+		getline(cin, memoSubj);
+	}
+
+public:
+	void writtingMemo()
+	{
+		gettingMemoData();
+	}
+
+	void writeTitleForm()
 	{
 		cout << "Write your name: ";
+		string writtenName = "";
 		getline(cin, writtenName);
 		cout << endl;
 
@@ -81,8 +113,6 @@ public:
 		this_thread::sleep_for(2s);
 
 		cout << "Your title form is writen in" << endl;
-		
-		return true;
 	}
 };
 

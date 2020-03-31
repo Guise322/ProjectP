@@ -1,3 +1,6 @@
+//Use this preprocessor statement because of getting the 'localtime' error in TitleForm.h
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include "FileWritingReading.h"
 #include "FileSearching.h"
@@ -26,7 +29,7 @@ int main()
 {
     cout << "Choose a mode of work:" << endl << "1 - Replacing particular words in the text;"
         << endl << "2 - Searching a word from the file;" << endl << "3 - Writting the title list form;"
-        << endl <<"4 - Write a word into the dictionary" << endl << endl;
+        <<endl<<"4 - Writting a memorandum form;"<< endl <<"5 - Write a word into the dictionary" << endl << endl;
     cout << "Write the number of the mode: ";
     
     getline(cin, choosenMode);
@@ -69,11 +72,18 @@ int main()
         TitleForm titleForm;
 
         titleForm.writeTitleForm();
-
-        ~titleForm.writeTitleForm();
     }
 
     else if (choosenMode == "4")
+    {
+        currMode = mode::writtingForm;
+
+        TitleForm memoForm;
+
+        memoForm.writtingMemo();
+    }
+
+    else if (choosenMode == "5")
     {
         currMode = mode::writtingIntoDict;
 
