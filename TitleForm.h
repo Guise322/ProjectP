@@ -17,6 +17,7 @@ private:
 	string fromWho = "";
 	string currDate = "";
 	string memoSubj = "";
+	string memoGreeting = "";
 
 	enum enumWhiteSpace
 	{
@@ -80,6 +81,23 @@ private:
 
 		cout << endl << "Write the subject of the memorandum: ";
 		getline(cin, memoSubj);
+
+		cout << endl << "Write the greeting: ";
+		getline(cin, memoGreeting);
+	}
+
+	string writingParagraphs()
+	{
+		string firstParagraph = gettingWhiteSpace(spaces, 1) 
+			+ "First paragraf: here you'll want to deliver your " 
+			+ "most critical information upfront.\n";
+		string secondParagraph = gettingWhiteSpace(spaces, 1)
+			+ "Second paragraph: here you'll want to provide " 
+			+ "context or supporting evidence.\n";
+		string thirdParagraph = gettingWhiteSpace(spaces, 1)
+			+ "Third paragraph: here you'll want to include "
+			+ "your specific request to who you sent this memo.\n";
+		return firstParagraph + secondParagraph + thirdParagraph;
 	}
 
 public:
@@ -93,18 +111,22 @@ public:
 
 		if (fileOf.is_open())
 		{
-			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << gettingWhiteSpace(spaces, 100);
 			fileOf << "TO: " + toWho;
 			fileOf << gettingWhiteSpace(newLines, 1);
-			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << gettingWhiteSpace(spaces, 100);
 			fileOf << "FROM: " + fromWho;
 			fileOf << gettingWhiteSpace(newLines, 1);
-			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << gettingWhiteSpace(spaces, 100);
 			fileOf << "DATE: " + currDate;
 			fileOf << gettingWhiteSpace(newLines, 1);
-			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << gettingWhiteSpace(spaces, 100);
 			fileOf << "SUBJECT: " + memoSubj;
 			fileOf << gettingWhiteSpace(newLines, 1);
+			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << memoGreeting;
+			fileOf << gettingWhiteSpace(newLines, 2);
+			fileOf << writingParagraphs();
 		}
 		else
 			cout << "The file can't be opened";
