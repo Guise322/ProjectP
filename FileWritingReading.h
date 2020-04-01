@@ -74,7 +74,7 @@ public:
             cout << "The file can't be opened" << endl;
     }
 
-    void dictionaryWritting()
+    void dictionaryWriting()
     {
         string takenDictWord = "";
         string replacedWord = "";

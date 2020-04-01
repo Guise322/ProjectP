@@ -24,32 +24,33 @@ private:
 		newLines = 1
 	};
 
-	void gettingWhiteSpace(enumWhiteSpace typeOfWP, int amountOfSpace)
+	string gettingWhiteSpace(enumWhiteSpace typeOfWP, int amountOfSpace)
 	{
-		if (fileOf.is_open())
+		if (typeOfWP == spaces)
 		{
-			if (typeOfWP == spaces)
+			whiteSpace[spaces].resize(amountOfSpace, " ");
+
+			string writtenSpaces = "";
+
+			for (int unsigned i = 0; i < whiteSpace[spaces].size(); i++)
 			{
-				whiteSpace[spaces].resize(amountOfSpace, " ");
-
-				for (int unsigned i = 0; i < whiteSpace[spaces].size(); i++)
-				{
-					fileOf << whiteSpace[spaces][i];
-				}
+				 writtenSpaces += whiteSpace[spaces][i];
 			}
-
-			if (typeOfWP == newLines)
-			{
-				whiteSpace[newLines].resize(amountOfSpace, "\n");
-
-				for (int unsigned i = 0; i < whiteSpace[newLines].size(); i++)
-				{
-					fileOf << whiteSpace[newLines][i];
-				}
-			}
+			return writtenSpaces;
 		}
-		else
-			cout << "File can not opened";
+
+		if (typeOfWP == newLines)
+		{
+			whiteSpace[newLines].resize(amountOfSpace, "\n");
+
+			string writtenNewLines = "";
+
+			for (int unsigned i = 0; i < whiteSpace[newLines].size(); i++)
+			{
+				writtenNewLines += whiteSpace[newLines][i];
+			}
+			return writtenNewLines;
+		}
 	}
 
 	string gettingDate()
@@ -77,9 +78,25 @@ private:
 	}
 
 public:
-	void writtingMemo()
+	void writingMemo()
 	{
 		gettingMemoData();
+
+		ofstream fileOf;
+
+		fileOf.open("Your memorandum template.txt");
+
+		if (fileOf.is_open())
+		{
+			fileOf << gettingWhiteSpace(spaces, 20);
+
+			fileOf << toWho;
+		}
+		else
+			cout << "The file can't be opened";
+		fileOf.close();
+
+		cout << "The memorandum template has been written.";
 	}
 
 	void writeTitleForm()
@@ -93,15 +110,15 @@ public:
 
 		if (fileOf.is_open())
 		{
-			gettingWhiteSpace(spaces, 10);
+			fileOf << gettingWhiteSpace(spaces, 10);
 
 			fileOf << "writtenTitleForm";
 
-			gettingWhiteSpace(newLines, 20);
+			fileOf << gettingWhiteSpace(newLines, 20);
 
 			fileOf << "Name:";
 
-			gettingWhiteSpace(spaces, 20);
+			fileOf << gettingWhiteSpace(spaces, 20);
 
 			fileOf << writtenName;
 		}
@@ -109,8 +126,6 @@ public:
 			cout << "The file can't be opened";
 
 		fileOf.close();
-
-		this_thread::sleep_for(2s);
 
 		cout << "Your title form is writen in" << endl;
 	}

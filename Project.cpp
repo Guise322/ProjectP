@@ -15,30 +15,30 @@ int FileWritingReading::cnt = 0;
 int FileWritingReading::amountOfWords = 0;
 
 //Below variable being for breaking the code execution
-int valueForEnter;
+char valueForEnter;
 
 vector<string> FileWritingReading::wordsVector;
 string choosenMode = "";
 enum mode
 {
-    writtingForm, searchingInFile, writtingTitleForm, writtingIntoDict, idle
+    writingForm, searchingInFile, writingTitleForm, writingIntoDict, idle
 };
 enum mode currMode;
 
 int main()
 {
     cout << "Choose a mode of work:" << endl << "1 - Replacing particular words in the text;"
-        << endl << "2 - Searching a word from the file;" << endl << "3 - Writting the title list form;"
-        <<endl<<"4 - Writting a memorandum form;"<< endl <<"5 - Write a word into the dictionary" << endl << endl;
+        << endl << "2 - Searching a word from the file;" << endl << "3 - Writing the title list form;"
+        <<endl<<"4 - Writing a memorandum template;"<< endl <<"5 - Write a word into the dictionary" << endl << endl;
     cout << "Write the number of the mode: ";
     
     getline(cin, choosenMode);
 
     if (choosenMode == "1")
     {
-        currMode = mode::writtingForm;
+        currMode = mode::writingForm;
 
-        FileWritingReading fileWrittingReading;
+        FileWritingReading fileWritingReading;
         FileReplacement fileReplacement;
 
         cout << "Write into the text.txt file" << endl;
@@ -51,11 +51,11 @@ int main()
             FileWritingReading::wordsVector.resize(0);
             this_thread::sleep_for(1s);
 
-            fileWrittingReading.readFromFile();
+            fileWritingReading.readFromFile();
 
             fileReplacement.replaceWord();
 
-            fileWrittingReading.writeToFile();
+            fileWritingReading.writeToFile();
         }
 
         //FileSearch fileSearch;
@@ -67,7 +67,7 @@ int main()
     {
         cout << endl;
 
-        currMode = mode::writtingTitleForm;
+        currMode = mode::writingTitleForm;
 
         TitleForm titleForm;
 
@@ -76,26 +76,26 @@ int main()
 
     else if (choosenMode == "4")
     {
-        currMode = mode::writtingForm;
+        currMode = mode::writingForm;
 
-        TitleForm memoForm;
+        TitleForm memoTemp;
 
-        memoForm.writtingMemo();
+        memoTemp.writingMemo();
     }
 
     else if (choosenMode == "5")
     {
-        currMode = mode::writtingIntoDict;
+        currMode = mode::writingIntoDict;
 
-        FileWritingReading fileWrittingReading;
+        FileWritingReading fileWritingReading;
 
-        fileWrittingReading.dictionaryWritting();
+        fileWritingReading.dictionaryWriting();
     }
 
     currMode = mode::idle;
 
     //Statement for breaking the execution
-    cout << endl << "Press any key and then Enter for exit" << endl;
+    cout << endl << "Press any letter key and then Enter for exit" << endl;
     cin >> valueForEnter;
 
     return 0;
