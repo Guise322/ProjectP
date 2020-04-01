@@ -2,12 +2,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
+#include <thread>
+#include <conio.h>
 #include "FileWritingReading.h"
 #include "FileSearching.h"
 #include "FileReplacement.h"
 #include "TitleForm.h"
-#include <thread>
-
 
 using namespace std;
 
@@ -95,8 +95,10 @@ int main()
     currMode = mode::idle;
 
     //Statement for breaking the execution
-    cout << endl << "Press any letter key and then Enter for exit" << endl;
-    cin >> valueForEnter;
+    do
+    {
+        cout << endl << "Press any key for exit";
+    } while (cin.get() != '\n');
 
     return 0;
 }

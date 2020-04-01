@@ -58,14 +58,19 @@ private:
 		time_t now = time(0);
 		tm* gotTime = localtime(&now);
 		int currYear = 1900 + gotTime->tm_year;
+		
+		//These statements do processing to occur the more readable form of the date
+		string day = gotTime->tm_mday < 10 ? "0" + to_string(gotTime->tm_mday) 
+			: to_string(gotTime->tm_mday);
+		string month = gotTime->tm_mon < 10 ? "0" + to_string(gotTime->tm_mon) 
+			: to_string(gotTime->tm_mon);
 
-		return to_string(gotTime->tm_mday) + "." + to_string(gotTime->tm_mon)
-			+ "." + to_string(currYear);
+		return day + "." + month + "." + to_string(currYear);
 	}
 
 	void gettingMemoData()
-	{
-		cout << endl << "Write who you are sending this memorandum: ";
+	{	
+		cout << endl << "Write name who you are sending this memorandum: ";
 		getline(cin, toWho);
 
 		cout << endl << "Write your surname and initials: ";
@@ -88,15 +93,24 @@ public:
 
 		if (fileOf.is_open())
 		{
-			fileOf << gettingWhiteSpace(spaces, 20);
-
-			fileOf << toWho;
+			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << "TO: " + toWho;
+			fileOf << gettingWhiteSpace(newLines, 1);
+			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << "FROM: " + fromWho;
+			fileOf << gettingWhiteSpace(newLines, 1);
+			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << "DATE: " + currDate;
+			fileOf << gettingWhiteSpace(newLines, 1);
+			fileOf << gettingWhiteSpace(spaces, 50);
+			fileOf << "SUBJECT: " + memoSubj;
+			fileOf << gettingWhiteSpace(newLines, 1);
 		}
 		else
 			cout << "The file can't be opened";
 		fileOf.close();
 
-		cout << "The memorandum template has been written.";
+		cout << endl << "The memorandum template has been written" << endl;
 	}
 
 	void writeTitleForm()
@@ -127,7 +141,7 @@ public:
 
 		fileOf.close();
 
-		cout << "Your title form is writen in" << endl;
+		cout << endl << "Your title form is writen in" << endl << endl;
 	}
 };
 
