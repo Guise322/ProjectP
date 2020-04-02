@@ -10,7 +10,8 @@ using namespace std;
 class FileWritingReading
 {
 private:
-    
+    int dictCnt = 0;
+    vector<string> dictVector{ "", "" };
 
 public:
     static int amountOfWords;
@@ -49,10 +50,9 @@ public:
 
         if (fileIf.is_open())
         {            
-            //....getline() and ....get() these functions don't had worked, because of that, prefere next method
             while (!fileIf.eof())
             {
-                if ((cnt) == wordsVector.size())
+                if (cnt == wordsVector.size())
                 {
                     wordsVector.resize(cnt + 10);
                 }
@@ -78,20 +78,52 @@ public:
     {
         string takenDictWord = "";
         string replacedWord = "";
+        
+        //dictVector.resize(1);
+
+        ifstream fileIf("Dictionari Data.txt", ios::out);
+            
+            if (fileIf.is_open())
+            {
+                while (!fileIf.eof())
+                {
+                    if (dictCnt == dictVector.size())
+                    {
+                        dictVector.resize(dictVector.size() + 2);
+                    }
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        getline(fileIf, dictVector[dictCnt + i], (dictCnt + i) % 2 == 0 ? '\t' : '\n');
+                    }
+
+                    dictCnt += 2;
+                }
+            }
+            else
+                cout << "The file can't be opened";
+
+            fileIf.close();
 
         ofstream fileOf("Dictionari Data.txt", ios::in);
 
         if (fileOf.is_open())
         {
-            cout << "Write a word to insert it into the dictionary: ";
+            cout << endl << "Write a word to insert it into the dictionary: ";
 
             getline(cin, takenDictWord);
 
-            cout << "Write a word that is replaced by that word: ";
+            cout << endl << "Write a word that is replaced by that word: ";
 
             getline(cin, replacedWord);
+            
+            dictVector[dictVector.size() - 2] = takenDictWord;
+            dictVector[dictVector.size() - 1] = replacedWord;
 
-            fileOf << takenDictWord << "\t" << replacedWord << "\t";
+            for (int i = 0; i < dictVector.size(); i += 2)
+            {
+                fileOf << dictVector[i] << '\t' << dictVector[i + 1] << '\n';
+            }
 
             cout << endl << "The words was written" << endl;
         }

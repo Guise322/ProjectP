@@ -74,7 +74,7 @@ private:
 		cout << endl << "Write name who you are sending this memorandum: ";
 		getline(cin, toWho);
 
-		cout << endl << "Write your surname and initials: ";
+		cout << endl << "Write your name: ";
 		getline(cin, fromWho);
 
 		currDate = gettingDate();
@@ -96,7 +96,7 @@ private:
 			+ "context or supporting evidence.\n";
 		string thirdParagraph = gettingWhiteSpace(spaces, 1)
 			+ "Third paragraph: here you'll want to include "
-			+ "your specific request to who you sent this memo.\n";
+			+ "your specific request to who you send this memo.\n";
 		return firstParagraph + secondParagraph + thirdParagraph;
 	}
 
