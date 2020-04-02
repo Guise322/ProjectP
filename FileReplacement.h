@@ -9,52 +9,31 @@ class FileReplacement:
 	public FileWritingReading
 {
 private:
-	vector<string> vectorToRelace;
+	vector<string> vectorToReplace;
 	int numberOfWord = 0;
 
 public:
 	void replaceWord()
 	{
-		int cntOfWords = 0;
-		ifstream fileIf("Dictionari Data.txt", ios::out);
+		vectorToReplace.resize(dictVectorSize);
+		vectorToReplace = dictionaryReading();
 
-		if (fileIf.is_open())
+		for (int i = 0; i < vectorToReplace.size(); i++)
 		{
-			while (!fileIf.eof())
-			{
-				cntOfWords++;
-
-				vectorToRelace.resize(cntOfWords);
-				
-				if (cntOfWords % 2 == 1)
-				{
-					getline(fileIf, vectorToRelace[cntOfWords - 1], '\t');
-				}
-				else
-				{
-					getline(fileIf, vectorToRelace[cntOfWords - 1], '\t');
-				}
-			}
-
-			for (int i = 0; i < cntOfWords; i++)
-			{
-				transform(vectorToRelace[i].begin(), vectorToRelace[i].end(), vectorToRelace[i].begin(), ::tolower);
-			}
-
-			for (int i = 0; i < cnt; i++)
-			{
-				for (int j = 1; j < cntOfWords; j += 2)
-				{
-					if (vectorToRelace[j].compare(wordsVector[i]) == 0)
-					{
-						wordsVector[i] = vectorToRelace[j - 1];
-					}
-				}
-				numberOfWord = i + 1;
-			}
-			cout << numberOfWord;
+			transform(vectorToReplace[i].begin(), vectorToReplace[i].end(), vectorToReplace[i].begin(), ::tolower);
 		}
-		else
-			cout << "The file can't be opened";
+
+		for (int i = 0; i < cnt; i++)
+		{
+			for (int j = 1; j < vectorToReplace.size(); j += 2)
+			{
+				if (vectorToReplace[j].compare(wordsVector[i]) == 0)
+				{
+					wordsVector[i] = vectorToReplace[j - 1];
+				}
+			}
+			numberOfWord = i + 1;
+		}
+		cout << numberOfWord;
 	}
 };

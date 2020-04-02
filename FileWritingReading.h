@@ -10,10 +10,9 @@ using namespace std;
 class FileWritingReading
 {
 private:
-    int dictCnt = 0;
-    vector<string> dictVector{ "", "" };
 
 public:
+    static int dictVectorSize;
     static int amountOfWords;
     static int cnt;
     static vector<string> wordsVector;
@@ -74,38 +73,50 @@ public:
             cout << "The file can't be opened" << endl;
     }
 
+    vector<string> dictionaryReading()
+    {
+        int dictCnt = 0;
+        vector<string> dictVector{ "", "" };
+
+        ifstream fileIf("Dictionary Data.txt", ios::out);
+
+        if (fileIf.is_open())
+        {
+            while (!fileIf.eof())
+            {
+                if (dictCnt == dictVector.size())
+                {
+                    dictVector.resize(dictVector.size() + 2);
+                }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    getline(fileIf, dictVector[dictCnt + i], (dictCnt + i) % 2 == 0 ? '\t' : '\n');
+                }
+
+                dictCnt += 2;
+            }
+        }
+        else
+            cout << "The file can't be opened";
+
+        fileIf.close();
+
+        dictVectorSize = dictVector.size();
+
+        return dictVector;
+    }
+
     void dictionaryWriting()
     {
         string takenDictWord = "";
         string replacedWord = "";
-        
-        //dictVector.resize(1);
+        vector<string> dictWordsVector;
 
-        ifstream fileIf("Dictionari Data.txt", ios::out);
-            
-            if (fileIf.is_open())
-            {
-                while (!fileIf.eof())
-                {
-                    if (dictCnt == dictVector.size())
-                    {
-                        dictVector.resize(dictVector.size() + 2);
-                    }
+        dictWordsVector.resize(dictVectorSize);
+        dictWordsVector = dictionaryReading();
 
-                    for (int i = 0; i < 2; i++)
-                    {
-                        getline(fileIf, dictVector[dictCnt + i], (dictCnt + i) % 2 == 0 ? '\t' : '\n');
-                    }
-
-                    dictCnt += 2;
-                }
-            }
-            else
-                cout << "The file can't be opened";
-
-            fileIf.close();
-
-        ofstream fileOf("Dictionari Data.txt", ios::in);
+        ofstream fileOf("Dictionary Data.txt", ios::in);
 
         if (fileOf.is_open())
         {
@@ -117,12 +128,12 @@ public:
 
             getline(cin, replacedWord);
             
-            dictVector[dictVector.size() - 2] = takenDictWord;
-            dictVector[dictVector.size() - 1] = replacedWord;
+            dictWordsVector[dictWordsVector.size() - 2] = takenDictWord;
+            dictWordsVector[dictWordsVector.size() - 1] = replacedWord;
 
-            for (int i = 0; i < dictVector.size(); i += 2)
+            for (int i = 0; i < dictWordsVector.size(); i += 2)
             {
-                fileOf << dictVector[i] << '\t' << dictVector[i + 1] << '\n';
+                fileOf << dictWordsVector[i] << '\t' << dictWordsVector[i + 1] << '\n';
             }
 
             cout << endl << "The words was written" << endl;

@@ -13,6 +13,7 @@ using namespace std;
 
 int FileWritingReading::cnt = 0;
 int FileWritingReading::amountOfWords = 0;
+int FileWritingReading::dictVectorSize = 0;
 
 //Below variable being for breaking the code execution
 char valueForEnter;
