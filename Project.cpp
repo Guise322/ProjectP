@@ -8,12 +8,14 @@
 #include "FileSearching.h"
 #include "FileReplacement.h"
 #include "TitleForm.h"
+#include "WordProcessing.h"
 
 using namespace std;
 
 int FileWritingReading::cnt = 0;
 int FileWritingReading::amountOfWords = 0;
 int FileWritingReading::dictVectorSize = 0;
+int WordProcessing::wordProcessSize = 0;
 
 //Below variable being for breaking the code execution
 char valueForEnter;

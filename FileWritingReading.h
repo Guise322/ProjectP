@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "WordProcessing.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ public:
         {
             //cout << "Write some text below" << endl;
             //getline(cin, writenText);
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < wordsVector.size(); i++)
             {
                 writenText += wordsVector[i] + ' ';
             }
@@ -56,12 +57,19 @@ public:
                     wordsVector.resize(cnt + 10);
                 }
                 getline(fileIf, wordsVector[cnt], ' ');
-                cnt++;
+
+                if (!wordsVector[cnt].empty())
+                {
+                    cnt++;
+                }
             }
 
+            WordProcessing wordProcessing;
+
+            wordsVector = wordProcessing.wordProcess(wordsVector);
             //cout << "Words:" << endl;
 
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < wordsVector.size(); i++)
             {
                 transform(wordsVector[i].begin(), wordsVector[i].end(), wordsVector[i].begin(), ::tolower);
             //    cout << wordsVector[i] << endl;

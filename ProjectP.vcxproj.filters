@@ -32,5 +32,8 @@
     <ClInclude Include="TitleForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WordProcessing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -23,7 +23,7 @@ public:
 			transform(vectorToReplace[i].begin(), vectorToReplace[i].end(), vectorToReplace[i].begin(), ::tolower);
 		}
 
-		for (int i = 0; i < cnt; i++)
+		for (int i = 0; i < wordsVector.size(); i++)
 		{
 			for (int j = 1; j < vectorToReplace.size(); j += 2)
 			{
