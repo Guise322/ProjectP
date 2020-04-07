@@ -13,7 +13,7 @@ class FileWritingReading
 private:
 
 public:
-    static int dictVectorSize;
+    //static int dictVectorSize;
     static int amountOfWords;
     static int cnt;
     static vector<string> wordsVector;
@@ -31,9 +31,14 @@ public:
         {
             //cout << "Write some text below" << endl;
             //getline(cin, writenText);
-            for (int i = 0; i < wordsVector.size(); i++)
+            for (unsigned int i = 0; i < wordsVector.size(); i++)
             {
-                writenText += wordsVector[i] + ' ';
+                if (wordsVector[i] != "\t" || wordsVector[i] != "\n")
+                {
+                    writenText += wordsVector[i] + ' ';
+                }
+                else
+                    writenText += wordsVector[i];
             }
             fileOf << writenText;
             fileOf.close();
@@ -69,7 +74,7 @@ public:
             wordsVector = wordProcessing.wordProcess(wordsVector);
             //cout << "Words:" << endl;
 
-            for (int i = 0; i < wordsVector.size(); i++)
+            for (unsigned int i = 0; i < wordsVector.size(); i++)
             {
                 transform(wordsVector[i].begin(), wordsVector[i].end(), wordsVector[i].begin(), ::tolower);
             //    cout << wordsVector[i] << endl;
@@ -110,7 +115,7 @@ public:
 
         fileIf.close();
 
-        dictVectorSize = dictVector.size();
+        //dictVectorSize = dictVector.size();
 
         return dictVector;
     }
@@ -121,7 +126,7 @@ public:
         string replacedWord = "";
         vector<string> dictWordsVector;
 
-        dictWordsVector.resize(dictVectorSize);
+        //dictWordsVector.resize(dictVectorSize);
         dictWordsVector = dictionaryReading();
 
         ofstream fileOf("Dictionary Data.txt", ios::in);
@@ -139,7 +144,7 @@ public:
             dictWordsVector[dictWordsVector.size() - 2] = takenDictWord;
             dictWordsVector[dictWordsVector.size() - 1] = replacedWord;
 
-            for (int i = 0; i < dictWordsVector.size(); i += 2)
+            for (unsigned int i = 0; i < dictWordsVector.size(); i += 2)
             {
                 fileOf << dictWordsVector[i] << '\t' << dictWordsVector[i + 1] << '\n';
             }

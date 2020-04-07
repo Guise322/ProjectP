@@ -27,31 +27,28 @@ private:
 
 	string gettingWhiteSpace(enumWhiteSpace typeOfWP, int amountOfSpace)
 	{
+		string newSpace = "";
+
 		if (typeOfWP == spaces)
 		{
 			whiteSpace[spaces].resize(amountOfSpace, " ");
 
-			string writtenSpaces = "";
-
 			for (int unsigned i = 0; i < whiteSpace[spaces].size(); i++)
 			{
-				 writtenSpaces += whiteSpace[spaces][i];
+				 newSpace += whiteSpace[spaces][i];
 			}
-			return writtenSpaces;
 		}
 
 		if (typeOfWP == newLines)
 		{
 			whiteSpace[newLines].resize(amountOfSpace, "\n");
 
-			string writtenNewLines = "";
-
 			for (int unsigned i = 0; i < whiteSpace[newLines].size(); i++)
 			{
-				writtenNewLines += whiteSpace[newLines][i];
+				newSpace += whiteSpace[newLines][i];
 			}
-			return writtenNewLines;
 		}
+		return newSpace;
 	}
 
 	string gettingDate()

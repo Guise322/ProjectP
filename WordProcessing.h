@@ -1,20 +1,21 @@
 /*------------------The Working Of The Function WordProcess----------------------------
 
-The function takes a vector containing words taken in the file 'text.txt'. It returns
-modified vector to a caller.
+The function takes a vector containing words has been taken in the file 'text.txt'. It 
+returns modified vector to a caller.
 
 Words, readed in the file, are being writed with characters '\n', '\t', '.' into a vector.
-For removing these characters in the words, the function created.
+That distruct a words replacement process. For removing these characters in the words, 
+the function is created.
 
-The vector that is being given to the function named wordsVector. WordsVector is readed
-by the for cicle word by word, then the function partitions each word down into characters
-and compares a character with the character assigned above. There writes the word's 
+The vector that is being given to the function named wordsVector. wordsVector is readed
+by a for loop word by word, then the function partitions each word down into characters
+and compares a character with the character assigned above. Then writes the word's 
 character to the word named oldWord. If the function gets one of the assigned characters,
 it then creats new vector with 1 more a lenght unit and writes remaining characters to 
-newWord. oldWord and newWord is being written into newVector. The function checks next 
+newWord. oldWord and newWord are being written into newVector. The function checks next 
 word then.
 
-After checking all the words, the function writes the size of newVector and returns 
+After checking all the words, the function returns 
 newVector.
 */
 
@@ -28,7 +29,7 @@ class WordProcessing
 private:
 
 public:
-	static int wordProcessSize;
+	//static int wordProcessSize;
 
 	vector<string> wordProcess(vector<string> wordsVector)
 	{
@@ -36,33 +37,37 @@ public:
 		string oldWord = "";
 		string newWord = "";
 		char wordLetter = ' ';
-		char comparedLetter = '\t';
+		char searchedLetter = ' ';
 		vector<string> newVector;
 		int check = 0;
 
-		for (int i = 0; i < wordsVector.size(); i++)
+		for (unsigned int i = 0; i < wordsVector.size(); i++)
 		{
 			word = wordsVector[i];
 
-			for (int j = 0; j < word.size(); j++)
+			for (unsigned int j = 0; j < word.size(); j++)
 			{
 				wordLetter = word[j];
-				oldWord += wordLetter;
-
-				if (wordLetter == comparedLetter)
+				
+				if ((wordLetter == '\t' || wordLetter == '\n' || wordLetter == '.')
+					&& word.size() != 1)
 				{
-					for (int k = j + 1; k < word.size(); k++)
+					searchedLetter = wordLetter;
+
+					for (unsigned int k = j + 1; k < word.size(); k++)
 					{
 						newWord += word[k];
 					}
 					check = 1;
 					break;
 				}
+
+				oldWord += wordLetter;
 			}
 			if (!check == 0)
 			{
-				newVector.resize(wordsVector.size() + 1);
-				for (int l = 0; l < newVector.size(); l++)
+				newVector.resize(wordsVector.size() + 2);
+				for (unsigned int l = 0; l < newVector.size(); l++)
 				{
 					if (l < i)
 					{
@@ -71,19 +76,26 @@ public:
 					if (l == i)
 					{
 						newVector[l] = oldWord;
-						newVector[l + 1] = newWord;
+						newVector[l + 1] = searchedLetter;
+						newVector[l + 2] = newWord;
+
+						//This statement is bacause the loop has empty steps 
+						//due to writing 2 new words into newVector
+						l += 2;
 					}
-					if (l > i + 1)
+					if (l > i + 2)
 					{
-						newVector[l] = wordsVector[l - 1];
+						newVector[l] = wordsVector[l - 2];
 					}
 				}
 				check = 0;
+				wordsVector = newVector;
 			}
 			oldWord.clear();
+			newWord.clear();
 		}
-		wordProcessSize = newVector.size();
+		//wordProcessSize = newVector.size();
 
-		return newVector;
+		return wordsVector;
 	}
 };
