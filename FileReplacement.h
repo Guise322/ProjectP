@@ -31,9 +31,9 @@ public:
 				{
 					wordsVector[i] = vectorToReplace[j - 1];
 					numberOfWord = i + 1;
+					//cout << numberOfWord;
 				}
 			}
 		}
-		cout << numberOfWord;
 	}
 };

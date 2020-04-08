@@ -64,7 +64,7 @@ public:
 
 				oldWord += wordLetter;
 			}
-			if (!check == 0)
+			if (check == 1)
 			{
 				newVector.resize(wordsVector.size() + 2);
 				for (unsigned int l = 0; l < newVector.size(); l++)
@@ -75,17 +75,26 @@ public:
 					}
 					if (l == i)
 					{
-						newVector[l] = oldWord;
-						newVector[l + 1] = searchedLetter;
-						newVector[l + 2] = newWord;
+						if (oldWord.empty())
+						{
+							newVector[l] = searchedLetter;
+							newVector[l + 1] = newWord;
+							l++;
+						}
+						else
+						{
+							newVector[l] = oldWord;
+							newVector[l + 1] = searchedLetter;
+							newVector[l + 2] = newWord;
 
-						//This statement is bacause the loop has empty steps 
-						//due to writing 2 new words into newVector
-						l += 2;
+							//This statement is bacause the loop has empty steps 
+							//due to writing 2 new words into newVector
+							l += 2;
+						}
 					}
-					if (l > i + 2)
+					if (l > i + 2 && l < wordsVector.size())
 					{
-						newVector[l] = wordsVector[l - 2];
+						newVector[l] = wordsVector[l - 1];
 					}
 				}
 				check = 0;
@@ -93,6 +102,7 @@ public:
 			}
 			oldWord.clear();
 			newWord.clear();
+			newVector.clear();
 		}
 		//wordProcessSize = newVector.size();
 

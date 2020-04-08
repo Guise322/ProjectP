@@ -29,16 +29,39 @@ public:
 
         if (fileOf.is_open())
         {
+            int check = 0;
             //cout << "Write some text below" << endl;
             //getline(cin, writenText);
             for (unsigned int i = 0; i < wordsVector.size(); i++)
             {
-                if (wordsVector[i] != "\t" || wordsVector[i] != "\n")
+                string word = wordsVector[i];
+
+                //Take a letter because the charaters have the char type
+                //Completely need only first character got from the word
+                char letter = word[0];
+
+                if (letter != '\t' && letter != '\n' && i == 0)
                 {
-                    writenText += wordsVector[i] + ' ';
+                    writenText += wordsVector[i];
+                }
+                else if (letter != '\t' && letter != '\n' && i != 0 && check == 1 && letter != '\0')
+                {
+                    writenText += wordsVector[i];
+                    check = 0;
+                }
+                else if (letter != '\t' && letter != '\n' && i != 0 && check == 0 && letter != '\0')
+                {
+                    writenText += ' ' + wordsVector[i];
+                }
+                else if (letter == '\0')
+                {
+                    continue;
                 }
                 else
+                {
                     writenText += wordsVector[i];
+                    check = 1;
+                }
             }
             fileOf << writenText;
             fileOf.close();
@@ -63,10 +86,7 @@ public:
                 }
                 getline(fileIf, wordsVector[cnt], ' ');
 
-                if (!wordsVector[cnt].empty())
-                {
-                    cnt++;
-                }
+                !wordsVector[cnt].empty() ? cnt++ : cnt = cnt;
             }
 
             WordProcessing wordProcessing;
