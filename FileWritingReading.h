@@ -18,8 +18,47 @@ public:
     static int cnt;
     static vector<string> wordsVector;
 
+    /*This function returns values defined by table 1:
+                                                                     table 1
+        |---|---------------------------------------------------------------|
+        | N |                         Defining                              |
+        |---|---------------------------------------------------------------|
+        | 0 | The written letter is not a defined symbol of the vector      |
+        |---|---------------------------------------------------------------|
+        | 1 | The written letter is the tabulation or next string symbol    |
+        |---|---------------------------------------------------------------|
+        | 2 | The written letter is the dot symbol                          |
+        |---|---------------------------------------------------------------|
+        | 3 | The written letter is empty                                   |
+        |---|---------------------------------------------------------------|
+    */       
+    int checkingWord(char wordLetter)
+    {
+        char symbols [] = { '\t', '\n' };
+
+        for (unsigned int i = 0; i < sizeof(symbols); i++)
+        {
+            if (wordLetter == symbols[i])
+                return 1;
+
+            else if (wordLetter == '.')
+                return 2;
+
+            else if (wordLetter == '\0')
+                return 3;
+
+            else
+                return 0;
+        }
+    }
+
     void writeToFile()
     {   
+        enum letterCondition
+        {
+            whiteSpace, dot, idle
+        };
+
         string writenText = "";
 
         writenText = "";
@@ -29,7 +68,7 @@ public:
 
         if (fileOf.is_open())
         {
-            int check = 0;
+            letterCondition check = idle;
             //cout << "Write some text below" << endl;
             //getline(cin, writenText);
             for (unsigned int i = 0; i < wordsVector.size(); i++)
@@ -40,27 +79,39 @@ public:
                 //Completely need only first character got from the word
                 char letter = word[0];
 
-                if (letter != '\t' && letter != '\n' && i == 0)
+                if (checkingWord(word[0]) != 1 && i == 0)
                 {
+                    wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += wordsVector[i];
                 }
-                else if (letter != '\t' && letter != '\n' && i != 0 && check == 1 && letter != '\0')
-                {
-                    writenText += wordsVector[i];
-                    check = 0;
-                }
-                else if (letter != '\t' && letter != '\n' && i != 0 && check == 0 && letter != '\0')
+                else if (checkingWord(word[0]) == 0 && check == idle)
                 {
                     writenText += ' ' + wordsVector[i];
                 }
-                else if (letter == '\0')
+                else if (checkingWord(word[0]) == 0 && check == whiteSpace)
+                {
+                    writenText += wordsVector[i];
+                    check = idle;
+                }
+                else if (checkingWord(word[0]) == 2 && check == idle)
+                {
+                    writenText += wordsVector[i];
+                    check = dot;
+                }
+                else if (checkingWord(word[0]) == 2 && check == dot)
+                {
+                    wordsVector[i][0] = toupper(wordsVector[i][0]);
+                    writenText += wordsVector[i];
+                    check = idle;
+                }
+                else if (checkingWord(word[0]) == 3)
                 {
                     continue;
                 }
                 else
                 {
                     writenText += wordsVector[i];
-                    check = 1;
+                    check = whiteSpace;
                 }
             }
             fileOf << writenText;

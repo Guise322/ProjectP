@@ -83,16 +83,23 @@ public:
 						}
 						else
 						{
-							newVector[l] = oldWord;
-							newVector[l + 1] = searchedLetter;
-							newVector[l + 2] = newWord;
+							if (newWord.empty())
+							{
+								newVector[l] = oldWord;
+								newVector[l + 1] = searchedLetter;
+								l++;
+							}
+							else
+							{
+								newVector[l + 2] = newWord;
 
-							//This statement is bacause the loop has empty steps 
-							//due to writing 2 new words into newVector
-							l += 2;
+								//This statement is bacause the loop has empty steps 
+								//due to writing 2 new words into newVector
+								l += 2;
+							}
 						}
 					}
-					if (l > i + 2 && l < wordsVector.size())
+					if (l > i + 1 && l < wordsVector.size())
 					{
 						newVector[l] = wordsVector[l - 1];
 					}
