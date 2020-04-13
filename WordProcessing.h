@@ -67,19 +67,21 @@ public:
 			if (check == 1)
 			{
 				newVector.resize(wordsVector.size() + 2);
+				bool emptyWord = false;
 				for (unsigned int l = 0; l < newVector.size(); l++)
 				{
 					if (l < i)
 					{
 						newVector[l] = wordsVector[l];
 					}
-					if (l == i)
+					else if (l == i)
 					{
 						if (oldWord.empty())
 						{
 							newVector[l] = searchedLetter;
 							newVector[l + 1] = newWord;
 							l++;
+							emptyWord = true;
 						}
 						else
 						{
@@ -88,20 +90,33 @@ public:
 								newVector[l] = oldWord;
 								newVector[l + 1] = searchedLetter;
 								l++;
+								emptyWord = true;
 							}
 							else
 							{
+								newVector[l] = oldWord;
+								newVector[l + 1] = searchedLetter;
 								newVector[l + 2] = newWord;
 
 								//This statement is bacause the loop has empty steps 
 								//due to writing 2 new words into newVector
 								l += 2;
+
+								emptyWord = false;
 							}
 						}
 					}
-					if (l > i + 1 && l < wordsVector.size())
+					else if (l > i + 1)
 					{
-						newVector[l] = wordsVector[l - 1];
+						if (emptyWord)
+						{
+							if (l<wordsVector.size())
+							{
+								newVector[l] = wordsVector[l - 1];
+							}
+						}
+						else
+							newVector[l] = wordsVector[l - 2];
 					}
 				}
 				check = 0;

@@ -11,6 +11,12 @@ using namespace std;
 class FileWritingReading
 {
 private:
+    enum letterCondition
+    {
+        tab, newString, dot, idle, error
+    };
+
+    letterCondition check = idle;
 
 public:
     //static int dictVectorSize;
@@ -23,63 +29,52 @@ public:
         |---|---------------------------------------------------------------|
         | N |                         Defining                              |
         |---|---------------------------------------------------------------|
-        | 0 | The written letter is not a defined symbol of the vector      |
+        | 0 | A written letter is not a defined symbol                      |
         |---|---------------------------------------------------------------|
-        | 1 | The written letter is the tabulation or next string symbol    |
+        | 1 | A written letter is the tabulation symbol                     |
         |---|---------------------------------------------------------------|
-        | 2 | The written letter is the dot symbol                          |
+        | 2 | A written letter is the next string symbol                    |
         |---|---------------------------------------------------------------|
-        | 3 | The written letter is empty                                   |
+        | 3 | The written letter is the dot symbol                          |
         |---|---------------------------------------------------------------|
-    */       
+        | 4 | The written letter is empty                                   |
+        |---|---------------------------------------------------------------|
+    */
     int checkingWord(char wordLetter)
     {
-        char symbols [] = { '\t', '\n' };
+        if (wordLetter == '\t')
+            return 1;
+        
+        if (wordLetter == '\n')
+            return 2;
 
-        for (unsigned int i = 0; i < sizeof(symbols); i++)
-        {
-            if (wordLetter == symbols[i])
-                return 1;
+        else if (wordLetter == '.')
+            return 3;
 
-            else if (wordLetter == '.')
-                return 2;
+        else if (wordLetter == '\0')
+            return 4;
 
-            else if (wordLetter == '\0')
-                return 3;
-
-            else
-                return 0;
-        }
+        else
+            return 0;
     }
 
     void writeToFile()
     {   
-        enum letterCondition
-        {
-            whiteSpace, dot, idle
-        };
-
         string writenText = "";
 
-        writenText = "";
         ofstream fileOf;
         
         fileOf.open("text.txt");
 
         if (fileOf.is_open())
         {
-            letterCondition check = idle;
             //cout << "Write some text below" << endl;
             //getline(cin, writenText);
             for (unsigned int i = 0; i < wordsVector.size(); i++)
             {
                 string word = wordsVector[i];
 
-                //Take a letter because the charaters have the char type
-                //Completely need only first character got from the word
-                char letter = word[0];
-
-                if (checkingWord(word[0]) != 1 && i == 0)
+                if (checkingWord(word[0]) == 0 && i == 0)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += wordsVector[i];
@@ -88,7 +83,12 @@ public:
                 {
                     writenText += ' ' + wordsVector[i];
                 }
-                else if (checkingWord(word[0]) == 0 && check == whiteSpace)
+                else if (checkingWord(word[0]) == 1 && check == idle)
+                {
+                    writenText += wordsVector[i];
+                    check = tab;
+                }
+                else if (checkingWord(word[0]) == 0 && check == tab)
                 {
                     writenText += wordsVector[i];
                     check = idle;
@@ -96,22 +96,32 @@ public:
                 else if (checkingWord(word[0]) == 2 && check == idle)
                 {
                     writenText += wordsVector[i];
-                    check = dot;
+                    check = newString;
                 }
-                else if (checkingWord(word[0]) == 2 && check == dot)
+                else if (checkingWord(word[0]) == 0 && check == newString)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += wordsVector[i];
                     check = idle;
                 }
-                else if (checkingWord(word[0]) == 3)
+                else if (checkingWord(word[0]) == 3 && check == idle)
+                {
+                    writenText += wordsVector[i];
+                    check = dot;
+                }
+                else if (checkingWord(word[0]) == 0 && check == dot)
+                {
+                    wordsVector[i][0] = toupper(wordsVector[i][0]);
+                    writenText += ' ' + wordsVector[i];
+                    check = idle;
+                }
+                else if (checkingWord(word[0]) == 4)
                 {
                     continue;
                 }
                 else
                 {
-                    writenText += wordsVector[i];
-                    check = whiteSpace;
+                    check = error;
                 }
             }
             fileOf << writenText;
