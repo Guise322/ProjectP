@@ -1,22 +1,21 @@
 /*------------------The Working Of The Function WordProcess----------------------------
 
 The function takes a vector containing words has been taken in the file 'text.txt'. It 
-returns modified vector to a caller.
+returns a modified vector to a caller.
 
 Words, readed in the file, are being writed with characters '\n', '\t', '.' into a vector.
-That distruct a words replacement process. For removing these characters in the words, 
-the function is created.
+Thus the process is distructing the words replacement process. For removing these characters
+in the words, the function is created.
 
 The vector that is being given to the function named wordsVector. wordsVector is readed
 by a for loop word by word, then the function partitions each word down into characters
 and compares a character with the character assigned above. Then writes the word's 
 character to the word named oldWord. If the function gets one of the assigned characters,
-it then creats new vector with 1 more a lenght unit and writes remaining characters to 
-newWord. oldWord and newWord are being written into newVector. The function checks next 
-word then.
+it then creats new vector with 2 more vector elements and writes remaining characters to 
+newWord. The got character is contained in the variable searchedLetter. oldWord, newWord, 
+and searchedLetter are being written into newVector. The function checks next word then.
 
-After checking all the words, the function returns 
-newVector.
+After checking all the words, the function returns newVector.
 */
 
 #pragma once
@@ -110,7 +109,7 @@ public:
 					{
 						if (emptyWord)
 						{
-							if (l<wordsVector.size())
+							if (l < wordsVector.size())
 							{
 								newVector[l] = wordsVector[l - 1];
 							}
@@ -121,10 +120,10 @@ public:
 				}
 				check = 0;
 				wordsVector = newVector;
+				newVector.clear();
 			}
 			oldWord.clear();
 			newWord.clear();
-			newVector.clear();
 		}
 		//wordProcessSize = newVector.size();
 

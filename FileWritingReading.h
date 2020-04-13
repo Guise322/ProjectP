@@ -83,7 +83,9 @@ public:
                 {
                     writenText += ' ' + wordsVector[i];
                 }
-                else if (checkingWord(word[0]) == 1 && check == idle)
+                //This if statement and next similar statements don't have the condition 'check == edle'
+                //because 'check' may have the condition 'dot' after a dot being in text for instance 
+                else if (checkingWord(word[0]) == 1)
                 {
                     writenText += wordsVector[i];
                     check = tab;
@@ -93,7 +95,7 @@ public:
                     writenText += wordsVector[i];
                     check = idle;
                 }
-                else if (checkingWord(word[0]) == 2 && check == idle)
+                else if (checkingWord(word[0]) == 2)
                 {
                     writenText += wordsVector[i];
                     check = newString;
