@@ -13,7 +13,7 @@ private:
 	int numberOfWord = 0;
 
 public:
-	void replaceWord()
+	void wordReplacement()
 	{
 		//vectorToReplace.resize(dictVectorSize);
 		vectorToReplace = dictionaryReading();

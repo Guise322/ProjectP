@@ -56,7 +56,7 @@ int main()
 
             fileWritingReading.readFromFile();
 
-            fileReplacement.replaceWord();
+            fileReplacement.wordReplacement();
 
             fileWritingReading.writeToFile();
         }

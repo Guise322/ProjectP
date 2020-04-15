@@ -106,7 +106,7 @@ public:
                     writenText += wordsVector[i];
                     check = idle;
                 }
-                else if (checkingWord(word[0]) == 3 && check == idle)
+                else if (checkingWord(word[0]) == 3)
                 {
                     writenText += wordsVector[i];
                     check = dot;
@@ -180,7 +180,7 @@ public:
         {
             while (!fileIf.eof())
             {
-                if (dictCnt == dictVector.size())
+                if (dictCnt >= dictVector.size())
                 {
                     dictVector.resize(dictVector.size() + 2);
                 }

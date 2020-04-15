@@ -51,7 +51,7 @@ one vector's element.
 		char wordLetter = ' ';
 		char searchedLetter = ' ';
 		vector<string> newVector;
-		int check = 0;
+		bool check = false;
 
 		for (unsigned int i = 0; i < vectorForProcessing.size(); i++)
 		{
@@ -70,16 +70,18 @@ one vector's element.
 					{
 						newWord += word[k];
 					}
-					check = 1;
+					check = true;
 					break;
 				}
 
 				oldWord += wordLetter;
 			}
-			if (check == 1)
+			if (check)
 			{
-				newVector.resize(vectorForProcessing.size() + 2);
 				bool emptyWord = false;
+
+				newVector.resize(vectorForProcessing.size() + 2);
+				
 				for (unsigned int l = 0; l < newVector.size(); l++)
 				{
 					if (l < i)
@@ -131,7 +133,7 @@ one vector's element.
 							newVector[l] = vectorForProcessing[l - 2];
 					}
 				}
-				check = 0;
+				check = false;
 				vectorForProcessing = newVector;
 				newVector.clear();
 			}
