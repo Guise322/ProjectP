@@ -13,7 +13,7 @@ class FileWritingReading
 private:
     enum letterCondition
     {
-        tab, newString, dot, idle, error
+        tab, newString, spaceAndUpper, idle, error
     };
 
     letterCondition check = idle;
@@ -29,29 +29,39 @@ public:
         |---|---------------------------------------------------------------|
         | N |                         Defining                              |
         |---|---------------------------------------------------------------|
-        | 0 | A written letter is not a defined symbol                      |
+        | 0 |  A written letter is not a defined symbol                     |
         |---|---------------------------------------------------------------|
-        | 1 | A written letter is the tabulation symbol                     |
+        | 1 |  A written letter is a tabulation symbol                      |
         |---|---------------------------------------------------------------|
-        | 2 | A written letter is the next string symbol                    |
+        | 2 |  A written letter is a next string symbol                     |
         |---|---------------------------------------------------------------|
-        | 3 | The written letter is the dot symbol                          |
+        | 3 |  The written letter is the symbol needs to write a space after|
+        |   | that and transform first letter of the next word to the upper |
+        |   | letter                                                        |
         |---|---------------------------------------------------------------|
-        | 4 | The written letter is empty                                   |
+        | 4 |  The written letter is empty                                  |
+        |---|---------------------------------------------------------------|
+        | 5 |  The written letter is the symbol don't needs to write a space|
+        |   | after that                                                    |
+        |---|---------------------------------------------------------------|
+        | 6 |  The written letter is the symbol needs to write a space after| 
+        |   | that                                                          |
         |---|---------------------------------------------------------------|
     */
     int checkingWord(char wordLetter)
     {
-        if (wordLetter == '\t')
+        //See ASCII code for incoding an integer to a char symbol
+
+        if (wordLetter == 9)
             return 1;
         
-        if (wordLetter == '\n')
+        if (wordLetter == 10)
             return 2;
 
-        else if (wordLetter == '.')
+        else if (wordLetter == 33 || wordLetter == 46 || wordLetter == 63)
             return 3;
 
-        else if (wordLetter == '\0')
+        else if (wordLetter == 0)
             return 4;
 
         else
@@ -109,9 +119,9 @@ public:
                 else if (checkingWord(word[0]) == 3)
                 {
                     writenText += wordsVector[i];
-                    check = dot;
+                    check = spaceAndUpper;
                 }
-                else if (checkingWord(word[0]) == 0 && check == dot)
+                else if (checkingWord(word[0]) == 0 && check == spaceAndUpper)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += ' ' + wordsVector[i];
