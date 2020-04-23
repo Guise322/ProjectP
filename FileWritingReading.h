@@ -143,7 +143,13 @@ public:
                 }
                 else if (checkingWord(word[0]) == 5)
                 {
-
+                    writenText += ' ' + wordsVector[i];
+                    check = spaceBefore;
+                }
+                else if (checkingWord(word[0]) == 0 && check == spaceBefore)
+                {
+                    writenText += wordsVector[i];
+                    check = idle;
                 }
                 else
                 {

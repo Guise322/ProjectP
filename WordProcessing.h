@@ -27,9 +27,9 @@ public:
 The function takes a vector containing words has been taken in the file 'text.txt'. It
 returns a modified vector to a caller.
 
-Words, readed in the file, are being writed with characters '\n', '\t', '.' into a vector.
-Thus the process is distructing the words replacement process. For removing these characters
-in the words, the function is created.
+Words, readed in the file, are being writed with not-letter characters into a vector.
+Thus the not-letter characters is distroying the words replacement process. For removing
+these characters in the words, the function was created.
 
 The vector that is being given to the function named wordsVector. wordsVector is readed
 by a for loop word by word, then the function partitions each word down into characters
@@ -39,8 +39,8 @@ it then creats new vector with two more vector elements and writes remaining cha
 newWord. The got character is contained in the variable searchedLetter. oldWord, newWord,
 and searchedLetter are being written into newVector. The function checks next word then.
 
-The function returns the vector, after checking all the words, containing one word within
-one vector's element.
+The function returns the vector, after checking all the words, containing one word/symbol
+within one vector's element.
 */
 
 	vector<string> wordProcess(vector<string> vectorForProcessing)
