@@ -61,7 +61,8 @@ one vector's element.
 			{
 				wordLetter = word[j];
 				
-				if ((wordLetter == '\t' || wordLetter == '\n' || wordLetter == '.')
+				//See ASCII code for encoding an integer to a char symbol
+				if ((wordLetter < 65 || wordLetter > 90) && (wordLetter < 97 || wordLetter > 122)
 					&& word.size() != 1)
 				{
 					searchedLetter = wordLetter;

@@ -13,7 +13,8 @@ class FileWritingReading
 private:
     enum letterCondition
     {
-        tab, newString, spaceAndUpper, idle, error
+        tab, newString, spaceAndUpper, spaceBefore, spaceAfter, surrounding, 
+        noSpace, idle, error
     };
 
     letterCondition check = idle;
@@ -33,7 +34,7 @@ public:
         |---|---------------------------------------------------------------|
         | 1 |  A written letter is a tabulation symbol                      |
         |---|---------------------------------------------------------------|
-        | 2 |  A written letter is a next string symbol                     |
+        | 2 |  A written letter is a new string symbol                      |
         |---|---------------------------------------------------------------|
         | 3 |  The written letter is the symbol needs to write a space after|
         |   | that and transform first letter of the next word to the upper |
@@ -41,16 +42,22 @@ public:
         |---|---------------------------------------------------------------|
         | 4 |  The written letter is empty                                  |
         |---|---------------------------------------------------------------|
-        | 5 |  The written letter is the symbol don't needs to write a space|
-        |   | after that                                                    |
+        | 5 |  The written letter is the symbol doesn't need to write       |
+        |   | a space after that but needs to write before                  |
         |---|---------------------------------------------------------------|
         | 6 |  The written letter is the symbol needs to write a space after| 
-        |   | that                                                          |
+        |   | that but doesn't need to write before                         |
+        |---|---------------------------------------------------------------|
+        | 7 |  The written letter is the symbol that 'surrounds' words      |
+        |   | (e.g. ", ', (, *).                                            |
+        |---|---------------------------------------------------------------|
+        | 8 |  The written letter is the symbol that doesn't to write       |
+        |   | a space after and before that                                 |
         |---|---------------------------------------------------------------|
     */
     int checkingWord(char wordLetter)
     {
-        //See ASCII code for incoding an integer to a char symbol
+        //See ASCII code for encoding an integer to a char symbol
 
         if (wordLetter == 9)
             return 1;
@@ -63,6 +70,9 @@ public:
 
         else if (wordLetter == 0)
             return 4;
+
+        else if (wordLetter == 35 || wordLetter == 36)
+            return 5;
 
         else
             return 0;
@@ -130,6 +140,10 @@ public:
                 else if (checkingWord(word[0]) == 4)
                 {
                     continue;
+                }
+                else if (checkingWord(word[0]) == 5)
+                {
+
                 }
                 else
                 {
