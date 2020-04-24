@@ -14,16 +14,16 @@ private:
     enum letterCondition
     {
         tab, newString, spaceAndUpper, spaceBefore, spaceAfter,
-        noSpace, idle, error
+        noSpace, idle, number, error
     };
 
     enum surroundingCondition
     {
-        surroundingBegin, surroundingEnd
+        surroundingProcess, surroundingIdle
     };
 
     letterCondition letterState = idle;
-    surroundingCondition surroundState = surroundingBegin;
+    surroundingCondition surroundState = surroundingIdle;
 
 public:
     //static int dictVectorSize;
@@ -60,10 +60,12 @@ public:
         | 8 |  The written letter is the symbol that doesn't to write       |
         |   | a space after and before that                                 |
         |---|---------------------------------------------------------------|
-    */
+        | 9 |  The written letter is a number                               |
+        |---|---------------------------------------------------------------|
+        */
     int checkingWord(char wordLetter)
     {
-        //See ASCII code for encoding an integer to a char symbol
+        //See ASCII code for encoding an integer number to a char symbol
 
         if (wordLetter == 9)
             return 1;
@@ -83,12 +85,15 @@ public:
         else if (wordLetter == 37 || wordLetter == 58 || wordLetter == 59 || wordLetter == 44)
             return 6;
 
-        else if (wordLetter == 34 || (wordLetter > 38 && wordLetter < 42) || wordLetter == 91 
+        else if (wordLetter == 34 || (wordLetter > 38 && wordLetter < 42) || wordLetter == 91
             || wordLetter == 93 || wordLetter == 123 || wordLetter == 125)
             return 7;
 
         else if (wordLetter == 47 || wordLetter == 92 || wordLetter == 95 || wordLetter == 96)
             return 8;
+
+        else if (wordLetter > 48 && wordLetter < 58)
+            return 9;
 
         else
             return 0;
@@ -110,6 +115,7 @@ public:
             {
                 string word = wordsVector[i];
 
+//----------------------------------The Pipe Of Writing Words Into A File---------------------------------------------
                 if (checkingWord(word[0]) == 0 && i == 0)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
@@ -175,23 +181,23 @@ public:
                 }
                 else if (checkingWord(word[0]) == 7)
                 {
-                    if (surroundState == surroundingBegin && (letterState == tab || letterState == newString))
+                    if (surroundState == surroundingIdle && (letterState == tab || letterState == newString))
                     {
                         writenText += wordsVector[i];
                         letterState = spaceBefore;
-                        surroundState = surroundingEnd;
+                        surroundState = surroundingProcess;
                     }
-                    else if (surroundState == surroundingBegin)
+                    else if (surroundState == surroundingIdle)
                     {
                         writenText += ' ' + wordsVector[i];
                         letterState = spaceBefore;
-                        surroundState = surroundingEnd;
+                        surroundState = surroundingProcess;
                     }
                     else
                     {
                         writenText += wordsVector[i];
                         letterState = spaceAfter;
-                        surroundState = surroundingBegin;
+                        surroundState = surroundingIdle;
                     }
                 }
                 else if (checkingWord(word[0]) == 8)
@@ -199,11 +205,27 @@ public:
                     writenText += wordsVector[i];
                     letterState = noSpace;
                 }
+                else if (checkingWord(word[0] == 9) && letterState != number && surroundState != surroundingProcess)
+                {
+                    writenText += ' ' + wordsVector[i];
+                    letterState = number;
+                }
+                else if (checkingWord(word[0] == 9) && letterState != number && surroundState == surroundingProcess)
+                {
+                    writenText += wordsVector[i];
+                    letterState = number;
+                }
+                else if (checkingWord(word[0] == 9) && letterState == number)
+                {
+                    writenText += wordsVector[i];
+                }
                 else
                 {
                     letterState = error;
                 }
             }
+//-------------------------------------the end of The Pipe-----------------------------------------------------------
+
             fileOf << writenText;
             fileOf.close();
         }
