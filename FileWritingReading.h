@@ -13,11 +13,17 @@ class FileWritingReading
 private:
     enum letterCondition
     {
-        tab, newString, spaceAndUpper, spaceBefore, spaceAfter, surrounding, 
+        tab, newString, spaceAndUpper, spaceBefore, spaceAfter,
         noSpace, idle, error
     };
 
-    letterCondition check = idle;
+    enum surroundingCondition
+    {
+        surroundingBegin, surroundingEnd
+    };
+
+    letterCondition letterState = idle;
+    surroundingCondition surroundState = surroundingBegin;
 
 public:
     //static int dictVectorSize;
@@ -74,6 +80,16 @@ public:
         else if (wordLetter == 35 || wordLetter == 36)
             return 5;
 
+        else if (wordLetter == 37 || wordLetter == 58 || wordLetter == 59 || wordLetter == 44)
+            return 6;
+
+        else if (wordLetter == 34 || (wordLetter > 38 && wordLetter < 42) || wordLetter == 91 
+            || wordLetter == 93 || wordLetter == 123 || wordLetter == 125)
+            return 7;
+
+        else if (wordLetter == 47 || wordLetter == 92 || wordLetter == 95 || wordLetter == 96)
+            return 8;
+
         else
             return 0;
     }
@@ -99,43 +115,44 @@ public:
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += wordsVector[i];
                 }
-                else if (checkingWord(word[0]) == 0 && check == idle)
+                else if (checkingWord(word[0]) == 0 && (letterState == idle || letterState == spaceAfter))
                 {
                     writenText += ' ' + wordsVector[i];
+                    letterState = idle;
                 }
                 //This if statement and next similar statements don't have the condition 'check == edle'
                 //because 'check' may have the condition 'dot' after a dot being in text for instance 
                 else if (checkingWord(word[0]) == 1)
                 {
                     writenText += wordsVector[i];
-                    check = tab;
+                    letterState = tab;
                 }
-                else if (checkingWord(word[0]) == 0 && check == tab)
+                else if (checkingWord(word[0]) == 0 && letterState == tab)
                 {
                     writenText += wordsVector[i];
-                    check = idle;
+                    letterState = idle;
                 }
                 else if (checkingWord(word[0]) == 2)
                 {
                     writenText += wordsVector[i];
-                    check = newString;
+                    letterState = newString;
                 }
-                else if (checkingWord(word[0]) == 0 && check == newString)
+                else if (checkingWord(word[0]) == 0 && letterState == newString)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += wordsVector[i];
-                    check = idle;
+                    letterState = idle;
                 }
                 else if (checkingWord(word[0]) == 3)
                 {
                     writenText += wordsVector[i];
-                    check = spaceAndUpper;
+                    letterState = spaceAndUpper;
                 }
-                else if (checkingWord(word[0]) == 0 && check == spaceAndUpper)
+                else if (checkingWord(word[0]) == 0 && letterState == spaceAndUpper)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += ' ' + wordsVector[i];
-                    check = idle;
+                    letterState = idle;
                 }
                 else if (checkingWord(word[0]) == 4)
                 {
@@ -144,16 +161,47 @@ public:
                 else if (checkingWord(word[0]) == 5)
                 {
                     writenText += ' ' + wordsVector[i];
-                    check = spaceBefore;
+                    letterState = spaceBefore;
                 }
-                else if (checkingWord(word[0]) == 0 && check == spaceBefore)
+                else if (checkingWord(word[0]) == 0 && (letterState == spaceBefore || letterState == noSpace))
                 {
                     writenText += wordsVector[i];
-                    check = idle;
+                    letterState = idle;
+                }
+                else if (checkingWord(word[0]) == 6)
+                {
+                    writenText += wordsVector[i];
+                    letterState = spaceAfter;
+                }
+                else if (checkingWord(word[0]) == 7)
+                {
+                    if (surroundState == surroundingBegin && (letterState == tab || letterState == newString))
+                    {
+                        writenText += wordsVector[i];
+                        letterState = spaceBefore;
+                        surroundState = surroundingEnd;
+                    }
+                    else if (surroundState == surroundingBegin)
+                    {
+                        writenText += ' ' + wordsVector[i];
+                        letterState = spaceBefore;
+                        surroundState = surroundingEnd;
+                    }
+                    else
+                    {
+                        writenText += wordsVector[i];
+                        letterState = spaceAfter;
+                        surroundState = surroundingBegin;
+                    }
+                }
+                else if (checkingWord(word[0]) == 8)
+                {
+                    writenText += wordsVector[i];
+                    letterState = noSpace;
                 }
                 else
                 {
-                    check = error;
+                    letterState = error;
                 }
             }
             fileOf << writenText;
