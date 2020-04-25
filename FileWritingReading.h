@@ -256,12 +256,11 @@ public:
 
             wordsVector = wordProcessing.wordProcess(wordsVector);
             //cout << "Words:" << endl;
-
-            for (unsigned int i = 0; i < wordsVector.size(); i++)
+            /*for (unsigned int i = 0; i < wordsVector.size(); i++)
             {
                 transform(wordsVector[i].begin(), wordsVector[i].end(), wordsVector[i].begin(), ::tolower);
             //    cout << wordsVector[i] << endl;
-            }
+            }*/
 
             fileIf.close();
         }
