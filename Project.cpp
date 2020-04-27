@@ -30,6 +30,10 @@ enum mode currMode;
 
 int main()
 {
+    char ch;
+
+    do
+    {
     cout << "Choose a mode of work:" << endl << "1 - Replacing particular words in the text;"
         << endl << "2 - Searching a word from the file;" << endl << "3 - Writing the title list form;"
         <<endl<<"4 - Writing a memorandum template;"<< endl <<"5 - Write a word into the dictionary" << endl << endl;
@@ -46,9 +50,9 @@ int main()
 
         cout << "Write into the text.txt file" << endl;
 
-        bool repeat{};
+        bool repeat = false;
 
-        while (repeat == false)
+        while (!repeat)
         //for (int i = 0; i < 60; i++)
         {
             
@@ -62,21 +66,37 @@ int main()
 
             fileWritingReading.writeToFile();
 
-            cout << endl << "Repeate the process? [Y/n]\n";
-            char ch{};
-            ch = cin.get();
-
-            if (ch == 'y' || ch == 'Y')
+            while (true)
             {
-                repeat = false;
-                cin.ignore(INT_MAX, '\n');
-            }
-            else if (ch == '\n')
-                repeat = false;
-            else  
-                repeat = true;
+                cout << endl << "Repeate the process? [Y/n]\n";
+         
+                cin.get(ch);
 
-            
+                if (ch == 'y' || ch == 'Y' || ch == '\n')
+                {
+                    repeat = false;
+                    //Use this statement for clearing a cin buffer because next cin.get() takes a char '\n'
+                    cin.ignore(INT_MAX, '\n');
+                    break;
+                }
+                /*else if (ch == '\n')
+                {
+                    repeat = false;
+                    break;
+                }*/
+                else if (ch != 'n')
+                {
+                    cin.ignore(INT_MAX, '\n');
+                    cout << "\nError!\n\nRepeate the command\n";
+                    repeat = false;
+                }
+                else
+                {
+                    cin.ignore(INT_MAX, '\n');
+                    repeat = true;
+                    break;
+                }
+            }
         }
 
         //FileSearch fileSearch;
@@ -115,11 +135,11 @@ int main()
 
     currMode = mode::idle;
 
-    //Statement for breaking the execution
-    do
-    {
-        cout << endl << "Press the Enter key to exit";
-    } while (cin.get() != '\n');
+    //Statements for breaking the execution
+        cout << endl << "Press the Enter key to exit or any key to choose another mode\n";
+        cin.get(ch);
+        //cin.ignore(INT_MAX, '\n');
+    } while (ch != '\n');
 
     return 0;
 }
