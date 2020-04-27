@@ -89,7 +89,8 @@ public:
             || wordLetter == 93 || wordLetter == 123 || wordLetter == 125)
             return 7;
 
-        else if (wordLetter == 47 || wordLetter == 92 || wordLetter == 95 || wordLetter == 96)
+        else if (wordLetter == 45 || wordLetter == 47 || wordLetter == 92 || wordLetter == 95 
+            || wordLetter == 96)
             return 8;
 
         else if (wordLetter > 48 && wordLetter < 58)
@@ -115,7 +116,7 @@ public:
             {
                 string word = wordsVector[i];
 
-//----------------------------------The Pipe Of Writing Words Into A File---------------------------------------------
+//----------------------------------The Pipeline Of Writing Words Into A File---------------------------------------------
                 if (checkingWord(word[0]) == 0 && i == 0)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
@@ -224,7 +225,7 @@ public:
                     letterState = error;
                 }
             }
-//-------------------------------------the end of The Pipe-----------------------------------------------------------
+//-------------------------------------the end of The Pipeline-----------------------------------------------------------
 
             fileOf << writenText;
             fileOf.close();

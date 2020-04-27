@@ -46,7 +46,9 @@ int main()
 
         cout << "Write into the text.txt file" << endl;
 
-        while (true)
+        bool repeat{};
+
+        while (repeat == false)
         //for (int i = 0; i < 60; i++)
         {
             
@@ -59,6 +61,22 @@ int main()
             fileReplacement.wordReplacement();
 
             fileWritingReading.writeToFile();
+
+            cout << endl << "Repeate the process? [Y/n]\n";
+            char ch{};
+            ch = cin.get();
+
+            if (ch == 'y' || ch == 'Y')
+            {
+                repeat = false;
+                cin.ignore(INT_MAX, '\n');
+            }
+            else if (ch == '\n')
+                repeat = false;
+            else  
+                repeat = true;
+
+            
         }
 
         //FileSearch fileSearch;
@@ -100,7 +118,7 @@ int main()
     //Statement for breaking the execution
     do
     {
-        cout << endl << "Press any key for exit";
+        cout << endl << "Press the Enter key to exit";
     } while (cin.get() != '\n');
 
     return 0;
