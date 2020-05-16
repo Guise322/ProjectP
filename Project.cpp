@@ -49,16 +49,6 @@ int main()
         {
             currMode = mode::writingForm;
 
-            /*CoInitialize(NULL);
-
-            DeleteAndPast::_PastClassPtr lol;
-
-            HRESULT hRes = lol.CreateInstance(DeleteAndPast::CLSID_PastClass);
-
-            BSTR str;
-            */
-            //lol->
-
             FileWritingReading fileWritingReading;
             FileReplacement fileReplacement;
 

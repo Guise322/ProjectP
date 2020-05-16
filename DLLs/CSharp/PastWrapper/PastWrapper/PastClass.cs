@@ -18,6 +18,7 @@ namespace PastWrapper
             int[] processesIDList = new int[6];
             string procName = nameOfProcessEXE;
             int cnt = 0;
+            string newLine = Environment.NewLine;
 
             processes = Process.GetProcessesByName(procName);
             foreach (Process proc in processes)

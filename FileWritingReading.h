@@ -4,7 +4,10 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <comutil.h>
 #include "WordProcessing.h"
+
+#import "C:\Users\userHP\Desktop\Code\ProjectP\DLLs\CSharp\PastWrapper\PastWrapper\bin\Debug\PastWrapper.tlb" named_guids raw_interfaces_only
 
 using namespace std;
 
@@ -104,12 +107,12 @@ public:
     {   
         string writenText = "";
 
-        ofstream fileOf;
+        //ofstream fileOf;
         
-        fileOf.open("text.txt");
+        //fileOf.open("text.txt");
 
-        if (fileOf.is_open())
-        {
+        //if (fileOf.is_open())
+        //{
             //cout << "Write some text below" << endl;
             //getline(cin, writenText);
             for (unsigned int i = 0; i < wordsVector.size(); i++)
@@ -226,12 +229,25 @@ public:
                 }
             }
 //-------------------------------------the end of The Pipeline-----------------------------------------------------------
+            CoInitialize(NULL);
 
-            fileOf << writenText;
-            fileOf.close();
-        }
-        else
-            cout << "The file can't be opened";
+            PastWrapper::IPastWrapperInterfacePtr iPastInterfacePtr;
+
+            HRESULT hRes = iPastInterfacePtr.CreateInstance(PastWrapper::CLSID_PastWrapper);
+
+            BSTR str;
+            BSTR nameOfProcessEXE = SysAllocString(L"Notepad");
+            BSTR nameOfNeededFile = SysAllocString(L"gg");
+            const char* cstr = writenText.c_str();
+            BSTR dataToPast = _com_util::ConvertStringToBSTR(cstr);
+            iPastInterfacePtr->PastWr(nameOfProcessEXE, nameOfNeededFile, dataToPast);
+
+            CoUninitialize();
+            //fileOf << writenText;
+            //fileOf.close();
+        //}
+        //else
+            //cout << "The file can't be opened";
     }
     void readFromFile()
     {
