@@ -10,6 +10,8 @@
 #include "TitleForm.h"
 #include "WordProcessing.h"
 
+#import "C:\Users\userHP\Desktop\Code\ProjectP\DLLs\CSharp\PastWrapper\PastWrapper\bin\Debug\PastWrapper.tlb" named_guids raw_interfaces_only
+
 using namespace std;
 
 int FileWritingReading::cnt = 0;
@@ -46,6 +48,16 @@ int main()
         if (choosenMode == '1')
         {
             currMode = mode::writingForm;
+
+            /*CoInitialize(NULL);
+
+            DeleteAndPast::_PastClassPtr lol;
+
+            HRESULT hRes = lol.CreateInstance(DeleteAndPast::CLSID_PastClass);
+
+            BSTR str;
+            */
+            //lol->
 
             FileWritingReading fileWritingReading;
             FileReplacement fileReplacement;
