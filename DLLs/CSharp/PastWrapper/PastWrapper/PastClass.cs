@@ -31,6 +31,9 @@ namespace PastWrapper
             string nameOfFileToCompare = nameOfNeededFile;
             int cntOfProcesses = 0;
 
+            dataToPast = dataToPast.Replace("\n", "\r\n");
+            dataToPast = dataToPast.Replace("\t", "\r\t");
+
             Clipboard.SetText(dataToPast);
 
             foreach (string name in processesNameList)

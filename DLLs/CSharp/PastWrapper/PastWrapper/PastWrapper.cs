@@ -17,7 +17,7 @@ namespace PastWrapper
     [Guid("881E627C-F74B-4A1A-937A-00FAFFB18A69")]
     public class PastWrapper : IPastWrapperInterface
     {
-        public void PastWr(string nameOfProcessEXEWrap, string nameOfNeededFileWrap, string dataToPastWrap)
+        public void PastWr(string nameOfProcessEXEWrap, string nameOfNeededFileWrap ,string dataToPastWrap)
         {
             Console.Beep();
             PastClass.Past(nameOfProcessEXEWrap, nameOfNeededFileWrap, dataToPastWrap);

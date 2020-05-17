@@ -238,6 +238,7 @@ public:
             BSTR str;
             BSTR nameOfProcessEXE = SysAllocString(L"Notepad");
             BSTR nameOfNeededFile = SysAllocString(L"gg");
+
             const char* cstr = writenText.c_str();
             BSTR dataToPast = _com_util::ConvertStringToBSTR(cstr);
             iPastInterfacePtr->PastWr(nameOfProcessEXE, nameOfNeededFile, dataToPast);
