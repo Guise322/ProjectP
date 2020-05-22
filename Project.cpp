@@ -33,6 +33,7 @@ enum mode currMode;
 int main()
 {
     char ch;
+    char checkL;
 
     do
     {
@@ -56,8 +57,9 @@ int main()
 
             bool repeat = false;
 
-            while (!repeat)
+            //while (!repeat)
                 //for (int i = 0; i < 60; i++)
+            do
             {
 
                 FileWritingReading::cnt = 0;
@@ -70,7 +72,7 @@ int main()
 
                 fileWritingReading.writeToFile();
 
-                while (true)
+                /*while (true)
                 {
                     cout << endl << "Repeate the process? [Y/n]" << endl << endl;
 
@@ -88,7 +90,7 @@ int main()
                         repeat = false;
                         break;
                     }*/
-                    else if (ch != 'n')
+                    /*else if (ch != 'n')
                     {
                         //cin.ignore(INT_MAX, '\n');
                         cout << endl << "Error!" << endl << endl << "Repeate the command" << endl;
@@ -100,8 +102,9 @@ int main()
                         repeat = true;
                         break;
                     }
-                }
-            }
+                }*/
+                cin.get(checkL);
+            } while (checkL != '5');
 
             //FileSearch fileSearch;
 
@@ -141,10 +144,11 @@ int main()
 
         //Statements for breaking the execution
         cout << endl << "Press the Enter key to exit or any key to choose another mode" << endl;
+        cin.clear();
         //This statement is used to put the char symbol '\n' from an input
-        cin.get(ch);
+        cin >> ch;
         //Because the cin stores all inputted char symbols, this statement is preffered to cut others symbols
-        cin.ignore(INT_MAX, '\n');
+        //cin.ignore(INT_MAX, '\n');
     } while (ch != '\n');
 
     return 0;

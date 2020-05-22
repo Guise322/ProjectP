@@ -237,7 +237,7 @@ public:
 
             BSTR str;
             BSTR nameOfProcessEXE = SysAllocString(L"Notepad");
-            BSTR nameOfNeededFile = SysAllocString(L"gg");
+            BSTR nameOfNeededFile = SysAllocString(L"text");
 
             const char* cstr = writenText.c_str();
             BSTR dataToPast = _com_util::ConvertStringToBSTR(cstr);
