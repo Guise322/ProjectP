@@ -32,11 +32,13 @@ enum mode currMode;
 
 int main()
 {
-    char ch;
-    char checkL;
+    string ch = "";
+    bool repeatProcess = false;
 
     do
     {
+        ch = "";
+
         cout << endl << "Choose a mode of work:" << endl << "1 - Replacing particular words in the text;"
             << endl << "2 - Searching a word from the file;" << endl << "3 - Writing the title list form;"
             << endl << "4 - Writing a memorandum template;" << endl << "5 - Write a word into the dictionary" << endl << endl;
@@ -55,13 +57,11 @@ int main()
 
             cout << endl << "Write into the text.txt file" << endl;
 
-            bool repeat = false;
+            bool repeatOne = false;
 
-            //while (!repeat)
                 //for (int i = 0; i < 60; i++)
             do
             {
-
                 FileWritingReading::cnt = 0;
                 FileWritingReading::wordsVector.resize(0);
                 this_thread::sleep_for(1s);
@@ -72,39 +72,32 @@ int main()
 
                 fileWritingReading.writeToFile();
 
-                /*while (true)
-                {
-                    cout << endl << "Repeate the process? [Y/n]" << endl << endl;
+                bool repeatRP = false;
 
+                do
+                {
+                    cout << endl << "Repeate the process? [y/n]" << endl << endl;
+                    
                     cin >> ch;
 
-                    if (ch == 'y' || ch == 'Y' || ch == '\n')
+                    if (ch == "y")
                     {
-                        repeat = false;
-                        //Use this statement for clearing a cin buffer because next cin.get() takes a char '\n'
-                        //cin.ignore(INT_MAX, '\n');
-                        break;
+                        repeatRP = true;
+                        repeatOne = false;
                     }
-                    /*else if (ch == '\n')
+                    else if (ch != "n")
                     {
-                        repeat = false;
-                        break;
-                    }*/
-                    /*else if (ch != 'n')
-                    {
-                        //cin.ignore(INT_MAX, '\n');
                         cout << endl << "Error!" << endl << endl << "Repeate the command" << endl;
-                        repeat = false;
+                        repeatRP = false;
+                        repeatOne = false;
                     }
                     else
                     {
-                        //cin.ignore(INT_MAX, '\n');
-                        repeat = true;
-                        break;
+                        repeatRP = true;
+                        repeatOne = true;
                     }
-                }*/
-                cin.get(checkL);
-            } while (checkL != '5');
+                } while (!repeatRP);
+            } while (!repeatOne);
 
             //FileSearch fileSearch;
 
@@ -142,14 +135,33 @@ int main()
 
         currMode = mode::idle;
 
-        //Statements for breaking the execution
-        cout << endl << "Press the Enter key to exit or any key to choose another mode" << endl;
-        cin.clear();
-        //This statement is used to put the char symbol '\n' from an input
-        cin >> ch;
-        //Because the cin stores all inputted char symbols, this statement is preffered to cut others symbols
-        //cin.ignore(INT_MAX, '\n');
-    } while (ch != '\n');
+        bool repeatCAM = false;
+
+        //The do loop for breaking the execution
+        do
+        {
+            cout << endl << "Chose another mode? [y/n]" << endl << endl;
+
+            cin >> ch;
+
+                if (ch == "y")
+                {
+                    repeatCAM = true;
+                    repeatProcess = false;
+                }
+                else if (ch != "n")
+                {
+                    cout << endl << "Error!" << endl << endl << "Repeate the command" << endl;
+                    repeatCAM = false;
+                    repeatProcess = false;
+                }
+                else
+                {
+                    repeatCAM = true;
+                    repeatProcess = true;
+                }
+        } while (!repeatCAM);
+    } while (!repeatProcess);
 
     return 0;
 }
