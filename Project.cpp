@@ -9,8 +9,11 @@
 #include "FileReplacement.h"
 #include "TitleForm.h"
 #include "WordProcessing.h"
+#include "RepeatProcess.h"
 
 #import "C:\Users\userHP\Desktop\Code\ProjectP\DLLs\CSharp\PastWrapper\PastWrapper\bin\Debug\PastWrapper.tlb" named_guids raw_interfaces_only
+
+RepeatProcess repeatProcess;
 
 using namespace std;
 
@@ -19,8 +22,7 @@ int FileWritingReading::amountOfWords = 0;
 //int FileWritingReading::dictVectorSize = 0;
 //int WordProcessing::wordProcessSize = 0;
 
-//Below variable being for breaking the code execution
-char valueForEnter;
+bool repeatChoice = false;
 
 vector<string> FileWritingReading::wordsVector;
 
@@ -32,19 +34,14 @@ enum mode currMode;
 
 int main()
 {
-    string ch = "";
-    bool repeatProcess = false;
-
     do
     {
-        ch = "";
-
-        cout << endl << "Choose a mode of work:" << endl << "1 - Replacing particular words in the text;"
-            << endl << "2 - Searching a word from the file;" << endl << "3 - Writing the title list form;"
+        cout << endl << "Choose a mode of the program work:" << endl << "1 - Replacing particular words in the text;"
+            << endl << "2 - Searching a word in the file;" << endl << "3 - Writing the title list form;"
             << endl << "4 - Writing a memorandum template;" << endl << "5 - Write a word into the dictionary" << endl << endl;
         cout << "Write the number of the mode: ";
 
-        char choosenMode;
+        char choosenMode = ' ';
 
         cin >> choosenMode;
 
@@ -72,36 +69,30 @@ int main()
 
                 fileWritingReading.writeToFile();
 
-                bool repeatRP = false;
-
-                do
-                {
-                    cout << endl << "Repeate the process? [y/n]" << endl << endl;
-                    
-                    cin >> ch;
-
-                    if (ch == "y")
-                    {
-                        repeatRP = true;
-                        repeatOne = false;
-                    }
-                    else if (ch != "n")
-                    {
-                        cout << endl << "Error!" << endl << endl << "Repeate the command" << endl;
-                        repeatRP = false;
-                        repeatOne = false;
-                    }
-                    else
-                    {
-                        repeatRP = true;
-                        repeatOne = true;
-                    }
-                } while (!repeatRP);
+                repeatOne = repeatProcess.repeat("Repeat the process?");
+                
             } while (!repeatOne);
 
             //FileSearch fileSearch;
 
             //fileSearch.fileSearch();
+        }
+
+        else if (choosenMode == '2')
+        {
+            currMode = mode::searchingInFile;
+
+            bool repeatTwo = false;
+
+            do
+            {
+                FileSearching fileSearching;
+
+                fileSearching.fileSearch();
+
+                repeatTwo = repeatProcess.repeat("Search a word again?");
+
+            } while (!repeatTwo);
         }
 
         else if (choosenMode == '3')
@@ -110,9 +101,17 @@ int main()
 
             currMode = mode::writingTitleForm;
 
-            TitleForm titleForm;
+            bool repeatThree = false;
 
-            titleForm.writeTitleForm();
+            do
+            {
+                TitleForm titleForm;
+
+                titleForm.writeTitleForm();
+
+                repeatThree = repeatProcess.repeat("Wrirte a title form again?");
+
+            } while (!repeatThree);
         }
 
         else if (choosenMode == '4')
@@ -135,33 +134,9 @@ int main()
 
         currMode = mode::idle;
 
-        bool repeatCAM = false;
+        repeatChoice = repeatProcess.repeat("Choose another mode?");
 
-        //The do loop for breaking the execution
-        do
-        {
-            cout << endl << "Chose another mode? [y/n]" << endl << endl;
-
-            cin >> ch;
-
-                if (ch == "y")
-                {
-                    repeatCAM = true;
-                    repeatProcess = false;
-                }
-                else if (ch != "n")
-                {
-                    cout << endl << "Error!" << endl << endl << "Repeate the command" << endl;
-                    repeatCAM = false;
-                    repeatProcess = false;
-                }
-                else
-                {
-                    repeatCAM = true;
-                    repeatProcess = true;
-                }
-        } while (!repeatCAM);
-    } while (!repeatProcess);
+    } while (!repeatChoice);
 
     return 0;
 }

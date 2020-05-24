@@ -2,8 +2,8 @@
 #include <cctype>
 #include "FileWritingReading.h"
 
-class FileSearch:
-    public FileWritingReading
+class FileSearching:
+    FileWritingReading
 {
 private:
     string wordForSearching = "";
@@ -35,7 +35,7 @@ public:
                 amountOfWords++;
                 comparedWord = to_string(i + 1);
             }
-            if (i == (cnt - 1) || 0)
+            if ((i == (cnt - 1)) || (i == 0))
             {
                 wordNumber += comparedWord + ".";
             }
