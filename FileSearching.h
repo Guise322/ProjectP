@@ -14,12 +14,14 @@ public:
 	void fileSearch()
 	{
         cout << "Write word for searching" << endl;
-        getline(cin, wordForSearching);
+
+        cin >> wordForSearching;
+
 
         //This statement converting upper case letters to lower case letters is occured below, because these letters don't equals to each other
         transform(wordForSearching.begin(), wordForSearching.end(), wordForSearching.begin(), ::tolower);
         
-        vector<string> wordsToCompare = wordsVector;
+        vector<string> wordsToCompare = readFromFile();
 
         for (string i : wordsToCompare)
         {
@@ -27,22 +29,28 @@ public:
         }
 
         string comparedWord = "";
+        bool wordSearched = false;
 
-        for (int i = 0; i < cnt; i++)
+        for (unsigned int i = 0; i < wordsToCompare.size(); i++)
         {
             if (wordForSearching.compare(wordsToCompare[i]) == 0)
             {
+                wordSearched = true;
                 amountOfWords++;
                 comparedWord = to_string(i + 1);
             }
-            if ((i == (cnt - 1)) || (i == 0))
+            if (((i == 0) || (amountOfWords == 1)) && wordSearched)
             {
-                wordNumber += comparedWord + ".";
+                wordNumber += comparedWord;
+                wordSearched = false;
             }
-            else
+            else if ((i != 0) && wordSearched)
             {
-                wordNumber += comparedWord + ", ";
+                wordNumber += ", " + comparedWord;
+                wordSearched = false;
             }
+            else if (i == (wordsToCompare.size() - 1))
+                wordNumber += ".";
         }
         if (wordNumber == "")
         {
@@ -52,7 +60,7 @@ public:
         {
             cout << "The word number is " << wordNumber << endl;
         }
-        cout << "Amount of words is " << amountOfWords << endl;
+        cout << "Amount of words is " << amountOfWords + "."<< endl;
         wordsToCompare.clear();
 	}
 };

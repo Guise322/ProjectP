@@ -250,7 +250,7 @@ public:
         //else
             //cout << "The file can't be opened";
     }
-    void readFromFile()
+    vector<string> readFromFile()
     {
         ifstream fileIf;
         //fileIf.open("text.txt");
@@ -284,6 +284,8 @@ public:
         }
         else
             cout << "The file can't be opened" << endl;
+        
+        return wordsVector;
     }
 
     vector<string> dictionaryReading()
