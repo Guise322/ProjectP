@@ -22,8 +22,8 @@ namespace PastWrapper
             processes = Process.GetProcessesByName(procName);
             foreach (Process proc in processes)
             {
-                processesNameList[cnt++] = proc.MainWindowTitle;
-                processesIDList[cnt] = proc.Id;
+                processesNameList[cnt] = proc.MainWindowTitle;
+                processesIDList[cnt++] = proc.Id;
             }
 
             string nameOfFileToCompare = nameOfNeededFile;
@@ -51,16 +51,20 @@ namespace PastWrapper
             }
             //Below statements get the window of ProjectP as the main window
             Process[] processesP;
-            string[] processesNameListP = new string[12];
-            int[] processesIDListP = new int[12];
-            string procNameP = "Console";
+            string[] processesNameListP;
+            int[] processesIDListP;
+            //string procNameP = "Console";
             int cntP = 0;
 
-            processesP = Process.GetProcessesByName(procNameP);
+            processesP = Process.GetProcesses();
+
+            processesNameListP = new string[processesP.Length];
+            processesIDListP = new int[processesP.Length];
+
             foreach (Process proc in processesP)
             {
-                processesNameListP[cntP++] = proc.MainWindowTitle;
-                processesIDListP[cntP] = proc.Id;
+                processesNameListP[cntP] = proc.MainWindowTitle;
+                processesIDListP[cntP++] = proc.Id;
             }
 
             string nameOfFileToCompareP = "ProjectP";
@@ -72,11 +76,12 @@ namespace PastWrapper
                 {
                     if (name.Contains(nameOfFileToCompareP))
                     {
-                        int procIDP = processesIDListP[cntOfProcessesP++];
+                        int procIDP = processesIDListP[cntOfProcessesP];
                         Process tempProcP = Process.GetProcessById(procIDP);
                         SetForegroundWindow(tempProcP.MainWindowHandle);
                     }
                 }
+                cntOfProcessesP++;
             }
         }
     }
