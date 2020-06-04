@@ -29,6 +29,22 @@ namespace PastWrapper
             string nameOfFileToCompare = nameOfNeededFile;
             int cntOfProcesses = 0;
 
+            YandexSpeller yandexSpeller = new YandexSpeller();
+
+            string[] spellerAnswer = yandexSpeller.XmlYandexAPIWordsVariants(dataToPast);
+
+            int j = 1;
+            for (int i = 0; i < spellerAnswer.Length; i += 2)
+            {
+                if (!spellerAnswer[i].Equals("###"))
+                {
+                    dataToPast = dataToPast.Replace(spellerAnswer[i], spellerAnswer[j]);
+                    j += 2;
+                }
+                else
+                    break;
+            }
+
             dataToPast = dataToPast.Replace("\n", "\r\n");
             dataToPast = dataToPast.Replace("\t", "\r\t");
 

@@ -7,7 +7,7 @@
 #include <comutil.h>
 #include "WordProcessing.h"
 
-#import "C:\Users\userHP\Desktop\Code\ProjectP\DLLs\CSharp\PastWrapper\PastWrapper\bin\Debug\PastWrapper.tlb" named_guids raw_interfaces_only
+#import "D:\Code\ProjectP\DLLs\CSharp\PastWrapper\PastWrapper\bin\Debug\PastWrapper.tlb" named_guids raw_interfaces_only
 
 using namespace std;
 

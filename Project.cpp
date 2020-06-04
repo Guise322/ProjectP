@@ -11,8 +11,6 @@
 #include "WordProcessing.h"
 #include "RepeatProcess.h"
 
-#import "C:\Users\userHP\Desktop\Code\ProjectP\DLLs\CSharp\PastWrapper\PastWrapper\bin\Debug\PastWrapper.tlb" named_guids raw_interfaces_only
-
 RepeatProcess repeatProcess;
 
 using namespace std;
