@@ -324,7 +324,7 @@ public:
 
     void dictionaryWriting()
     {
-        string takenDictWord = "";
+        string replacingWord = "";
         string replacedWord = "";
         vector<string> dictWordsVector;
 
@@ -335,15 +335,15 @@ public:
 
         if (fileOf.is_open())
         {
-            cout << endl << "Write a word to insert it into the dictionary: ";
-
-            getline(cin, takenDictWord);
-
-            cout << endl << "Write a word that is replaced by that word: ";
+            cout << endl << "Write the word that will be replaced by another: ";
 
             getline(cin, replacedWord);
+
+            cout << endl << "Write the word that will replace the written above word: ";
+
+            getline(cin, replacingWord);
             
-            dictWordsVector[dictWordsVector.size() - 2] = takenDictWord;
+            dictWordsVector[dictWordsVector.size() - 2] = replacingWord;
             dictWordsVector[dictWordsVector.size() - 1] = replacedWord;
 
             for (unsigned int i = 0; i < dictWordsVector.size(); i += 2)

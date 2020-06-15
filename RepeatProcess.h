@@ -6,7 +6,7 @@ class RepeatProcess
 {
 private:
 	bool repeatRP = false;
-    std::string check = "";
+    std::string check = " ";
 
 public:
 	bool repeat(std::string title)
@@ -14,11 +14,12 @@ public:
         bool intEndOfMode = false;
         do
         {
-            std::cout << std::endl << title + " [y/n]" << std::endl << std::endl;
+            std::cout << std::endl << title + " [Y/n]" << std::endl << std::endl;
 
-            std::cin >> check;
+            //std::cin.ignore(1, '/n');
+            std::getline(std::cin, check);
 
-            if (check == "y")
+            if (check == "y" || check == "Y" || check == "")
             {
                 repeatRP = true;
                 intEndOfMode = false;

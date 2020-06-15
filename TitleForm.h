@@ -4,6 +4,7 @@
 #include <fstream>
 #include <thread>
 #include <ctime>
+#include <limits>
 
 class TitleForm
 {
@@ -60,8 +61,8 @@ private:
 		//These statements do processing to occur the more readable form of the date
 		string day = gotTime->tm_mday < 10 ? "0" + to_string(gotTime->tm_mday) 
 			: to_string(gotTime->tm_mday);
-		string month = gotTime->tm_mon < 10 ? "0" + to_string(gotTime->tm_mon) 
-			: to_string(gotTime->tm_mon);
+		string month = gotTime->tm_mon < 10 ? "0" + to_string(gotTime->tm_mon + 1) 
+			: to_string(gotTime->tm_mon + 1);
 
 		return day + "." + month + "." + to_string(currYear);
 	}
@@ -136,6 +137,8 @@ public:
 	{
 		cout << "Write your name: ";
 		string writtenName = "";
+		//Use the below statement because getline takes the /n symbol from the previous writing 
+		//cin.ignore(1, '/n');
 		getline(cin, writtenName);
 		cout << endl;
 

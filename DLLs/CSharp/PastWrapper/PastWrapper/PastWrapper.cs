@@ -19,7 +19,6 @@ namespace PastWrapper
     {
         public void PastWr(string nameOfProcessEXEWrap, string nameOfNeededFileWrap ,string dataToPastWrap)
         {
-            Console.Beep();
             PastClass.Past(nameOfProcessEXEWrap, nameOfNeededFileWrap, dataToPastWrap);
         }
     }

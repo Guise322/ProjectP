@@ -14,7 +14,7 @@ namespace PastWrapper
             XmlDocument xmlDoc = new XmlDocument();
             try
             {
-                string connectStatus = "\r\n Connecting...";
+                string connectStatus = "\r\n Connecting to Yandex.Speller... ";
                 Console.Write(connectStatus);
 
                 xmlDoc.Load("https://speller.yandex.net/services/spellservice/checkText?text=" + strData);

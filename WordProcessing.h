@@ -22,7 +22,7 @@ public:
 		return vectorForRemoving;
 	}
 
-/*------------------The Working Of The Function WordProcess----------------------------
+/*------------------The Working Of The WordProcess Function----------------------------
 
 The function takes a vector containing words has been taken in the file 'text.txt'. It
 returns a modified vector to a caller.
@@ -32,7 +32,7 @@ Thus the not-letter characters is distroying the words replacement process. For 
 these characters in the words, the function was created.
 
 The vector that is being given to the function named wordsVector. wordsVector is readed
-by a for loop word by word, then the function partitions each word down into characters
+word by word by a for loop, then the function partitions each word down into characters
 and compares a character with the character assigned above. Then writes the word's
 character to the word named oldWord. If the function gets one of the assigned characters,
 it then creats new vector with two more vector elements and writes remaining characters to

@@ -15,7 +15,7 @@ public:
 	{
         cout << "Write word for searching" << endl;
 
-        cin >> wordForSearching;
+        getline(cin, wordForSearching);
 
 
         //This statement converting upper case letters to lower case letters is occured below, because these letters don't equals to each other
@@ -44,6 +44,11 @@ public:
                 wordNumber += comparedWord;
                 wordSearched = false;
             }
+            else if ((i == 0) && wordSearched)
+            {
+                wordNumber += comparedWord;
+                wordSearched = false;
+            }
             else if ((i != 0) && wordSearched)
             {
                 wordNumber += ", " + comparedWord;
@@ -52,15 +57,16 @@ public:
             else if (i == (wordsToCompare.size() - 1))
                 wordNumber += ".";
         }
-        if (wordNumber == "")
+        if (wordNumber == ".")
         {
-            cout << "The word number is 0" << endl;
+            cout << "The word number is 0." << endl;
         }
         else
         {
-            cout << "The word number is " << wordNumber << endl;
+            cout << "The word number is " + wordNumber << endl;
         }
-        cout << "Amount of words is " << amountOfWords + "."<< endl;
+        cout << "Amount of words is " + to_string(amountOfWords);
+        cout << '.'<< endl;
         wordsToCompare.clear();
 	}
 };

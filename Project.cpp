@@ -39,11 +39,11 @@ int main()
             << endl << "4 - Writing a memorandum template;" << endl << "5 - Write a word into the dictionary" << endl << endl;
         cout << "Write the number of the mode: ";
 
-        char choosenMode = ' ';
+        string choosenMode = "";
 
-        cin >> choosenMode;
+        getline(cin, choosenMode);
 
-        if (choosenMode == '1')
+        if (choosenMode == "1")
         {
             currMode = mode::writingForm;
 
@@ -76,7 +76,7 @@ int main()
             //fileSearch.fileSearch();
         }
 
-        else if (choosenMode == '2')
+        else if (choosenMode == "2")
         {
             currMode = mode::searchingInFile;
 
@@ -93,7 +93,7 @@ int main()
             } while (!repeatTwo);
         }
 
-        else if (choosenMode == '3')
+        else if (choosenMode == "3")
         {
             cout << endl;
 
@@ -107,27 +107,48 @@ int main()
 
                 titleForm.writeTitleForm();
 
-                repeatThree = repeatProcess.repeat("Wrirte a title form again?");
+                repeatThree = repeatProcess.repeat("Write a title form again?");
 
             } while (!repeatThree);
         }
 
-        else if (choosenMode == '4')
+        else if (choosenMode == "4")
         {
-            currMode = mode::writingForm;
+            bool repeatFour = false;
 
-            TitleForm memoTemp;
+            do
+            {
+                currMode = mode::writingForm;
 
-            memoTemp.writingMemo();
+                TitleForm memoTemp;
+
+                memoTemp.writingMemo();
+
+                repeatFour = repeatProcess.repeat("Write a memorandum template again?");
+
+            } while (!repeatFour);
         }
 
-        else if (choosenMode == '5')
+        else if (choosenMode == "5")
         {
-            currMode = mode::writingIntoDict;
+            bool repeatFive = false;
+            
+            do
+            {
+                currMode = mode::writingIntoDict;
 
-            FileWritingReading fileWritingReading;
+                FileWritingReading fileWritingReading;
 
-            fileWritingReading.dictionaryWriting();
+                fileWritingReading.dictionaryWriting();
+
+                repeatFive = repeatProcess.repeat("Write another word into the dictionary?");
+
+            } while (!repeatFive);
+        }
+
+        else
+        {
+            cout << "This mode does not exist!" << endl;
         }
 
         currMode = mode::idle;
