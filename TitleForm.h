@@ -69,7 +69,7 @@ private:
 
 	void gettingMemoData()
 	{	
-		cout << endl << "Write name who you are sending this memorandum: ";
+		cout << endl << "Write the name who you are sending this memorandum: ";
 		getline(cin, toWho);
 
 		cout << endl << "Write your name: ";
