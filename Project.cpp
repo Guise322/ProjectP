@@ -34,10 +34,10 @@ int main()
 {
     do
     {
-        cout << endl << "Choose a mode of the program work:" << endl << "1 - Replacing particular words in the text;"
-            << endl << "2 - Searching a word in the file;" << endl << "3 - Writing the title list form;"
-            << endl << "4 - Writing a memorandum template;" << endl << "5 - Write a word into the dictionary" << endl << endl;
-        cout << "Write the number of the mode: ";
+        cout << endl << "Choose a mode of the program work:" << endl << "1 - replacing particular words and spell checking in text;"
+            << endl << "2 - searching a word in text;" << endl << "3 - writing a title list form;"
+            << endl << "4 - writing a memorandum template;" << endl << "5 - writing a word into the dictionary" << endl << endl;
+        cout << "Write the mode number: ";
 
         string choosenMode = "";
 

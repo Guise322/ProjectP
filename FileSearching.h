@@ -13,7 +13,7 @@ public:
 
 	void fileSearch()
 	{
-        cout << "Write word for searching" << endl;
+        cout << "Write a searched word" << endl;
 
         getline(cin, wordForSearching);
 
