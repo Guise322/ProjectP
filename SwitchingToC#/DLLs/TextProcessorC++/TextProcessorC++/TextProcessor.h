@@ -1,0 +1,157 @@
+#pragma once
+
+#include <iostream>
+#include <thread>
+#include <conio.h>
+#include "FileWritingReading.h"
+#include "FileSearching.h"
+#include "FileReplacement.h"
+#include "TitleForm.h"
+#include "WordProcessing.h"
+
+using namespace std;
+
+int FileWritingReading::cnt = 0;
+int FileWritingReading::amountOfWords = 0;
+//int FileWritingReading::dictVectorSize = 0;
+//int WordProcessing::wordProcessSize = 0;
+
+bool repeatChoice = false;
+
+vector<string> FileWritingReading::wordsVector;
+
+enum mode
+{
+    writingForm, searchingInFile, writingTitleForm, writingIntoDict, idle
+};
+enum mode currMode;
+
+string textProcessor(int mode)
+{
+    //do
+    //{
+    //    cout << endl << "Choose a mode of the program work:" << endl << "1 - replacing particular words and spell checking in text;"
+    //        << endl << "2 - searching a word in text;" << endl << "3 - writing a title list form;"
+    //        << endl << "4 - writing a memorandum template;" << endl << "5 - writing a word into the dictionary" << endl << endl;
+    //    cout << "Write the mode number: ";
+
+    //    string modeNumber = "";
+
+    //    getline(cin, modeNumber);
+
+        if (to_string(mode) == "1")
+        {
+            currMode = mode::writingForm;
+
+            FileWritingReading fileWritingReading;
+            FileReplacement fileReplacement;
+
+            //cout << endl << "Write into the text.txt file" << endl;
+
+            bool repeatOne = false;
+
+            //for (int i = 0; i < 60; i++)
+            //do
+            //{
+                FileWritingReading::cnt = 0;
+                FileWritingReading::wordsVector.resize(0);
+                this_thread::sleep_for(1s);
+
+                fileWritingReading.readFromFile();
+
+                fileReplacement.wordReplacement();
+
+                return fileWritingReading.writeToFile();
+
+                //repeatOne = repeatProcess.repeat("Repeat the process?");
+
+            //} while (!repeatOne);
+
+            //FileSearch fileSearch;
+
+            //fileSearch.fileSearch();
+        }
+
+        else if (to_string(mode) == "2")
+        {
+            currMode = mode::searchingInFile;
+
+            bool repeatTwo = false;
+
+            //do
+            //{
+                FileSearching fileSearching;
+
+                fileSearching.fileSearch();
+
+                //repeatTwo = repeatProcess.repeat("Search a word again?");
+
+            //} while (!repeatTwo);
+        }
+
+        else if (to_string(mode) == "3")
+        {
+            cout << endl;
+
+            currMode = mode::writingTitleForm;
+
+            bool repeatThree = false;
+
+            //do
+            //{
+                TitleForm titleForm;
+
+                titleForm.writeTitleForm();
+
+                //repeatThree = repeatProcess.repeat("Write a title form again?");
+
+            //} while (!repeatThree);
+        }
+
+        else if (to_string(mode) == "4")
+        {
+            bool repeatFour = false;
+
+            //do
+            //{
+                currMode = mode::writingForm;
+
+                TitleForm memoTemp;
+
+                memoTemp.writingMemo();
+
+                //repeatFour = repeatProcess.repeat("Write a memorandum template again?");
+
+            //} while (!repeatFour);
+        }
+
+        else if (to_string(mode) == "5")
+        {
+            bool repeatFive = false;
+
+            //do
+            //{
+                currMode = mode::writingIntoDict;
+
+                FileWritingReading fileWritingReading;
+
+                fileWritingReading.dictionaryWriting();
+
+                //repeatFive = repeatProcess.repeat("Write another word into the dictionary?");
+
+            //} while (!repeatFive);
+        }
+
+        //else
+        //{
+        //    cout << "This mode does not exist!" << endl;
+        //}
+
+        currMode = mode::idle;
+
+        //repeatChoice = repeatProcess.repeat("Choose another mode?");
+
+    //} while (!repeatChoice);
+
+    //return 0;
+}
