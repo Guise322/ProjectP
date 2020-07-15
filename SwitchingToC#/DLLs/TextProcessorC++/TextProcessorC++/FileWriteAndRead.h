@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class FileWritingReading
+class FileWriteAndRead
 {
 private:
     enum letterCondition
@@ -252,7 +252,7 @@ public:
         return writenText;
     }
 
-    vector<string> readFromFile()
+    vector<string> ReadFile()
     {
         ifstream fileIf;
         //fileIf.open("text.txt");
@@ -290,7 +290,7 @@ public:
         return wordsVector;
     }
 
-    vector<string> dictionaryReading()
+    vector<string> readDict()
     {
         int dictCnt = 0;
         vector<string> dictVector{ "", "" };
@@ -324,14 +324,14 @@ public:
         return dictVector;
     }
 
-    void dictionaryWriting()
+    void writeIntoDict()
     {
         string replacingWord = "";
         string replacedWord = "";
         vector<string> dictWordsVector;
 
         //dictWordsVector.resize(dictVectorSize);
-        dictWordsVector = dictionaryReading();
+        dictWordsVector = readDict();
 
         ofstream fileOf("Dictionary Data.txt", ios::in);
 

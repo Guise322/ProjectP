@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
+using ProjectP;
 
-namespace ProjectP.TextModes
+namespace Encapsulate
 {
     class ModesOfWork
     {
-
-        public int Mode { get; set; }
+        public int ModeNumber { get; set; }
         public string WorkResult
         {
             get
             {
-                return Marshal.PtrToStringAnsi(Import.dllCpp(Mode));
+                return Marshal.PtrToStringAnsi(Import.dllCpp(ModeNumber));
             }
         }
-        public List<string> FileToPast { get; set; }
     }
 }

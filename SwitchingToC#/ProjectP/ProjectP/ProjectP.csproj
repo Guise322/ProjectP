@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PastDataFromSpellAPI\EncapsPasting.cs" />
     <Compile Include="PastDataFromSpellAPI\PastingIntoFile.cs" />
     <Compile Include="PastDataFromSpellAPI\SpellerAPI.cs" />
     <Compile Include="TextModes\ModesOfWork.cs" />

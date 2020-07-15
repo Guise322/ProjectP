@@ -1,9 +1,9 @@
 #pragma once
 #include <cctype>
-#include "FileWritingReading.h"
+#include "FileWriteAndRead.h"
 
 class FileSearching:
-    FileWritingReading
+    FileWriteAndRead
 {
 private:
     string wordForSearching = "";
@@ -21,7 +21,7 @@ public:
         //This statement converting upper case letters to lower case letters is occured below, because these letters don't equals to each other
         transform(wordForSearching.begin(), wordForSearching.end(), wordForSearching.begin(), ::tolower);
         
-        vector<string> wordsToCompare = readFromFile();
+        vector<string> wordsToCompare = ReadFile();
 
         for (string i : wordsToCompare)
         {

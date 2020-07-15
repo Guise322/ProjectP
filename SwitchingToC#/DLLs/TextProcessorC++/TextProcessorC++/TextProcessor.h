@@ -3,28 +3,27 @@
 #include <iostream>
 #include <thread>
 #include <conio.h>
-#include "FileWritingReading.h"
+#include "FileWriteAndRead.h"
 #include "FileSearching.h"
-#include "FileReplacement.h"
-#include "TitleForm.h"
+#include "FileReplace.h"
+#include "WriteTitleForm.h"
 #include "WordProcessing.h"
 
 using namespace std;
 
-int FileWritingReading::cnt = 0;
-int FileWritingReading::amountOfWords = 0;
+int FileWriteAndRead::cnt = 0;
+int FileWriteAndRead::amountOfWords = 0;
 //int FileWritingReading::dictVectorSize = 0;
 //int WordProcessing::wordProcessSize = 0;
 
 bool repeatChoice = false;
 
-vector<string> FileWritingReading::wordsVector;
+vector<string> FileWriteAndRead::wordsVector;
 
 enum mode
 {
-    writingForm, searchingInFile, writingTitleForm, writingIntoDict, idle
+    writeText = 1, searchInFile, writeTitleForm, writeMemo,writeIntoDict, idle
 };
-enum mode currMode;
 
 string textProcessor(int mode)
 {
@@ -39,29 +38,27 @@ string textProcessor(int mode)
 
     //    getline(cin, modeNumber);
 
-        if (to_string(mode) == "1")
+        if (mode == mode::writeText)
         {
-            currMode = mode::writingForm;
-
-            FileWritingReading fileWritingReading;
-            FileReplacement fileReplacement;
+            FileWriteAndRead fileWriteAndRead;
+            FileReplace fileReplace;
 
             //cout << endl << "Write into the text.txt file" << endl;
 
-            bool repeatOne = false;
+            //bool repeatOne = false;
 
             //for (int i = 0; i < 60; i++)
             //do
             //{
-                FileWritingReading::cnt = 0;
-                FileWritingReading::wordsVector.resize(0);
+                FileWriteAndRead::cnt = 0;
+                FileWriteAndRead::wordsVector.resize(0);
                 this_thread::sleep_for(1s);
 
-                fileWritingReading.readFromFile();
+                fileWriteAndRead.ReadFile();
 
-                fileReplacement.wordReplacement();
+                fileReplace.wordReplacement();
 
-                return fileWritingReading.writeToFile();
+                return fileWriteAndRead.writeToFile();
 
                 //repeatOne = repeatProcess.repeat("Repeat the process?");
 
@@ -72,11 +69,9 @@ string textProcessor(int mode)
             //fileSearch.fileSearch();
         }
 
-        else if (to_string(mode) == "2")
+        else if (mode == mode::searchInFile)
         {
-            currMode = mode::searchingInFile;
-
-            bool repeatTwo = false;
+            //bool repeatTwo = false;
 
             //do
             //{
@@ -89,53 +84,47 @@ string textProcessor(int mode)
             //} while (!repeatTwo);
         }
 
-        else if (to_string(mode) == "3")
+        else if (mode == mode::writeTitleForm)
         {
             cout << endl;
-
-            currMode = mode::writingTitleForm;
 
             bool repeatThree = false;
 
             //do
             //{
-                TitleForm titleForm;
+                WriteTitleForm writeTitleForm;
 
-                titleForm.writeTitleForm();
+                writeTitleForm.writeTitleForm();
 
                 //repeatThree = repeatProcess.repeat("Write a title form again?");
 
             //} while (!repeatThree);
         }
 
-        else if (to_string(mode) == "4")
+        else if (mode == mode::writeMemo)
         {
-            bool repeatFour = false;
+            //bool repeatFour = false;
 
             //do
             //{
-                currMode = mode::writingForm;
+                WriteTitleForm memoTemp;
 
-                TitleForm memoTemp;
-
-                memoTemp.writingMemo();
+                memoTemp.writeMemo();
 
                 //repeatFour = repeatProcess.repeat("Write a memorandum template again?");
 
             //} while (!repeatFour);
         }
 
-        else if (to_string(mode) == "5")
+        else if (mode == mode::writeIntoDict)
         {
-            bool repeatFive = false;
+            //bool repeatFive = false;
 
             //do
             //{
-                currMode = mode::writingIntoDict;
+                FileWriteAndRead fileWriteAndRead;
 
-                FileWritingReading fileWritingReading;
-
-                fileWritingReading.dictionaryWriting();
+                fileWriteAndRead.writeIntoDict();
 
                 //repeatFive = repeatProcess.repeat("Write another word into the dictionary?");
 
@@ -147,7 +136,6 @@ string textProcessor(int mode)
         //    cout << "This mode does not exist!" << endl;
         //}
 
-        currMode = mode::idle;
 
         //repeatChoice = repeatProcess.repeat("Choose another mode?");
 

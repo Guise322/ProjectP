@@ -1,5 +1,5 @@
 #pragma once
-#include "FileWritingReading.h"
+#include "FileWriteAndRead.h"
 
 using namespace std;
 

@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
 #include <ostream>
-#include "FileWritingReading.h"
+#include "FileWriteAndRead.h"
 
 using namespace std;
 
-class FileReplacement:
-	public FileWritingReading
+class FileReplace:
+	public FileWriteAndRead
 {
 private:
 	vector<string> vectorToReplace;
@@ -16,7 +16,7 @@ public:
 	void wordReplacement()
 	{
 		//vectorToReplace.resize(dictVectorSize);
-		vectorToReplace = dictionaryReading();
+		vectorToReplace = readDict();
 
 		for (unsigned int i = 0; i < vectorToReplace.size(); i++)
 		{

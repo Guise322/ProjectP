@@ -21,16 +21,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileReplacement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FileSearching.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FileWritingReading.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WordProcessing.h">
@@ -40,6 +31,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileWriteAndRead.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReplace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteTitleForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

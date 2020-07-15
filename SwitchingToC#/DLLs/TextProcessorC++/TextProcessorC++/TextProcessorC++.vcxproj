@@ -153,12 +153,12 @@
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="TextProcessor.h" />
-    <ClInclude Include="FileReplacement.h" />
+    <ClInclude Include="FileReplace.h" />
     <ClInclude Include="FileSearching.h" />
-    <ClInclude Include="FileWritingReading.h" />
+    <ClInclude Include="FileWriteAndRead.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="TitleForm.h" />
+    <ClInclude Include="WriteTitleForm.h" />
     <ClInclude Include="WordProcessing.h" />
   </ItemGroup>
   <ItemGroup>
