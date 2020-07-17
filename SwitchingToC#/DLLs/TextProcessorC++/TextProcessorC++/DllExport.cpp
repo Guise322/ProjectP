@@ -3,7 +3,7 @@
 #include "TextProcessor.h"
 
 extern "C" 
-{__declspec (dllexport) char* dllCpp(int mode)
+{__declspec (dllexport) char* DllCpp(int mode)
 {
 	string res = textProcessor(mode);
 	char* cstr = new char[res.length() + 1];

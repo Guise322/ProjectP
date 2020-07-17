@@ -7,11 +7,15 @@ namespace ProjectP.PastDataFromSpellAPI
 {
     class PastingIntoFile
     {
+        public void PastIntoFile(string ProcessEXEName, string NeededFileName, string DataToPast)
+        {
+            pastIntoFile(ProcessEXEName, NeededFileName, DataToPast);
+        }
         [DllImport("user32.dll")]
 
         public static extern int SetForegroundWindow(IntPtr hWnd);
 
-        public PastingIntoFile(string nameOfProcessEXE, string nameOfNeededFile, string dataToPast)
+        void pastIntoFile(string nameOfProcessEXE, string nameOfNeededFile, string dataToPast)
         {
             Process[] processes;
             string[] processesNameList = new string[12];

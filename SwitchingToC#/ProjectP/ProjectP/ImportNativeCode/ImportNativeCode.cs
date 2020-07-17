@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 
 namespace ProjectP
 {
-    public class Import
+    public class ImportNativeCode
     {
             [DllImport("TextProcessorC++.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr dllCpp(int mode);
+            public static extern IntPtr DllCpp(int mode);
     }
 }

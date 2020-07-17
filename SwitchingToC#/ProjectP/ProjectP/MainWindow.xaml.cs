@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Encapsulate;
+using ProjectP.Requests;
 
 namespace ProjectP
 {
@@ -10,8 +10,9 @@ namespace ProjectP
     {
         public MainWindow()
         {
-            new EncapsPasting(1);
+            RequestsFormer requestsFormer = new RequestsFormer();
             InitializeComponent();
+            requestsFormer.PastIntoFileReq(1);
         }
     }
 }
