@@ -59,6 +59,8 @@
     <Compile Include="PastDataFromSpellAPI\PastingIntoFile.cs" />
     <Compile Include="PastDataFromSpellAPI\SpellerAPI.cs" />
     <Compile Include="Requests\RequestsFormer.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,6 +100,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

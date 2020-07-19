@@ -8,6 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="244,198,0,0" VerticalAlignment="Top" Width="74"/>
-
+        <TextBlock Text="{Binding Path=FirstName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

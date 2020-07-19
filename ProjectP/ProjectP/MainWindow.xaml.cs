@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using ProjectP.Requests;
+using ProjectP.ViewModels;
 
 namespace ProjectP
 {
@@ -10,9 +10,12 @@ namespace ProjectP
     {
         public MainWindow()
         {
-            RequestsFormer requestsFormer = new RequestsFormer();
+            var viewModel = new ViewModel();
+            viewModel.FirstName = "Kevin";
+
+            DataContext = viewModel;
             InitializeComponent();
-            requestsFormer.PastIntoFileReq(1);
+            viewModel.FirstName = "Sue";
         }
     }
 }
