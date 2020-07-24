@@ -56,12 +56,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PastDataFromSpellAPI\PastingIntoFile.cs" />
-    <Compile Include="PastDataFromSpellAPI\SpellerAPI.cs" />
+    <Compile Include="Models\PastDataFromSpellAPI\PastingIntoFile.cs" />
+    <Compile Include="Models\PastDataFromSpellAPI\SpellerAPI.cs" />
     <Compile Include="Requests\RequestsFormer.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -69,8 +69,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImportNativeCode\ImportNativeCode.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Models\ImportNativeCode\ImportNativeCode.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -101,9 +101,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

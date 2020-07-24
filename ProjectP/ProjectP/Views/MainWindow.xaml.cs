@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using ProjectP.ViewModels;
 
-namespace ProjectP
+namespace ProjectP.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -11,11 +11,9 @@ namespace ProjectP
         public MainWindow()
         {
             var viewModel = new ViewModel();
-            viewModel.FirstName = "Kevin";
-
             DataContext = viewModel;
             InitializeComponent();
-            viewModel.FirstName = "Sue";
+            TextField.Text = "Text...";
         }
     }
 }
