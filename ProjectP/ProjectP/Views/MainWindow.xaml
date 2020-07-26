@@ -3,14 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:Navigator="clr-namespace:ProjectP.Navigators"
+        
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
     <Grid>
+        <ContentControl/>
         <UserControl Height="400" Width="750" Visibility="Visible">
-            <TextBox Name="TextField" Text="{Binding TextAreaContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="20"/>
+            <TextBox Name="TextField" TextWrapping="Wrap" Text="{Binding TextAreaContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="20"/>
         </UserControl>
         <UserControl Height="450" Width="800" Visibility="Collapsed">
-            
+
         </UserControl>
         <Button Content="Button" Command="{Binding Path=ChangeNameCommand}" HorizontalAlignment="Left" Margin="244,198,0,0" VerticalAlignment="Top" Width="74"/>
         <TextBlock Text="{Binding Path=FirstNameBox, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center"/>

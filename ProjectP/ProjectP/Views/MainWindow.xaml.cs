@@ -10,8 +10,6 @@ namespace ProjectP.Views
     {
         public MainWindow()
         {
-            var viewModel = new ViewModel();
-            DataContext = viewModel;
             InitializeComponent();
             TextField.Text = "Text...";
         }

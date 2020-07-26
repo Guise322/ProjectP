@@ -58,9 +58,10 @@
     </ApplicationDefinition>
     <Compile Include="Models\PastDataFromSpellAPI\PastingIntoFile.cs" />
     <Compile Include="Models\PastDataFromSpellAPI\SpellerAPI.cs" />
+    <Compile Include="Navigators\INavigator.cs" />
+    <Compile Include="Navigators\Navigator.cs" />
     <Compile Include="Requests\RequestsFormer.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

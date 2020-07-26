@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Navigation;
 using ProjectP.Models.ImportNativeCode;
+using ProjectP.Navigators;
 
 namespace ProjectP.ViewModels
 {
-    class ViewModel : ViewModelBase
+    public class ViewModel : INotifyPropertyChanged
     {
         //public ICommand ChangeNameCommand => _changeNameCommand;
         //private readonly DelegateCommand _changeNameCommand;
+        public INavigator Navigator { get; set; } = new Navigator();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         string _textAreaContent;
         public string TextAreaContent
         {
@@ -23,7 +26,8 @@ namespace ProjectP.ViewModels
             {
                 int mode = 1;
                 //SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(value, mode)));
-                SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(Marshal.StringToHGlobalAnsi(value), mode)));
+                _textAreaContent = Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(Marshal.StringToHGlobalAnsi(value), mode));
+                OnPropertyChanged(nameof(TextAreaContent));
             }
         }
         //public ViewModel()
