@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
 using ProjectP.Models.ImportNativeCode;
-using ProjectP.Navigators;
 
 namespace ProjectP.ViewModels
 {
@@ -9,7 +8,6 @@ namespace ProjectP.ViewModels
     {
         //public ICommand ChangeNameCommand => _changeNameCommand;
         //private readonly DelegateCommand _changeNameCommand;
-        public INavigator Navigator { get; set; } = new Navigator();
 
         public event PropertyChangedEventHandler PropertyChanged;
         
