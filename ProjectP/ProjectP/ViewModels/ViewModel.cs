@@ -13,7 +13,6 @@ namespace ProjectP.ViewModels
 {
     class ViewModel : ViewModelBase
     {
-        ImportNativeCode importNativeCode = new ImportNativeCode();
         //public ICommand ChangeNameCommand => _changeNameCommand;
         //private readonly DelegateCommand _changeNameCommand;
         string _textAreaContent;
@@ -24,7 +23,7 @@ namespace ProjectP.ViewModels
             {
                 int mode = 1;
                 //SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(value, mode)));
-                SetProperty(ref _textAreaContent, importNativeCode.DllCpp(value, mode));
+                SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(Marshal.StringToHGlobalAnsi(value), mode)));
             }
         }
         //public ViewModel()

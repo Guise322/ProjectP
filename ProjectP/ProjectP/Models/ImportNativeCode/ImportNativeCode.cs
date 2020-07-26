@@ -9,11 +9,11 @@ namespace ProjectP.Models.ImportNativeCode
 {
     public class ImportNativeCode
     {
-            //[DllImport("TextProcessorC++.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
-            //public static extern IntPtr DllCpp(string text, int mode);
-            public string DllCpp(string text, int mode)
-        {
-            return text + mode;
-        }
+            [DllImport("TextProcessorC++.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
+            public static extern IntPtr DllCpp(IntPtr text, int mode);
+        //    public string DllCpp(string text, int mode)
+        //{
+        //    return text + mode;
+        //}
     }
 }

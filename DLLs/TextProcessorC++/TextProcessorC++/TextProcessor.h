@@ -25,7 +25,7 @@ enum mode
     writeText = 1, searchInFile, writeTitleForm, writeMemo,writeIntoDict, idle
 };
 
-string textProcessor(int mode)
+string textProcessor(string text, int mode)
 {
     //do
     //{
@@ -50,7 +50,9 @@ string textProcessor(int mode)
             //for (int i = 0; i < 60; i++)
             //do
             //{
-                FileWriteAndRead::cnt = 0;
+            return text + "ho-ho!!";
+            //-------- the working code below
+                /*FileWriteAndRead::cnt = 0;
                 FileWriteAndRead::wordsVector.resize(0);
                 this_thread::sleep_for(1s);
 
@@ -58,7 +60,8 @@ string textProcessor(int mode)
 
                 fileReplace.wordReplacement();
 
-                return fileWriteAndRead.writeToFile();
+                return fileWriteAndRead.writeToFile();*/
+             //
 
                 //repeatOne = repeatProcess.repeat("Repeat the process?");
 
