@@ -3,33 +3,30 @@
 #include <ostream>
 #include "FileWriteAndRead.h"
 
-using namespace std;
-
-class FileReplace:
-	public FileWriteAndRead
+class FileReplace
 {
-private:
-	vector<string> vectorToReplace;
-	int numberOfWord = 0;
-
 public:
-	void wordReplacement()
+	string wordReplacement(string text)
 	{
+		int numberOfWord = 0;
+		vector<string> vectorToReplace;
+		vector<string> wordsVector;
+		FileWriteAndRead fileWriteRead;
 		//vectorToReplace.resize(dictVectorSize);
-		vectorToReplace = readDict();
+		vectorToReplace = fileWriteRead.readDict();
+		wordsVector = fileWriteRead.SplitText(text);
 
-		for (unsigned int i = 0; i < vectorToReplace.size(); i++)
+		for (auto word : vectorToReplace)
 		{
-			transform(vectorToReplace[i].begin(), vectorToReplace[i].end(), vectorToReplace[i].begin(), ::tolower);
+			transform(word.begin(), word.end(), word.begin(), ::tolower);
 		}
 
 		vector<string> vectorToCompare = wordsVector;
 
-		for (unsigned int i = 0; i < vectorToCompare.size(); i++)
+		for (auto word : vectorToCompare)
 		{
-			transform(vectorToCompare[i].begin(), vectorToCompare[i].end(), vectorToCompare[i].begin(), ::tolower);
+			transform(word.begin(), word.end(), word.begin(), ::tolower);
 		}
-		
 			vector<int> wordNumbers;
 
 		for (unsigned int i = 0; i < vectorToCompare.size(); i++)
@@ -50,5 +47,7 @@ public:
 			//write checking an upper letter case and then transforming the letter of a word in vectorToCompare to the upper letter
 			wordsVector[i] = vectorToCompare[i];
 		}
+		string d = fileWriteRead.writeToFile(wordsVector);
+		return d;
 	}
 };

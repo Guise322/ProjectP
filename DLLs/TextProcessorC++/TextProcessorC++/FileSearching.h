@@ -21,7 +21,7 @@ public:
         //This statement converting upper case letters to lower case letters is occured below, because these letters don't equals to each other
         transform(wordForSearching.begin(), wordForSearching.end(), wordForSearching.begin(), ::tolower);
         
-        vector<string> wordsToCompare = ReadFile();
+        vector<string> wordsToCompare = SplitText("fff");
 
         for (string i : wordsToCompare)
         {

@@ -16,8 +16,6 @@ int FileWriteAndRead::amountOfWords = 0;
 //int FileWritingReading::dictVectorSize = 0;
 //int WordProcessing::wordProcessSize = 0;
 
-bool repeatChoice = false;
-
 vector<string> FileWriteAndRead::wordsVector;
 
 enum mode
@@ -38,39 +36,12 @@ string textProcessor(string text, int mode)
 
     //    getline(cin, modeNumber);
 
-        if (mode == mode::writeText)
-        {
-            FileWriteAndRead fileWriteAndRead;
-            FileReplace fileReplace;
-
-            //cout << endl << "Write into the text.txt file" << endl;
-
-            //bool repeatOne = false;
-
-            //for (int i = 0; i < 60; i++)
-            //do
-            //{
-            return text + "ho-ho!!";
-            //-------- the working code below
-                /*FileWriteAndRead::cnt = 0;
-                FileWriteAndRead::wordsVector.resize(0);
-                this_thread::sleep_for(1s);
-
-                fileWriteAndRead.ReadFile();
-
-                fileReplace.wordReplacement();
-
-                return fileWriteAndRead.writeToFile();*/
-             //
-
-                //repeatOne = repeatProcess.repeat("Repeat the process?");
-
-            //} while (!repeatOne);
-
-            //FileSearch fileSearch;
-
-            //fileSearch.fileSearch();
-        }
+    if (mode == mode::writeText)
+    {
+        FileReplace fileReplace;
+        
+        return fileReplace.wordReplacement(text);
+    }
 
         else if (mode == mode::searchInFile)
         {

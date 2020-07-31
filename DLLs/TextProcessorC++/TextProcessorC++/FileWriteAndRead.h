@@ -17,7 +17,7 @@ private:
     enum letterCondition
     {
         tab, newString, spaceAndUpper, spaceBefore, spaceAfter,
-        noSpace, idle, number, error
+        noSpace, idle, number, nospace, error
     };
 
     enum surroundingCondition
@@ -65,6 +65,8 @@ public:
         |---|---------------------------------------------------------------|
         | 9 |  The written letter is a number                               |
         |---|---------------------------------------------------------------|
+        | 10|  The written letter is a white spice                          |
+        |---|---------------------------------------------------------------|
         */
     int checkingWord(char wordLetter)
     {
@@ -99,11 +101,14 @@ public:
         else if (wordLetter > 48 && wordLetter < 58)
             return 9;
 
+        else if (wordLetter == 32)
+            return 10;
+
         else
             return 0;
     }
 
-    string writeToFile()
+    string writeToFile(vector<string> wordsVector)
     {
         string writenText = "";
 
@@ -118,72 +123,72 @@ public:
         for (unsigned int i = 0; i < wordsVector.size(); i++)
         {
             string word = wordsVector[i];
-
+            int result = checkingWord(word[0]);
             //----------------------------------The Pipeline Of Writing Words Into A File---------------------------------------------
-            if (checkingWord(word[0]) == 0 && i == 0)
+            if (result == 0 && i == 0)
             {
                 wordsVector[i][0] = toupper(wordsVector[i][0]);
                 writenText += wordsVector[i];
             }
-            else if (checkingWord(word[0]) == 0 && (letterState == idle || letterState == spaceAfter))
+            else if (result == 0 && (letterState == idle || letterState == spaceAfter))
             {
                 writenText += ' ' + wordsVector[i];
                 letterState = idle;
             }
             //This if statement and next similar statements don't have the condition 'check == edle'
             //because 'check' may have the condition 'dot' after a dot being in text for instance 
-            else if (checkingWord(word[0]) == 1)
+            else if (result == 1)
             {
                 writenText += wordsVector[i];
                 letterState = tab;
             }
-            else if (checkingWord(word[0]) == 0 && letterState == tab)
+            else if (result == 0 && letterState == tab)
             {
                 writenText += wordsVector[i];
                 letterState = idle;
             }
-            else if (checkingWord(word[0]) == 2)
+            else if (result == 2)
             {
                 writenText += wordsVector[i];
                 letterState = newString;
             }
-            else if (checkingWord(word[0]) == 0 && letterState == newString)
+            else if (result == 0 && letterState == newString)
             {
                 wordsVector[i][0] = toupper(wordsVector[i][0]);
                 writenText += wordsVector[i];
                 letterState = idle;
             }
-            else if (checkingWord(word[0]) == 3)
+            else if (result == 3)
             {
                 writenText += wordsVector[i];
                 letterState = spaceAndUpper;
             }
-            else if (checkingWord(word[0]) == 0 && letterState == spaceAndUpper)
+            else if (result == 0 && letterState == spaceAndUpper)
             {
                 wordsVector[i][0] = toupper(wordsVector[i][0]);
                 writenText += ' ' + wordsVector[i];
                 letterState = idle;
             }
-            else if (checkingWord(word[0]) == 4)
+            else if (result == 4)
             {
                 continue;
             }
-            else if (checkingWord(word[0]) == 5)
+            else if (result == 5)
             {
                 writenText += ' ' + wordsVector[i];
                 letterState = spaceBefore;
             }
-            else if (checkingWord(word[0]) == 0 && (letterState == spaceBefore || letterState == noSpace))
+            else if (result == 0 && (letterState == spaceBefore || letterState == noSpace))
             {
                 writenText += wordsVector[i];
                 letterState = idle;
             }
-            else if (checkingWord(word[0]) == 6)
+            else if (result == 6)
             {
                 writenText += wordsVector[i];
                 letterState = spaceAfter;
             }
-            else if (checkingWord(word[0]) == 7)
+            else if (result == 7)
             {
                 if (surroundState == surroundingIdle && (letterState == tab || letterState == newString))
                 {
@@ -204,24 +209,29 @@ public:
                     surroundState = surroundingIdle;
                 }
             }
-            else if (checkingWord(word[0]) == 8)
+            else if (result == 8)
             {
                 writenText += wordsVector[i];
                 letterState = noSpace;
             }
-            else if (checkingWord(word[0] == 9) && letterState != number && surroundState != surroundingProcess)
+            else if ((result == 9) && letterState != number && surroundState != surroundingProcess)
             {
                 writenText += ' ' + wordsVector[i];
                 letterState = number;
             }
-            else if (checkingWord(word[0] == 9) && letterState != number && surroundState == surroundingProcess)
+            else if ((result == 9) && letterState != number && surroundState == surroundingProcess)
             {
                 writenText += wordsVector[i];
                 letterState = number;
             }
-            else if (checkingWord(word[0] == 9) && letterState == number)
+            else if ((result == 9) && letterState == number)
             {
                 writenText += wordsVector[i];
+            }
+            else if ((result == 10) && letterState == idle)
+            {
+                writenText += wordsVector[i];
+                letterState = spaceBefore;
             }
             else
             {
@@ -252,41 +262,40 @@ public:
         return writenText;
     }
 
-    vector<string> ReadFile()
+    vector<string> SplitText(std::string text)
     {
-        ifstream fileIf;
-        //fileIf.open("text.txt");
-
-        fileIf.open("text.txt");
-
-        if (fileIf.is_open())
-        {            
-            while (!fileIf.eof())
-            {
-                if (cnt == wordsVector.size())
-                {
-                    wordsVector.resize(cnt + 10);
-                }
-                getline(fileIf, wordsVector[cnt], ' ');
-
-                !wordsVector[cnt].empty() ? cnt++ : cnt = cnt;
-            }
-
-            WordProcessing wordProcessing;
-
-            wordsVector = wordProcessing.wordProcess(wordsVector);
-            //cout << "Words:" << endl;
-            /*for (unsigned int i = 0; i < wordsVector.size(); i++)
-            {
-                transform(wordsVector[i].begin(), wordsVector[i].end(), wordsVector[i].begin(), ::tolower);
-            //    cout << wordsVector[i] << endl;
-            }*/
-
-            fileIf.close();
+        vector<std::string> wordsVector;
+        string word = "";
+        int cnt = 0;
+        if (cnt == wordsVector.size())
+        {
+            wordsVector.resize(cnt + 10);
         }
-        else
-            cout << "The file can't be opened" << endl;
-        
+        for (auto character : text)
+        {
+
+            if (character == ' ')
+            {
+                if (word != "")
+                {
+                    wordsVector[cnt] = word + ' ';
+                    cnt++;
+                    word = "";
+                }
+                else
+                    break;
+            }
+            else
+                word = word + character;
+        }
+        wordsVector[cnt++] = word;
+        !wordsVector[cnt].empty() ? cnt++ : cnt = cnt;
+        wordsVector.resize(cnt);
+
+        WordProcessing wordProcessing;
+
+        wordsVector = wordProcessing.wordProcess(wordsVector);
+
         return wordsVector;
     }
 

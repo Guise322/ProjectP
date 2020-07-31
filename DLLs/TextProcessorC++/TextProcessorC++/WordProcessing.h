@@ -82,7 +82,7 @@ within one vector's element.
 				bool emptyWord = false;
 
 				newVector.resize(vectorForProcessing.size() + 2);
-				
+
 				for (unsigned int l = 0; l < newVector.size(); l++)
 				{
 					if (l < i)
@@ -125,7 +125,7 @@ within one vector's element.
 					{
 						if (emptyWord)
 						{
-							if (l < vectorForProcessing.size())
+							if (l <= vectorForProcessing.size())
 							{
 								newVector[l] = vectorForProcessing[l - 1];
 							}
