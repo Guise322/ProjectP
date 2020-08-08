@@ -75,7 +75,7 @@ public:
         if (wordLetter == 9)
             return 1;
         
-        if (wordLetter == 10)
+        else if (wordLetter == 10)
             return 2;
 
         else if (wordLetter == 33 || wordLetter == 46 || wordLetter == 63)
@@ -132,7 +132,7 @@ public:
             }
             else if (result == 0 && (letterState == idle || letterState == spaceAfter))
             {
-                writenText += ' ' + wordsVector[i];
+                writenText += wordsVector[i];
                 letterState = idle;
             }
             //This if statement and next similar statements don't have the condition 'check == edle'
@@ -166,7 +166,7 @@ public:
             else if (result == 0 && letterState == spaceAndUpper)
             {
                 wordsVector[i][0] = toupper(wordsVector[i][0]);
-                writenText += ' ' + wordsVector[i];
+                writenText += wordsVector[i];
                 letterState = idle;
             }
             else if (result == 4)
@@ -228,10 +228,9 @@ public:
             {
                 writenText += wordsVector[i];
             }
-            else if ((result == 10) && letterState == idle)
+            else if ((result == 10) && (letterState == idle || letterState == spaceAfter || letterState == number || letterState == spaceAndUpper))
             {
                 writenText += wordsVector[i];
-                letterState = spaceBefore;
             }
             else
             {
