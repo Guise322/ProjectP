@@ -17,7 +17,7 @@ private:
     enum letterCondition
     {
         tab, newString, spaceAndUpper, spaceBefore, spaceAfter,
-        noSpace, idle, number, nospace, error
+        noSpace, idle, number, nospace, upper, error
     };
 
     enum surroundingCondition
@@ -130,10 +130,45 @@ public:
                 wordsVector[i][0] = toupper(wordsVector[i][0]);
                 writenText += wordsVector[i];
             }
-            else if (result == 0 && (letterState == idle || letterState == spaceAfter))
+            else if (result == 0)
             {
-                writenText += wordsVector[i];
-                letterState = idle;
+                if (letterState == spaceAndUpper)
+                {
+                    wordsVector[i][0] = toupper(wordsVector[i][0]);
+                    writenText += ' ' + wordsVector[i];
+                    letterState = idle;
+                }
+                else if (letterState == newString)
+                {
+                    wordsVector[i][0] = toupper(wordsVector[i][0]);
+                    writenText += wordsVector[i];
+                    letterState = idle;
+                }
+                else if (letterState == tab)
+                {
+                    writenText += wordsVector[i];
+                    letterState = idle;
+                }
+                else if (letterState == spaceAfter)
+                {
+                    writenText += ' ' + wordsVector[i];
+                    letterState = idle;
+                }
+                else if (letterState == idle)
+                {
+                    writenText += wordsVector[i];
+                }
+                else if (letterState == spaceBefore || letterState == noSpace)
+                {
+                    writenText += wordsVector[i];
+                    letterState = idle;
+                }
+                else if (letterState == upper)
+                {
+                    wordsVector[i][0] = toupper(wordsVector[i][0]);
+                    writenText += wordsVector[i];
+                    letterState = idle;
+                }
             }
             //This if statement and next similar statements don't have the condition 'check == edle'
             //because 'check' may have the condition 'dot' after a dot being in text for instance 
@@ -142,32 +177,15 @@ public:
                 writenText += wordsVector[i];
                 letterState = tab;
             }
-            else if (result == 0 && letterState == tab)
-            {
-                writenText += wordsVector[i];
-                letterState = idle;
-            }
             else if (result == 2)
             {
                 writenText += wordsVector[i];
                 letterState = newString;
             }
-            else if (result == 0 && letterState == newString)
-            {
-                wordsVector[i][0] = toupper(wordsVector[i][0]);
-                writenText += wordsVector[i];
-                letterState = idle;
-            }
             else if (result == 3)
             {
                 writenText += wordsVector[i];
                 letterState = spaceAndUpper;
-            }
-            else if (result == 0 && letterState == spaceAndUpper)
-            {
-                wordsVector[i][0] = toupper(wordsVector[i][0]);
-                writenText += wordsVector[i];
-                letterState = idle;
             }
             else if (result == 4)
             {
@@ -177,11 +195,6 @@ public:
             {
                 writenText += ' ' + wordsVector[i];
                 letterState = spaceBefore;
-            }
-            else if (result == 0 && (letterState == spaceBefore || letterState == noSpace))
-            {
-                writenText += wordsVector[i];
-                letterState = idle;
             }
             else if (result == 6)
             {
@@ -198,7 +211,7 @@ public:
                 }
                 else if (surroundState == surroundingIdle)
                 {
-                    writenText += ' ' + wordsVector[i];
+                    writenText += wordsVector[i];
                     letterState = spaceBefore;
                     surroundState = surroundingProcess;
                 }
@@ -214,23 +227,41 @@ public:
                 writenText += wordsVector[i];
                 letterState = noSpace;
             }
-            else if ((result == 9) && letterState != number && surroundState != surroundingProcess)
+            else if (result == 9)
             {
-                writenText += ' ' + wordsVector[i];
-                letterState = number;
+                if (letterState != number && letterState != spaceBefore && surroundState != surroundingProcess)
+                {
+                    writenText += ' ' + wordsVector[i];
+                    letterState = number;
+                }
+                else if (letterState != number && surroundState == surroundingProcess)
+                {
+                    writenText += wordsVector[i];
+                    letterState = number;
+                }
+                else if (letterState == number && surroundState == surroundingProcess)
+                {
+                    writenText += wordsVector[i];
+                    letterState = number;
+                }
+                else if (letterState == spaceBefore)
+                {
+                    writenText += wordsVector[i];
+                }
             }
-            else if ((result == 9) && letterState != number && surroundState == surroundingProcess)
+            else if (result == 10) //&& (letterState == idle || letterState == spaceAfter || letterState == number ||
+                //letterState == spaceAndUpper || letterState == upper))
             {
                 writenText += wordsVector[i];
-                letterState = number;
-            }
-            else if ((result == 9) && letterState == number)
-            {
-                writenText += wordsVector[i];
-            }
-            else if ((result == 10) && (letterState == idle || letterState == spaceAfter || letterState == number || letterState == spaceAndUpper))
-            {
-                writenText += wordsVector[i];
+                surroundState = surroundingIdle;
+                if (letterState == spaceAfter)
+                    letterState = spaceBefore;
+                else if (letterState == idle || letterState == noSpace)
+                    letterState = spaceBefore;
+                else if (letterState == spaceAndUpper)
+                    letterState = upper;
+                else if (letterState == spaceBefore)
+                    letterState = idle;
             }
             else
             {
