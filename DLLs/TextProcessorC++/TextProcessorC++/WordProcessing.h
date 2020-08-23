@@ -82,7 +82,7 @@ within one vector's element.
 				bool emptyWord = false;
 
 				newVector.resize(vectorForProcessing.size() + 2);
-
+				
 				for (unsigned int l = 0; l < newVector.size(); l++)
 				{
 					if (l < i)

@@ -75,7 +75,7 @@ public:
         if (wordLetter == 9)
             return 1;
         
-        else if (wordLetter == 10)
+        if (wordLetter == 10)
             return 2;
 
         else if (wordLetter == 33 || wordLetter == 46 || wordLetter == 63)
@@ -120,6 +120,7 @@ public:
         //{
             //cout << "Write some text below" << endl;
             //getline(cin, writenText);
+
         for (unsigned int i = 0; i < wordsVector.size(); i++)
         {
             string word = wordsVector[i];
@@ -295,38 +296,47 @@ public:
     vector<string> SplitText(std::string text)
     {
         vector<std::string> wordsVector;
-        string word = "";
-        int cnt = 0;
-        if (cnt == wordsVector.size())
-        {
-            wordsVector.resize(cnt + 10);
-        }
-        for (auto character : text)
-        {
 
-            if (character == ' ')
+        if (text != "")
+        {
+            string word = "";
+            int cnt = 0;
+
+            for (auto character : text)
             {
-                if (word != "")
+                if (wordsVector.size() == 0)
+                    wordsVector.resize(cnt + 11);
+                else if (cnt == (wordsVector.size() - 2))
+                    wordsVector.resize(cnt + 11);
+
+                if (character == ' ')
                 {
-                    wordsVector[cnt] = word + ' ';
-                    cnt++;
-                    word = "";
+                    if (word != "")
+                    {
+                        wordsVector[cnt] = word + ' ';
+                        cnt++;
+                        word = "";
+                    }
+                    else
+                        break;
                 }
                 else
-                    break;
+                    word = word + character;
             }
-            else
-                word = word + character;
+            wordsVector[cnt++] = word;
+            !wordsVector[cnt].empty() ? cnt++ : cnt = cnt;
+            wordsVector.resize(cnt);
+
+            WordProcessing wordProcessing;
+
+            wordsVector = wordProcessing.wordProcess(wordsVector);
+
+            return wordsVector;
         }
-        wordsVector[cnt++] = word;
-        !wordsVector[cnt].empty() ? cnt++ : cnt = cnt;
-        wordsVector.resize(cnt);
-
-        WordProcessing wordProcessing;
-
-        wordsVector = wordProcessing.wordProcess(wordsVector);
-
-        return wordsVector;
+        else
+        {
+            return wordsVector;
+        }
     }
 
     vector<string> readDict()
