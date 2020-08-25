@@ -11,7 +11,6 @@ namespace ProjectP.Views
         public MainWindow()
         {
             InitializeComponent();
-            TextField.Text = "Text...";
         }
     }
 }

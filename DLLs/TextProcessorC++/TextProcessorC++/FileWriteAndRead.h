@@ -123,10 +123,9 @@ public:
 
         for (unsigned int i = 0; i < wordsVector.size(); i++)
         {
-            string word = wordsVector[i];
-            int result = checkingWord(word[0]);
+            int result = checkingWord(wordsVector[i][0]);
             //----------------------------------The Pipeline Of Writing Words Into A File---------------------------------------------
-            if (result == 0 && i == 0)
+            if (i == 0)
             {
                 wordsVector[i][0] = toupper(wordsVector[i][0]);
                 writenText += wordsVector[i];
@@ -139,13 +138,13 @@ public:
                     writenText += ' ' + wordsVector[i];
                     letterState = idle;
                 }
-                else if (letterState == newString)
+                else if (letterState == newString || letterState == upper)
                 {
                     wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += wordsVector[i];
                     letterState = idle;
                 }
-                else if (letterState == tab)
+                else if (letterState == tab || letterState == number || letterState == idle)
                 {
                     writenText += wordsVector[i];
                     letterState = idle;
@@ -155,18 +154,8 @@ public:
                     writenText += ' ' + wordsVector[i];
                     letterState = idle;
                 }
-                else if (letterState == idle)
-                {
-                    writenText += wordsVector[i];
-                }
                 else if (letterState == spaceBefore || letterState == noSpace)
                 {
-                    writenText += wordsVector[i];
-                    letterState = idle;
-                }
-                else if (letterState == upper)
-                {
-                    wordsVector[i][0] = toupper(wordsVector[i][0]);
                     writenText += wordsVector[i];
                     letterState = idle;
                 }
@@ -230,24 +219,15 @@ public:
             }
             else if (result == 9)
             {
-                if (letterState != number && letterState != spaceBefore && surroundState != surroundingProcess)
+                if (letterState != number && letterState != idle && letterState != spaceBefore && surroundState != surroundingProcess)
                 {
                     writenText += ' ' + wordsVector[i];
                     letterState = number;
                 }
-                else if (letterState != number && surroundState == surroundingProcess)
+                else
                 {
                     writenText += wordsVector[i];
                     letterState = number;
-                }
-                else if (letterState == number && surroundState == surroundingProcess)
-                {
-                    writenText += wordsVector[i];
-                    letterState = number;
-                }
-                else if (letterState == spaceBefore)
-                {
-                    writenText += wordsVector[i];
                 }
             }
             else if (result == 10) //&& (letterState == idle || letterState == spaceAfter || letterState == number ||
@@ -261,7 +241,7 @@ public:
                     letterState = spaceBefore;
                 else if (letterState == spaceAndUpper)
                     letterState = upper;
-                else if (letterState == spaceBefore)
+                else //if (letterState == spaceBefore || letterState == number)
                     letterState = idle;
             }
             else
