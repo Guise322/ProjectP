@@ -6,9 +6,8 @@
         
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
-    <Grid>
-        <UserControl Height="400" Width="750" Visibility="Visible">
-            <TextBox Name="TextField" TextWrapping="Wrap" Text="{Binding TextAreaContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="20"/>
-        </UserControl>
-    </Grid>
+
+    <UserControl Height="400" Width="750" Visibility="Visible" Padding="5">
+        <TextBox Name="TextField" TextWrapping="Wrap" Text="{Binding TextAreaContent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+    </UserControl>
 </Window>

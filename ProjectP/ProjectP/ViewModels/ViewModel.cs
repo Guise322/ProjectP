@@ -24,7 +24,7 @@ namespace ProjectP.ViewModels
             {
                 int mode = 1;
                 //SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(value, mode)));
-                _textAreaContent = Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(Marshal.StringToHGlobalAnsi(value), mode));
+                _textAreaContent = Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(Marshal.StringToCoTaskMemAnsi(value), mode));
                 OnPropertyChanged(nameof(TextAreaContent));
             }
         }

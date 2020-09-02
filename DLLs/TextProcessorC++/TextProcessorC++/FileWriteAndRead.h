@@ -129,6 +129,7 @@ public:
             {
                 wordsVector[i][0] = toupper(wordsVector[i][0]);
                 writenText += wordsVector[i];
+                result == 9 ? letterState = number : letterState = idle;
             }
             else if (result == 0)
             {
@@ -144,12 +145,12 @@ public:
                     writenText += wordsVector[i];
                     letterState = idle;
                 }
-                else if (letterState == tab || letterState == number || letterState == idle)
+                else if (letterState == tab || letterState == idle)
                 {
                     writenText += wordsVector[i];
                     letterState = idle;
                 }
-                else if (letterState == spaceAfter)
+                else if (letterState == spaceAfter || letterState == number)
                 {
                     writenText += ' ' + wordsVector[i];
                     letterState = idle;
@@ -219,16 +220,16 @@ public:
             }
             else if (result == 9)
             {
-                if (letterState != number && letterState != idle && letterState != spaceBefore && surroundState != surroundingProcess)
+                /*if (letterState != number && letterState != spaceBefore && surroundState != surroundingProcess)
                 {
                     writenText += ' ' + wordsVector[i];
                     letterState = number;
                 }
                 else
-                {
+                {*/
                     writenText += wordsVector[i];
                     letterState = number;
-                }
+                //}
             }
             else if (result == 10) //&& (letterState == idle || letterState == spaceAfter || letterState == number ||
                 //letterState == spaceAndUpper || letterState == upper))
