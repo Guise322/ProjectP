@@ -58,6 +58,8 @@
     </ApplicationDefinition>
     <Compile Include="Models\PastDataFromSpellAPI\PastingIntoFile.cs" />
     <Compile Include="Models\PastDataFromSpellAPI\SpellerAPI.cs" />
+    <Compile Include="Models\TextProcessor\TextProcessor.cs" />
+    <Compile Include="Models\TextProcessor\WordProcessor.cs" />
     <Compile Include="Requests\RequestsFormer.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="Views\MainWindow.xaml">

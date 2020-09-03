@@ -22,7 +22,7 @@ public:
 		return vectorForRemoving;
 	}
 
-/*------------------The Working Of The WordProcess Function----------------------------
+/*------------------The Working Of The WordProcessing Function----------------------------
 
 The function takes a vector containing words has been taken in the file 'text.txt'. It
 returns a modified vector to a caller.
