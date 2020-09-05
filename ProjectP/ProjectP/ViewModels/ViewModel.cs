@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
 using ProjectP.Models.ImportNativeCode;
+using ProjectP.Models.TextProcessor;
 
 namespace ProjectP.ViewModels
 {
@@ -16,15 +17,16 @@ namespace ProjectP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        string _textAreaContent;
+        TextInstance writtenText = new TextInstance();
+        TextProcessor textProcessor = new TextProcessor();
         public string TextAreaContent
         {
-            get => _textAreaContent;
+            get => writtenText.Text;
             set
             {
-                int mode = 1;
                 //SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(value, mode)));
-                _textAreaContent = Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(Marshal.StringToCoTaskMemAnsi(value), mode));
+                writtenText.Text = value;
+                writtenText.Text = textProcessor.TextProcessing(writtenText)[0];
                 OnPropertyChanged(nameof(TextAreaContent));
             }
         }

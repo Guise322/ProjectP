@@ -8,7 +8,11 @@ namespace ProjectP.Models.TextProcessor
 {
 	class WordProcessor
 	{ 
-		List<string> wordProcessing(string[] words)
+		public List<string> WordProcessing(TextInstance textFromUser)
+        {
+			return wordProcessing(textFromUser);
+        }
+		List<string> wordProcessing(TextInstance textFromUser)
 		{
 			/*------------------The Working Of The WordProcessing Function----------------------------
 
@@ -40,9 +44,9 @@ within one vector's element.
 			string[] wordsSet = new string[1];
 			bool check = false;
 
-			for (int i = 0; i < words.Length; i++)
+			for (int i = 0; i < textFromUser.Words.Length; i++)
 			{
-				word = words[i];
+				word = textFromUser.Words[i];
 
 				for (int j = 0; j < word.Length; j++)
 				{
@@ -74,7 +78,7 @@ within one vector's element.
 					{
 						if (l < i)
 						{
-							wordsSet[l] = words[l];
+							wordsSet[l] = textFromUser.Words[l];
 						}
 						else if (l == i)
 						{
@@ -112,24 +116,24 @@ within one vector's element.
 						{
 							if (emptyWord)
 							{
-								if (l <= words.Length)
+								if (l <= textFromUser.Words.Length)
 								{
-									wordsSet[l] = words[l - 1];
+									wordsSet[l] = textFromUser.Words[l - 1];
 								}
 							}
 							else
-								wordsSet[l] = words[l - 2];
+								wordsSet[l] = textFromUser.Words[l - 2];
 						}
 					}
 					check = false;
-					words = wordsSet;
+					textFromUser.Words = wordsSet;
 					wordsSet = new string[1];
 				}
 				oldWord = null;
 				newWord = null;
 			}
 			//wordProcessSize = wordsSet.size();
-			List<string> wordsList = words.TakeWhile(p => p != "").ToList();
+			List<string> wordsList = textFromUser.Words.TakeWhile(p => p != "").ToList();
 
 			return wordsList;
 		}

@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\PastDataFromSpellAPI\PastingIntoFile.cs" />
     <Compile Include="Models\PastDataFromSpellAPI\SpellerAPI.cs" />
+    <Compile Include="Models\TextProcessor\TextInstance.cs" />
     <Compile Include="Models\TextProcessor\TextProcessor.cs" />
     <Compile Include="Models\TextProcessor\WordProcessor.cs" />
     <Compile Include="Requests\RequestsFormer.cs" />
