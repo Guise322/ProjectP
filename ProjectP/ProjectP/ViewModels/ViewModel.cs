@@ -26,7 +26,8 @@ namespace ProjectP.ViewModels
             {
                 //SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(value, mode)));
                 writtenText.Text = value;
-                writtenText.Text = textProcessor.TextProcessing(writtenText)[0];
+                TextInstance processedText = textProcessor.TextProcessing(writtenText);
+                writtenText.Text = processedText.Text;
                 OnPropertyChanged(nameof(TextAreaContent));
             }
         }

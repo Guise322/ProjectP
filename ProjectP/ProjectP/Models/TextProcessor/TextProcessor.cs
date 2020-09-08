@@ -8,16 +8,16 @@ namespace ProjectP.Models.TextProcessor
 {
     class TextProcessor
     {
-        public string[] TextProcessing(TextInstance textFromUser)
+        public TextInstance TextProcessing(TextInstance textFromUser)
         {
             return textProcessing(textFromUser);
         }
-        string[] textProcessing(TextInstance textFromUser)
+        TextInstance textProcessing(TextInstance textFromUser)
         {
             textFromUser.Words = textFromUser.Text.Split(' ');
             WordProcessor wordProcessor = new WordProcessor();
-            List<string> s = wordProcessor.WordProcessing(textFromUser);
-            return s.ToArray();
+            TextInstance textWithProcessedWords = wordProcessor.WordProcessing(textFromUser);
+            return wordProcessor.WritingText(textWithProcessedWords);
         }
     }
 }
