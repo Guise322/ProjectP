@@ -14,7 +14,12 @@ namespace ProjectP.Models.TextProcessor
         }
         TextInstance textProcessing(TextInstance textFromUser)
         {
-            textFromUser.Words = textFromUser.Text.Split(' ');
+            int wordsNumber = textFromUser.Text.Split(' ').Length;
+            char[] p = new char[] { ' '};
+            if (wordsNumber != 1)
+                textFromUser.Words = textFromUser.Text.Split(p, wordsNumber - 1);
+            else
+                textFromUser.Words = textFromUser.Text.Split(p);
             WordProcessor wordProcessor = new WordProcessor();
             TextInstance textWithProcessedWords = wordProcessor.WordProcessing(textFromUser);
             return wordProcessor.WritingText(textWithProcessedWords);

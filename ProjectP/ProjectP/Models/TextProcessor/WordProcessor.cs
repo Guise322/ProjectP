@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,140 +18,36 @@ namespace ProjectP.Models.TextProcessor
         {
             return writingOfText(textFromUser);
         }
-		TextInstance wordProcessing(TextInstance textFromUser)
-		{
-/*------------------The Working Of The WordProcessing Function----------------------------
-
-The function takes a vector containing words has been taken in the file 'text.txt'. It
-returns a modified vector to a caller.
-
-Words, readed in the file, are being writed with not-letter characters into a vector.
-Thus the not-letter characters is destroying the words replacement process. For removing
-these characters in the words, the function was created.
-
-The vector that is being given to the function named textFromUser.Words. textFromUser.Words is readed
-word by word by a for loop, then the function partitions each word down into characters
-and compares a character with the character assigned above. Then writes the word's
-character to the word named oldWord. If the function gets one of the assigned characters,
-it then creats new vector with two more vector elements and writes remaining characters to
-newWord. The got character is contained in the variable searchedLetter. oldWord, newWord,
-and searchedLetter are being written into wordsSet. The function checks next word then.
-
-The function returns the vector, after checking all the words, containing one word/symbol
-within one vector's element.*/
-
-
-			string word = "";
-			string oldWord = "";
-			string newWord = "";
-			char wordLetter = ' ';
-			char searchedLetter = ' ';
-			string[] wordsSet = new string[1];
-			bool check = false;
-
-			for (int i = 0; i < textFromUser.Words.Length; i++)
-			{
-				word = textFromUser.Words[i];
-                if (word != null)
+        TextInstance wordProcessing(TextInstance textFromUser)
+        {
+            string leftWord = null;
+            List<string> wordsQueue = new List<string>();
+            foreach (var word in textFromUser.Words)
+            {
+                foreach (var wordLetter in word)
                 {
-                    for (int j = 0; j < word.Length; j++)
-                    {
-
-                        wordLetter = word[j];
-
-                        //See ASCII code for encoding an integer to a char symbol
-                        if ((wordLetter < 65 || wordLetter > 90) && (wordLetter < 97 || wordLetter > 122)
+                    if ((wordLetter < 65 || wordLetter > 90) && (wordLetter < 97 || wordLetter > 122)
                             && word.Length != 1)
-                        {
-                            searchedLetter = wordLetter;
-
-                            for (int k = j + 1; k < word.Length; k++)
-                            {
-                                newWord += word[k];
-                            }
-                            check = true;
-                            break;
-                        }
-
-                        oldWord += wordLetter;
-                    }
-                }
-				if (check)
-				{
-					bool emptyWord = false;
-
-					Array.Resize(ref wordsSet, wordsSet.Length + 2);
-
-                    for (int l = 0; l < wordsSet.Length; l++)
                     {
-                        if (l < i)
-                        {
-                            wordsSet[l] = textFromUser.Words[l];
-                        }
-                        else if (l == i)
-                        {
-                            if (oldWord == "")
-                            {
-                                wordsSet[l] += searchedLetter;
-                                wordsSet[l + 1] = newWord;
-                                l++;
-                                emptyWord = true;
-                            }
-                            else
-                            {
-                                if (newWord == "")
-                                {
-                                    wordsSet[l] = oldWord;
-                                    wordsSet[l + 1] = searchedLetter.ToString();
-                                    l++;
-                                    emptyWord = true;
-                                }
-                                else
-                                {
-                                    if (oldWord == null)
-                                    {
-                                        wordsSet[l] = searchedLetter.ToString();
-                                        wordsSet[l + 1] = newWord;
-                                    }
-                                    else
-                                    {
-                                        wordsSet[l] = oldWord;
-                                        wordsSet[l + 1] += searchedLetter;
-                                        Array.Resize(ref wordsSet, wordsSet.Length + 2);
-                                        if (newWord != null)
-                                        {
-                                            wordsSet[l + 2] = newWord;
-
-                                            //This statement is bacause the loop has empty steps 
-                                            //due to writing 2 new words into wordsSet
-                                            l += 2;
-                                        }
-                                    }
-                                    emptyWord = false;
-                                }
-                            }
-                        }
-                        else if (l > i + 1)
-                        {
-                            if (emptyWord)
-                            {
-                                if (l <= textFromUser.Words.Length)
-                                {
-                                    wordsSet[l] = textFromUser.Words[l - 1];
-                                }
-                            }
-                        }
+                        if (leftWord != null)
+                            wordsQueue.Add(leftWord);
+                        wordsQueue.Add(wordLetter.ToString());
+                        leftWord = null;
                     }
-					check = false;
-                    textFromUser.Words = wordsSet;
-				}
-				oldWord = null;
-				newWord = null;
-			}
-            //wordProcessSize = wordsSet.size();
-            textFromUser.Words = textFromUser.Words.TakeWhile(p => p != null).ToArray();
+                    else
+                        leftWord += wordLetter;
+                }
+                if (leftWord != null)
+                    wordsQueue.Add(leftWord);
+                leftWord = null;
+            }
+            //for (int i = 0; i < wordsQueue.Count - 1; i++)
+            //{
+            //    wordsQueue[i] += ' ';
+            //}
+            textFromUser.Words = wordsQueue.ToArray();
             return textFromUser;
-		}
+        }
 
         enum LetterCondition
         {
@@ -201,7 +99,7 @@ within one vector's element.*/
         int checkingWord(char wordLetter)
         {
             //See ASCII code for encoding an integer number to a char symbol
-
+            
             if (wordLetter == 9)
                 return 1;
 
@@ -262,121 +160,113 @@ within one vector's element.*/
                     else
                         letterState = LetterCondition.idle;
                 }
-                else if (result == 0)
-                {
-                    if (letterState == LetterCondition.spaceAndUpper)
-                    {
-                        writenText += ' ' + textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
-                        letterState = LetterCondition.idle;
-                    }
-                    else if (letterState == LetterCondition.newString || letterState == LetterCondition.upper)
-                    {
-                        writenText += textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
-                        letterState = LetterCondition.idle;
-                    }
-                    else if (letterState == LetterCondition.tab || letterState == LetterCondition.idle)
-                    {
-                        writenText += textFromUser.Words[i];
-                        letterState = LetterCondition.idle;
-                    }
-                    else if (letterState == LetterCondition.spaceAfter || letterState == LetterCondition.number)
-                    {
-                        writenText += ' ' + textFromUser.Words[i];
-                        letterState = LetterCondition.idle;
-                    }
-                    else if (letterState == LetterCondition.spaceBefore || letterState == LetterCondition.noSpace)
-                    {
-                        writenText += textFromUser.Words[i];
-                        letterState = LetterCondition.idle;
-                    }
-                }
-                //This if statement and next similar statements don't have the condition 'check == edle'
-                //because 'check' may have the condition 'dot' after a dot being in text for instance 
-                else if (result == 1)
-                {
-                    writenText += textFromUser.Words[i];
-                    letterState = LetterCondition.tab;
-                }
-                else if (result == 2)
-                {
-                    writenText += textFromUser.Words[i];
-                    letterState = LetterCondition.newString;
-                }
-                else if (result == 3)
-                {
-                    writenText += textFromUser.Words[i];
-                    letterState = LetterCondition.spaceAndUpper;
-                }
-                else if (result == 4)
-                {
-                    continue;
-                }
-                else if (result == 5)
-                {
-                    writenText += ' ' + textFromUser.Words[i];
-                    letterState = LetterCondition.spaceBefore;
-                }
-                else if (result == 6)
-                {
-                    writenText += textFromUser.Words[i];
-                    letterState = LetterCondition.spaceAfter;
-                }
-                else if (result == 7)
-                {
-                    if (surroundState == SurroundingCondition.surroundingIdle && (letterState == LetterCondition.tab || letterState == LetterCondition.newString))
-                    {
-                        writenText += textFromUser.Words[i];
-                        letterState = LetterCondition.spaceBefore;
-                        surroundState = SurroundingCondition.surroundingProcess;
-                    }
-                    else if (surroundState == SurroundingCondition.surroundingIdle)
-                    {
-                        writenText += textFromUser.Words[i];
-                        letterState = LetterCondition.spaceBefore;
-                        surroundState = SurroundingCondition.surroundingProcess;
-                    }
-                    else
-                    {
-                        writenText += textFromUser.Words[i];
-                        letterState = LetterCondition.spaceAfter;
-                        surroundState = SurroundingCondition.surroundingIdle;
-                    }
-                }
-                else if (result == 8)
-                {
-                    writenText += textFromUser.Words[i];
-                    letterState = LetterCondition.noSpace;
-                }
-                else if (result == 9)
-                {
-                    /*if (letterState != number && letterState != spaceBefore && surroundState != surroundingProcess)
-                    {
-                        writenText += ' ' + textFromUser.Words[i];
-                        letterState = number;
-                    }
-                    else
-                    {*/
-                    writenText += textFromUser.Words[i];
-                    letterState = LetterCondition.number;
-                    //}
-                }
-                else if (result == 10) //&& (letterState == idle || letterState == spaceAfter || letterState == number ||
-                                       //letterState == spaceAndUpper || letterState == upper))
-                {
-                    writenText += textFromUser.Words[i];
-                    surroundState = SurroundingCondition.surroundingIdle;
-                    if (letterState == LetterCondition.spaceAfter)
-                        letterState = LetterCondition.spaceBefore;
-                    else if (letterState == LetterCondition.idle || letterState == LetterCondition.noSpace)
-                        letterState = LetterCondition.spaceBefore;
-                    else if (letterState == LetterCondition.spaceAndUpper)
-                        letterState = LetterCondition.upper;
-                    else //if (letterState == spaceBefore || letterState == number)
-                        letterState = LetterCondition.idle;
-                }
                 else
                 {
-                    letterState = LetterCondition.error;
+                  switch (result)
+                    {
+                        case 0:
+                            if (letterState == LetterCondition.spaceAndUpper)
+                            {
+                                writenText += ' ' + textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
+                                letterState = LetterCondition.idle;
+                            }
+                            else if (letterState == LetterCondition.newString || letterState == LetterCondition.upper)
+                            {
+                                writenText += textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
+                                letterState = LetterCondition.idle;
+                            }
+                            else if (letterState == LetterCondition.tab)
+                            {
+                                writenText += textFromUser.Words[i];
+                                letterState = LetterCondition.idle;
+                            }
+                            else if (letterState == LetterCondition.spaceAfter || letterState == LetterCondition.number || letterState == LetterCondition.idle)
+                            {
+                                writenText += ' ' + textFromUser.Words[i];
+                                letterState = LetterCondition.idle;
+                            }
+                            else if (letterState == LetterCondition.spaceBefore || letterState == LetterCondition.noSpace)
+                            {
+                                writenText += textFromUser.Words[i];
+                                letterState = LetterCondition.idle;
+                            }
+                            break;
+                        //This if statement and next similar statements don't have the condition 'check == edle'
+                        //because 'check' may have the condition 'dot' after a dot being in text for instance 
+                        case 1:
+                            writenText += textFromUser.Words[i];
+                            letterState = LetterCondition.tab;
+                            break;
+                        case 2:
+                            writenText += textFromUser.Words[i];
+                            letterState = LetterCondition.newString;
+                            break;
+                        case 3:
+                            writenText += textFromUser.Words[i];
+                            letterState = LetterCondition.spaceAndUpper;
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            writenText += ' ' + textFromUser.Words[i];
+                            letterState = LetterCondition.spaceBefore;
+                            break;
+                        case 6:
+                            writenText += textFromUser.Words[i];
+                            letterState = LetterCondition.spaceAfter;
+                            break;
+                        case 7:
+                            if (surroundState == SurroundingCondition.surroundingIdle && (letterState == LetterCondition.tab || letterState == LetterCondition.newString))
+                            {
+                                writenText += textFromUser.Words[i];
+                                letterState = LetterCondition.spaceBefore;
+                                surroundState = SurroundingCondition.surroundingProcess;
+                            }
+                            else if (surroundState == SurroundingCondition.surroundingIdle)
+                            {
+                                writenText += textFromUser.Words[i];
+                                letterState = LetterCondition.spaceBefore;
+                                surroundState = SurroundingCondition.surroundingProcess;
+                            }
+                            else
+                            {
+                                writenText += textFromUser.Words[i];
+                                letterState = LetterCondition.spaceAfter;
+                                surroundState = SurroundingCondition.surroundingIdle;
+                            }
+                            break;
+                        case 8:
+                            writenText += textFromUser.Words[i];
+                            letterState = LetterCondition.noSpace;
+                            break;
+                        case 9:
+                            /*if (letterState != number && letterState != spaceBefore && surroundState != surroundingProcess)
+                            {
+                                writenText += ' ' + textFromUser.Words[i];
+                                letterState = number;
+                            }
+                            else
+                            {*/
+                            writenText += textFromUser.Words[i];
+                            letterState = LetterCondition.number;
+                            //}
+                            break;
+                        case 10:
+                            writenText += textFromUser.Words[i];
+                            surroundState = SurroundingCondition.surroundingIdle;
+                            if (letterState == LetterCondition.spaceAfter)
+                                letterState = LetterCondition.spaceBefore;
+                            else if (letterState == LetterCondition.idle || letterState == LetterCondition.noSpace)
+                                letterState = LetterCondition.spaceBefore;
+                            else if (letterState == LetterCondition.spaceAndUpper)
+                                letterState = LetterCondition.upper;
+                            else //if (letterState == spaceBefore || letterState == number)
+                                letterState = LetterCondition.idle;
+                            break;
+                        default:
+                            letterState = LetterCondition.error;
+                            break;
+                    }
                 }
             }
             //-------------------------------------the end of The Pipeline-----------------------------------------------------------
