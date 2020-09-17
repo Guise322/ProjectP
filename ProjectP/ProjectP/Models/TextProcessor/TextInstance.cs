@@ -10,5 +10,9 @@ namespace ProjectP.Models.TextProcessor
     {
         public string Text { get; set; }
         public string[] Words { get; set; }
+
+        public LetterCondition LetterState { get; set; }
+
+        public SurroundingCondition SurroundState { get; set; }
     }
 }

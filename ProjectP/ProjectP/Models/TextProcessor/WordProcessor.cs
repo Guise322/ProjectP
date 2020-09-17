@@ -8,7 +8,17 @@ using System.Threading.Tasks;
 
 namespace ProjectP.Models.TextProcessor
 {
-	class WordProcessor
+    enum LetterCondition
+    {
+        tab, newString, spaceAndUpper, spaceBefore, spaceAfter,
+        noSpace, idle, number, nospace, upper, whiteSpace, error
+    };
+    enum SurroundingCondition
+    {
+        surroundingProcess, surroundingIdle
+    };
+
+    class WordProcessor
 	{ 
 		public TextInstance WordProcessing(TextInstance textFromUser)
         {
@@ -20,8 +30,9 @@ namespace ProjectP.Models.TextProcessor
         }
         TextInstance wordProcessing(TextInstance textFromUser)
         {
+            bool wordLetterCheckedBefore = false;
             string leftWord = null;
-            List<string> wordsQueue = new List<string>();
+            List<string> wordsList = new List<string>();
             foreach (var word in textFromUser.Words)
             {
                 foreach (var wordLetter in word)
@@ -29,39 +40,37 @@ namespace ProjectP.Models.TextProcessor
                     if ((wordLetter < 65 || wordLetter > 90) && (wordLetter < 97 || wordLetter > 122)
                             && word.Length != 1)
                     {
-                        if (leftWord != null)
-                            wordsQueue.Add(leftWord);
-                        wordsQueue.Add(wordLetter.ToString());
-                        leftWord = null;
+                        if (wordLetterCheckedBefore)
+                            wordsList[wordsList.Count - 1] += wordLetter;
+                        else
+                        {
+                            if (leftWord != null)
+                                wordsList.Add(leftWord);
+                            wordsList.Add(wordLetter.ToString());
+                            leftWord = null;
+                            wordLetterCheckedBefore = true;
+                        }
                     }
                     else
+                    {
                         leftWord += wordLetter;
+                        wordLetterCheckedBefore = false;
+                    }
                 }
                 if (leftWord != null)
-                    wordsQueue.Add(leftWord);
-                leftWord = null;
+                {
+                    wordsList.Add(leftWord);
+                    leftWord = null;
+                }
             }
             //for (int i = 0; i < wordsQueue.Count - 1; i++)
             //{
             //    wordsQueue[i] += ' ';
             //}
-            textFromUser.Words = wordsQueue.ToArray();
+            textFromUser.Words = wordsList.ToArray();
             return textFromUser;
         }
 
-        enum LetterCondition
-        {
-            tab, newString, spaceAndUpper, spaceBefore, spaceAfter,
-            noSpace, idle, number, nospace, upper, error
-        };
-
-        enum SurroundingCondition
-        {
-            surroundingProcess, surroundingIdle
-        };
-
-        LetterCondition letterState = LetterCondition.idle;
-        SurroundingCondition surroundState = SurroundingCondition.surroundingIdle;
         /*This function returns values defined by table 1:
                                                                     table 1
        |---|---------------------------------------------------------------|
@@ -137,6 +146,10 @@ namespace ProjectP.Models.TextProcessor
         }
         TextInstance writingOfText (TextInstance textFromUser)
         {
+
+            textFromUser.LetterState = LetterCondition.idle;
+        textFromUser.SurroundState = SurroundingCondition.surroundingIdle;
+
             string writenText = "";
 
             //ofstream fileOf;
@@ -150,121 +163,148 @@ namespace ProjectP.Models.TextProcessor
 
             for (int i = 0; i < textFromUser.Words.Length; i++)
             {
-                int result = checkingWord(textFromUser.Words[i].First());
+                int result = checkingWord(textFromUser.Words[i].First(predicate =>
+                {
+                    if (predicate == 32)
+                    {
+                        if (i < (textFromUser.Words.Length - 1) && textFromUser.Words[i].Length != 1)
+                        {
+                            textFromUser.Words[i] = textFromUser.Words[i].Substring(1);
+                            return false;
+                        }
+                        else
+                            return true;
+                    }
+                    else if (i < (textFromUser.Words.Length - 1))
+                    {
+                        textFromUser.Words[i] = textFromUser.Words[i].Trim();
+                        return true;
+                    }
+                    else
+                        return true;
+                }));
+
                 //----------------------------------The Pipeline Of Writing Words Into A File---------------------------------------------
                 if (i == 0)
                 {
                     writenText += textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
                     if (result == 9)
-                        letterState = LetterCondition.number;
+                        textFromUser.LetterState = LetterCondition.number;
                     else
-                        letterState = LetterCondition.idle;
+                        textFromUser.LetterState = LetterCondition.idle;
                 }
                 else
                 {
-                  switch (result)
+                    switch (result)
                     {
                         case 0:
-                            if (letterState == LetterCondition.spaceAndUpper)
+                            if (textFromUser.LetterState == LetterCondition.spaceAndUpper)
                             {
                                 writenText += ' ' + textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
-                                letterState = LetterCondition.idle;
+                                textFromUser.LetterState = LetterCondition.idle;
                             }
-                            else if (letterState == LetterCondition.newString || letterState == LetterCondition.upper)
+                            else if (textFromUser.LetterState == LetterCondition.newString || textFromUser.LetterState == LetterCondition.upper)
                             {
                                 writenText += textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
-                                letterState = LetterCondition.idle;
+                                textFromUser.LetterState = LetterCondition.idle;
                             }
-                            else if (letterState == LetterCondition.tab)
+                            else if (textFromUser.LetterState == LetterCondition.tab || textFromUser.LetterState == LetterCondition.whiteSpace)
                             {
                                 writenText += textFromUser.Words[i];
-                                letterState = LetterCondition.idle;
+                                textFromUser.LetterState = LetterCondition.idle;
                             }
-                            else if (letterState == LetterCondition.spaceAfter || letterState == LetterCondition.number || letterState == LetterCondition.idle)
+                            else if (textFromUser.LetterState == LetterCondition.spaceAfter || textFromUser.LetterState == LetterCondition.number || textFromUser.LetterState == LetterCondition.idle)
                             {
                                 writenText += ' ' + textFromUser.Words[i];
-                                letterState = LetterCondition.idle;
+                                textFromUser.LetterState = LetterCondition.idle;
                             }
-                            else if (letterState == LetterCondition.spaceBefore || letterState == LetterCondition.noSpace)
+                            else if (textFromUser.LetterState == LetterCondition.spaceBefore || textFromUser.LetterState == LetterCondition.noSpace)
                             {
                                 writenText += textFromUser.Words[i];
-                                letterState = LetterCondition.idle;
+                                textFromUser.LetterState = LetterCondition.idle;
                             }
                             break;
-                        //This if statement and next similar statements don't have the condition 'check == edle'
-                        //because 'check' may have the condition 'dot' after a dot being in text for instance 
                         case 1:
                             writenText += textFromUser.Words[i];
-                            letterState = LetterCondition.tab;
+                            textFromUser.LetterState = LetterCondition.tab;
                             break;
                         case 2:
                             writenText += textFromUser.Words[i];
-                            letterState = LetterCondition.newString;
+                            textFromUser.LetterState = LetterCondition.newString;
                             break;
                         case 3:
                             writenText += textFromUser.Words[i];
-                            letterState = LetterCondition.spaceAndUpper;
+                            textFromUser.LetterState = LetterCondition.spaceAndUpper;
                             break;
                         case 4:
                             break;
                         case 5:
                             writenText += ' ' + textFromUser.Words[i];
-                            letterState = LetterCondition.spaceBefore;
+                            textFromUser.LetterState = LetterCondition.spaceBefore;
                             break;
                         case 6:
                             writenText += textFromUser.Words[i];
-                            letterState = LetterCondition.spaceAfter;
+                            textFromUser.LetterState = LetterCondition.spaceAfter;
                             break;
                         case 7:
-                            if (surroundState == SurroundingCondition.surroundingIdle && (letterState == LetterCondition.tab || letterState == LetterCondition.newString))
+                            if (textFromUser.SurroundState == SurroundingCondition.surroundingIdle && (textFromUser.LetterState == LetterCondition.tab || textFromUser.LetterState == LetterCondition.newString))
                             {
                                 writenText += textFromUser.Words[i];
-                                letterState = LetterCondition.spaceBefore;
-                                surroundState = SurroundingCondition.surroundingProcess;
+                                textFromUser.LetterState = LetterCondition.spaceBefore;
+                                textFromUser.SurroundState = SurroundingCondition.surroundingProcess;
                             }
-                            else if (surroundState == SurroundingCondition.surroundingIdle)
+                            else if (textFromUser.SurroundState == SurroundingCondition.surroundingIdle)
                             {
-                                writenText += textFromUser.Words[i];
-                                letterState = LetterCondition.spaceBefore;
-                                surroundState = SurroundingCondition.surroundingProcess;
+                                writenText += ' ' + textFromUser.Words[i];
+                                textFromUser.LetterState = LetterCondition.spaceBefore;
+                                textFromUser.SurroundState = SurroundingCondition.surroundingProcess;
                             }
                             else
                             {
                                 writenText += textFromUser.Words[i];
-                                letterState = LetterCondition.spaceAfter;
-                                surroundState = SurroundingCondition.surroundingIdle;
+                                textFromUser.LetterState = LetterCondition.spaceAfter;
+                                textFromUser.SurroundState = SurroundingCondition.surroundingIdle;
                             }
                             break;
                         case 8:
                             writenText += textFromUser.Words[i];
-                            letterState = LetterCondition.noSpace;
+                            textFromUser.LetterState = LetterCondition.noSpace;
                             break;
                         case 9:
-                            /*if (letterState != number && letterState != spaceBefore && surroundState != surroundingProcess)
+                            /*if (textFromUser.LetterState != number && textFromUser.LetterState != spaceBefore && textFromUser.SurroundState != surroundingProcess)
                             {
                                 writenText += ' ' + textFromUser.Words[i];
-                                letterState = number;
+                                textFromUser.LetterState = number;
                             }
                             else
                             {*/
-                            writenText += textFromUser.Words[i];
-                            letterState = LetterCondition.number;
+                            if (textFromUser.LetterState == LetterCondition.whiteSpace || textFromUser.LetterState == LetterCondition.number)
+                            {
+                                writenText += textFromUser.Words[i];
+                                textFromUser.LetterState = LetterCondition.number;
+                            }
+                            else
+                            {
+                                writenText += ' ' + textFromUser.Words[i];
+                                textFromUser.LetterState = LetterCondition.number;
+                            }
                             //}
                             break;
                         case 10:
                             writenText += textFromUser.Words[i];
-                            surroundState = SurroundingCondition.surroundingIdle;
-                            if (letterState == LetterCondition.spaceAfter)
-                                letterState = LetterCondition.spaceBefore;
-                            else if (letterState == LetterCondition.idle || letterState == LetterCondition.noSpace)
-                                letterState = LetterCondition.spaceBefore;
-                            else if (letterState == LetterCondition.spaceAndUpper)
-                                letterState = LetterCondition.upper;
-                            else //if (letterState == spaceBefore || letterState == number)
-                                letterState = LetterCondition.idle;
+                            textFromUser.SurroundState = SurroundingCondition.surroundingIdle;
+                            textFromUser.LetterState = LetterCondition.whiteSpace;
+                            //if (textFromUser.LetterState == LetterCondition.spaceAfter)
+                            //    textFromUser.LetterState = LetterCondition.spaceBefore;
+                            //else if (textFromUser.LetterState == LetterCondition.idle || textFromUser.LetterState == LetterCondition.noSpace)
+                            //    textFromUser.LetterState = LetterCondition.spaceBefore;
+                            //else if (textFromUser.LetterState == LetterCondition.spaceAndUpper)
+                            //    textFromUser.LetterState = LetterCondition.upper;
+                            //else //if (textFromUser.LetterState == spaceBefore || textFromUser.LetterState == number)
+                            //    textFromUser.LetterState = LetterCondition.idle;
                             break;
                         default:
-                            letterState = LetterCondition.error;
+                            textFromUser.LetterState = LetterCondition.error;
                             break;
                     }
                 }

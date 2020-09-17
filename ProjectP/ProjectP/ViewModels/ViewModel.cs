@@ -17,17 +17,18 @@ namespace ProjectP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        TextInstance writtenText = new TextInstance();
+        TextInstance processedText = new TextInstance();
+        TextInstance previousText;
         TextProcessor textProcessor = new TextProcessor();
         public string TextAreaContent
         {
-            get => writtenText.Text;
+            get => processedText.Text;
             set
             {
                 //SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(value, mode)));
-                writtenText.Text = value;
-                TextInstance processedText = textProcessor.TextProcessing(writtenText);
-                writtenText.Text = processedText.Text;
+                processedText.Text = value;
+                processedText = textProcessor.TextProcessing(processedText); //TODO: make a void function to evaluate the instance
+                previousText.Text = processedText.Text;
                 OnPropertyChanged(nameof(TextAreaContent));
             }
         }
