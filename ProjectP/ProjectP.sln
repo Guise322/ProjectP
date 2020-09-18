@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectP", "ProjectP\ProjectP.csproj", "{5E382244-E6F2-47CC-84C0-201575F8E94C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextProcessorC++", "..\DLLs\TextProcessorC++\TextProcessorC++\TextProcessorC++.vcxproj", "{DC9D06E3-CD95-404C-87F5-098B592F0BFF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,16 +27,6 @@ Global
 		{5E382244-E6F2-47CC-84C0-201575F8E94C}.Release|x64.Build.0 = Release|Any CPU
 		{5E382244-E6F2-47CC-84C0-201575F8E94C}.Release|x86.ActiveCfg = Release|Any CPU
 		{5E382244-E6F2-47CC-84C0-201575F8E94C}.Release|x86.Build.0 = Release|Any CPU
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Debug|x64.ActiveCfg = Debug|x64
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Debug|x64.Build.0 = Debug|x64
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Debug|x86.ActiveCfg = Debug|Win32
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Debug|x86.Build.0 = Debug|Win32
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Release|Any CPU.ActiveCfg = Release|Win32
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Release|x64.ActiveCfg = Release|x64
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Release|x64.Build.0 = Release|x64
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Release|x86.ActiveCfg = Release|Win32
-		{DC9D06E3-CD95-404C-87F5-098B592F0BFF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

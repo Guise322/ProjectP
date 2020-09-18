@@ -9,10 +9,8 @@ namespace ProjectP.Models.TextProcessor
     class TextInstance
     {
         public string Text { get; set; }
+        public string ProcessedText { get; set; }
         public string[] Words { get; set; }
-
-        public LetterCondition LetterState { get; set; }
-
-        public SurroundingCondition SurroundState { get; set; }
+        public string[] PreviousWords { get; set; }
     }
 }

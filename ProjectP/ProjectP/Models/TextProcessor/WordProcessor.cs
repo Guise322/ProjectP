@@ -20,15 +20,15 @@ namespace ProjectP.Models.TextProcessor
 
     class WordProcessor
 	{ 
-		public TextInstance WordProcessing(TextInstance textFromUser)
+		public void WordProcessing(TextInstance textFromUser)
         {
-			return wordProcessing(textFromUser);
+			wordProcessing(textFromUser);
         }
-        public TextInstance WritingText(TextInstance textFromUser)
+        public void WritingOfText(TextInstance textFromUser)
         {
-            return writingOfText(textFromUser);
+            writingOfText(textFromUser);
         }
-        TextInstance wordProcessing(TextInstance textFromUser)
+        public void wordProcessing(TextInstance textFromUser)
         {
             bool wordLetterCheckedBefore = false;
             string leftWord = null;
@@ -63,12 +63,7 @@ namespace ProjectP.Models.TextProcessor
                     leftWord = null;
                 }
             }
-            //for (int i = 0; i < wordsQueue.Count - 1; i++)
-            //{
-            //    wordsQueue[i] += ' ';
-            //}
             textFromUser.Words = wordsList.ToArray();
-            return textFromUser;
         }
 
         /*This function returns values defined by table 1:
@@ -144,22 +139,13 @@ namespace ProjectP.Models.TextProcessor
             else
                 return 0;
         }
-        TextInstance writingOfText (TextInstance textFromUser)
+        void writingOfText (TextInstance textFromUser)
         {
 
-            textFromUser.LetterState = LetterCondition.idle;
-        textFromUser.SurroundState = SurroundingCondition.surroundingIdle;
+            LetterCondition LetterState = LetterCondition.idle;
+            SurroundingCondition SurroundState = SurroundingCondition.surroundingIdle;
 
             string writenText = "";
-
-            //ofstream fileOf;
-
-            //fileOf.open("text.txt");
-
-            //if (fileOf.is_open())
-            //{
-            //cout << "Write some text below" << endl;
-            //getline(cin, writenText);
 
             for (int i = 0; i < textFromUser.Words.Length; i++)
             {
@@ -189,149 +175,128 @@ namespace ProjectP.Models.TextProcessor
                 {
                     writenText += textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
                     if (result == 9)
-                        textFromUser.LetterState = LetterCondition.number;
+                        LetterState = LetterCondition.number;
                     else
-                        textFromUser.LetterState = LetterCondition.idle;
+                        LetterState = LetterCondition.idle;
                 }
                 else
                 {
                     switch (result)
                     {
                         case 0:
-                            if (textFromUser.LetterState == LetterCondition.spaceAndUpper)
+                            if (LetterState == LetterCondition.spaceAndUpper)
                             {
                                 writenText += ' ' + textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
-                                textFromUser.LetterState = LetterCondition.idle;
+                                LetterState = LetterCondition.idle;
                             }
-                            else if (textFromUser.LetterState == LetterCondition.newString || textFromUser.LetterState == LetterCondition.upper)
+                            else if (LetterState == LetterCondition.newString || LetterState == LetterCondition.upper)
                             {
                                 writenText += textFromUser.Words[i].First().ToString().ToUpper() + textFromUser.Words[i].Substring(1);
-                                textFromUser.LetterState = LetterCondition.idle;
+                                LetterState = LetterCondition.idle;
                             }
-                            else if (textFromUser.LetterState == LetterCondition.tab || textFromUser.LetterState == LetterCondition.whiteSpace)
+                            else if (LetterState == LetterCondition.tab || LetterState == LetterCondition.whiteSpace)
                             {
                                 writenText += textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.idle;
+                                LetterState = LetterCondition.idle;
                             }
-                            else if (textFromUser.LetterState == LetterCondition.spaceAfter || textFromUser.LetterState == LetterCondition.number || textFromUser.LetterState == LetterCondition.idle)
+                            else if (LetterState == LetterCondition.spaceAfter || LetterState == LetterCondition.number || LetterState == LetterCondition.idle)
                             {
                                 writenText += ' ' + textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.idle;
+                                LetterState = LetterCondition.idle;
                             }
-                            else if (textFromUser.LetterState == LetterCondition.spaceBefore || textFromUser.LetterState == LetterCondition.noSpace)
+                            else if (LetterState == LetterCondition.spaceBefore || LetterState == LetterCondition.noSpace)
                             {
                                 writenText += textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.idle;
+                                LetterState = LetterCondition.idle;
                             }
                             break;
                         case 1:
                             writenText += textFromUser.Words[i];
-                            textFromUser.LetterState = LetterCondition.tab;
+                            LetterState = LetterCondition.tab;
                             break;
                         case 2:
                             writenText += textFromUser.Words[i];
-                            textFromUser.LetterState = LetterCondition.newString;
+                            LetterState = LetterCondition.newString;
                             break;
                         case 3:
                             writenText += textFromUser.Words[i];
-                            textFromUser.LetterState = LetterCondition.spaceAndUpper;
+                            LetterState = LetterCondition.spaceAndUpper;
                             break;
                         case 4:
                             break;
                         case 5:
                             writenText += ' ' + textFromUser.Words[i];
-                            textFromUser.LetterState = LetterCondition.spaceBefore;
+                            LetterState = LetterCondition.spaceBefore;
                             break;
                         case 6:
                             writenText += textFromUser.Words[i];
-                            textFromUser.LetterState = LetterCondition.spaceAfter;
+                            LetterState = LetterCondition.spaceAfter;
                             break;
                         case 7:
-                            if (textFromUser.SurroundState == SurroundingCondition.surroundingIdle && (textFromUser.LetterState == LetterCondition.tab || textFromUser.LetterState == LetterCondition.newString))
+                            if (SurroundState == SurroundingCondition.surroundingIdle && (LetterState == LetterCondition.tab || LetterState == LetterCondition.newString))
                             {
                                 writenText += textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.spaceBefore;
-                                textFromUser.SurroundState = SurroundingCondition.surroundingProcess;
+                                LetterState = LetterCondition.spaceBefore;
+                                SurroundState = SurroundingCondition.surroundingProcess;
                             }
-                            else if (textFromUser.SurroundState == SurroundingCondition.surroundingIdle)
+                            else if (SurroundState == SurroundingCondition.surroundingIdle)
                             {
                                 writenText += ' ' + textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.spaceBefore;
-                                textFromUser.SurroundState = SurroundingCondition.surroundingProcess;
+                                LetterState = LetterCondition.spaceBefore;
+                                SurroundState = SurroundingCondition.surroundingProcess;
                             }
                             else
                             {
                                 writenText += textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.spaceAfter;
-                                textFromUser.SurroundState = SurroundingCondition.surroundingIdle;
+                                LetterState = LetterCondition.spaceAfter;
+                                SurroundState = SurroundingCondition.surroundingIdle;
                             }
                             break;
                         case 8:
                             writenText += textFromUser.Words[i];
-                            textFromUser.LetterState = LetterCondition.noSpace;
+                            LetterState = LetterCondition.noSpace;
                             break;
                         case 9:
-                            /*if (textFromUser.LetterState != number && textFromUser.LetterState != spaceBefore && textFromUser.SurroundState != surroundingProcess)
+                            /*if (LetterState != number && LetterState != spaceBefore && SurroundState != surroundingProcess)
                             {
                                 writenText += ' ' + textFromUser.Words[i];
-                                textFromUser.LetterState = number;
+                                LetterState = number;
                             }
                             else
                             {*/
-                            if (textFromUser.LetterState == LetterCondition.whiteSpace || textFromUser.LetterState == LetterCondition.number)
+                            if (LetterState == LetterCondition.whiteSpace || LetterState == LetterCondition.number)
                             {
                                 writenText += textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.number;
+                                LetterState = LetterCondition.number;
                             }
                             else
                             {
                                 writenText += ' ' + textFromUser.Words[i];
-                                textFromUser.LetterState = LetterCondition.number;
+                                LetterState = LetterCondition.number;
                             }
                             //}
                             break;
                         case 10:
                             writenText += textFromUser.Words[i];
-                            textFromUser.SurroundState = SurroundingCondition.surroundingIdle;
-                            textFromUser.LetterState = LetterCondition.whiteSpace;
-                            //if (textFromUser.LetterState == LetterCondition.spaceAfter)
-                            //    textFromUser.LetterState = LetterCondition.spaceBefore;
-                            //else if (textFromUser.LetterState == LetterCondition.idle || textFromUser.LetterState == LetterCondition.noSpace)
-                            //    textFromUser.LetterState = LetterCondition.spaceBefore;
-                            //else if (textFromUser.LetterState == LetterCondition.spaceAndUpper)
-                            //    textFromUser.LetterState = LetterCondition.upper;
-                            //else //if (textFromUser.LetterState == spaceBefore || textFromUser.LetterState == number)
-                            //    textFromUser.LetterState = LetterCondition.idle;
+                            SurroundState = SurroundingCondition.surroundingIdle;
+                            LetterState = LetterCondition.whiteSpace;
+                            //if (LetterState == LetterCondition.spaceAfter)
+                            //    LetterState = LetterCondition.spaceBefore;
+                            //else if (LetterState == LetterCondition.idle || LetterState == LetterCondition.noSpace)
+                            //    LetterState = LetterCondition.spaceBefore;
+                            //else if (LetterState == LetterCondition.spaceAndUpper)
+                            //    LetterState = LetterCondition.upper;
+                            //else //if (LetterState == spaceBefore || LetterState == number)
+                            //    LetterState = LetterCondition.idle;
                             break;
                         default:
-                            textFromUser.LetterState = LetterCondition.error;
+                            LetterState = LetterCondition.error;
                             break;
                     }
                 }
             }
             //-------------------------------------the end of The Pipeline-----------------------------------------------------------
-            /*CoInitialize(NULL);
-
-            PastWrapper::IPastWrapperInterfacePtr iPastInterfacePtr;
-
-            HRESULT hRes = iPastInterfacePtr.CreateInstance(PastWrapper::CLSID_PastWrapper);
-
-            BSTR str;
-            BSTR nameOfProcessEXE = SysAllocString(L"Notepad");
-            BSTR nameOfNeededFile = SysAllocString(L"text");
-
-            const char* cstr = writenText.c_str();
-            BSTR dataToPast = _com_util::ConvertStringToBSTR(cstr);
-            iPastInterfacePtr->PastWr(nameOfProcessEXE, nameOfNeededFile, dataToPast);
-
-            CoUninitialize();*/
-            //fileOf << writenText;
-            //fileOf.close();
-            //}
-            //else
-            //cout << "The file can't be opened";
-            textFromUser.Text = writenText;
-            return textFromUser;
+            textFromUser.ProcessedText = writenText;
         }
     }
 }

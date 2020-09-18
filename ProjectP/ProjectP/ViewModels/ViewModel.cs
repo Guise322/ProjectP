@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Runtime.InteropServices;
-using ProjectP.Models.ImportNativeCode;
 using ProjectP.Models.TextProcessor;
 
 namespace ProjectP.ViewModels
@@ -17,18 +15,17 @@ namespace ProjectP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        TextInstance processedText = new TextInstance();
-        TextInstance previousText;
+        TextInstance textInstance = new TextInstance();
         TextProcessor textProcessor = new TextProcessor();
         public string TextAreaContent
         {
-            get => processedText.Text;
+            get => textInstance.ProcessedText;
             set
             {
                 //SetProperty(ref _textAreaContent, Marshal.PtrToStringAnsi(ImportNativeCode.DllCpp(value, mode)));
-                processedText.Text = value;
-                processedText = textProcessor.TextProcessing(processedText); //TODO: make a void function to evaluate the instance
-                previousText.Text = processedText.Text;
+                textInstance.Text = value;
+                textProcessor.TextProcessing(textInstance);
+                textInstance.PreviousWords = textInstance.Words;
                 OnPropertyChanged(nameof(TextAreaContent));
             }
         }

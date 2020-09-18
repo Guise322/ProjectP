@@ -61,7 +61,6 @@
     <Compile Include="Models\TextProcessor\TextInstance.cs" />
     <Compile Include="Models\TextProcessor\TextProcessor.cs" />
     <Compile Include="Models\TextProcessor\WordProcessor.cs" />
-    <Compile Include="Requests\RequestsFormer.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -71,7 +70,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\ImportNativeCode\ImportNativeCode.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
