@@ -1,0 +1,29 @@
+﻿@page "/"
+@using ProjectP.Models.TextProcessor;
+
+<head>
+    <h1>This is ProjectP!</h1>
+</head>
+<body>
+    Write some text.
+    <div>
+        <textarea @bind="Text" @bind:event="oninput" rows="20" cols="90"></textarea>
+    </div>
+</body>
+
+@code
+{
+    TextInstance textInstance = new TextInstance();
+    TextProcessor textProcessor = new TextProcessor();
+
+    string Text
+    {
+        get => textInstance.ProcessedText;
+        set
+        {
+            textInstance.Text = value;
+            textProcessor.TextProcessing(textInstance);
+            textInstance.PreviousWords = textInstance.Words;
+        }
+    }
+}
