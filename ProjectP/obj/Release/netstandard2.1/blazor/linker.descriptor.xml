@@ -1,5 +1,0 @@
-﻿<linker>
-  <assembly fullname="ProjectPPWA">
-    <type fullname="*" required="true" />
-  </assembly>
-</linker>

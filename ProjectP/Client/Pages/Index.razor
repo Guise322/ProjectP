@@ -1,0 +1,26 @@
+﻿@page "/"
+@using ProjectP.Shared
+@inject HttpClient Http
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@if (instance == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1 class="col-sm-9"> @instance.Text</h1>
+}
+
+@code {
+    private TextInstance instance;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.PostAsJsonAsync<TextInstance>("Text", new TextInstance() {Text = "Hello, Polindos!"});
+        instance = await response.Content.ReadFromJsonAsync<TextInstance>();
+    }
+}
