@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/dmitry/code/ProjectP/Client/ProjectP.Client.csproj": {}
+    "/home/dmitry/code/ProjectP/ProjectP/Client/ProjectP.Client.csproj": {}
   },
   "projects": {
-    "/home/dmitry/code/ProjectP/Client/ProjectP.Client.csproj": {
+    "/home/dmitry/code/ProjectP/ProjectP/Client/ProjectP.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/dmitry/code/ProjectP/Client/ProjectP.Client.csproj",
+        "projectUniqueName": "/home/dmitry/code/ProjectP/ProjectP/Client/ProjectP.Client.csproj",
         "projectName": "ProjectP.Client",
-        "projectPath": "/home/dmitry/code/ProjectP/Client/ProjectP.Client.csproj",
+        "projectPath": "/home/dmitry/code/ProjectP/ProjectP/Client/ProjectP.Client.csproj",
         "packagesPath": "/home/dmitry/.nuget/packages/",
-        "outputPath": "/home/dmitry/code/ProjectP/Client/obj/",
+        "outputPath": "/home/dmitry/code/ProjectP/ProjectP/Client/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/dmitry/.nuget/NuGet/NuGet.Config"
@@ -25,8 +25,8 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
-              "/home/dmitry/code/ProjectP/Shared/ProjectP.Shared.csproj": {
-                "projectPath": "/home/dmitry/code/ProjectP/Shared/ProjectP.Shared.csproj"
+              "/home/dmitry/code/ProjectP/ProjectP/Shared/ProjectP.Shared.csproj": {
+                "projectPath": "/home/dmitry/code/ProjectP/ProjectP/Shared/ProjectP.Shared.csproj"
               }
             }
           }
@@ -56,7 +56,7 @@
             },
             "System.Net.Http.Json": {
               "target": "Package",
-              "version": "[3.2.0, )"
+              "version": "[3.2.1, )"
             }
           },
           "imports": [
@@ -74,18 +74,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/dmitry/code/ProjectP/Shared/ProjectP.Shared.csproj": {
+    "/home/dmitry/code/ProjectP/ProjectP/Shared/ProjectP.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/dmitry/code/ProjectP/Shared/ProjectP.Shared.csproj",
+        "projectUniqueName": "/home/dmitry/code/ProjectP/ProjectP/Shared/ProjectP.Shared.csproj",
         "projectName": "ProjectP.Shared",
-        "projectPath": "/home/dmitry/code/ProjectP/Shared/ProjectP.Shared.csproj",
+        "projectPath": "/home/dmitry/code/ProjectP/ProjectP/Shared/ProjectP.Shared.csproj",
         "packagesPath": "/home/dmitry/.nuget/packages/",
-        "outputPath": "/home/dmitry/code/ProjectP/Shared/obj/",
+        "outputPath": "/home/dmitry/code/ProjectP/ProjectP/Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/dmitry/.nuget/NuGet/NuGet.Config"
@@ -124,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
         }
       }
     }

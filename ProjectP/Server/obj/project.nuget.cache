@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kfh44DPcFUHGltLhr/QfOtVci+HeOZJzp5K72TzrdWTv2qp9I1jp956Ca5Ecw6ijX0zrvw2UHhCOzk8pPKzVaw==",
+  "dgSpecHash": "CpUBXtCvRaJUKI15HzyNOkApTcHn+s6HaTwGC3X04VvwgT40R269GoCN1XuGsChHBosyBWjK/Q5/yE52MEt99Q==",
   "success": true,
-  "projectFilePath": "/home/dmitry/code/ProjectP/Server/ProjectP.Server.csproj",
+  "projectFilePath": "/home/dmitry/code/ProjectP/ProjectP/Server/ProjectP.Server.csproj",
   "expectedPackageFiles": [
     "/home/dmitry/.nuget/packages/microsoft.aspnetcore.authorization/3.1.6/microsoft.aspnetcore.authorization.3.1.6.nupkg.sha512",
     "/home/dmitry/.nuget/packages/microsoft.aspnetcore.components/3.1.6/microsoft.aspnetcore.components.3.1.6.nupkg.sha512",
@@ -29,8 +29,8 @@
     "/home/dmitry/.nuget/packages/microsoft.extensions.primitives/3.1.6/microsoft.extensions.primitives.3.1.6.nupkg.sha512",
     "/home/dmitry/.nuget/packages/microsoft.jsinterop/3.1.6/microsoft.jsinterop.3.1.6.nupkg.sha512",
     "/home/dmitry/.nuget/packages/microsoft.jsinterop.webassembly/3.2.1/microsoft.jsinterop.webassembly.3.2.1.nupkg.sha512",
-    "/home/dmitry/.nuget/packages/system.net.http.json/3.2.0/system.net.http.json.3.2.0.nupkg.sha512",
-    "/home/dmitry/.nuget/packages/system.text.json/4.7.1/system.text.json.4.7.1.nupkg.sha512"
+    "/home/dmitry/.nuget/packages/system.net.http.json/3.2.1/system.net.http.json.3.2.1.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512"
   ],
   "logs": []
 }

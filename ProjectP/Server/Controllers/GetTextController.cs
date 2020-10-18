@@ -10,24 +10,25 @@ using Microsoft.Extensions.Logging;
 namespace ProjectP.Server.Controllers
 {
     [ApiController]
-    [Route("Text")]
+    [Route("GText")]
     public class GetTextController : ControllerBase
     {
 
         private ITextInstance _textInstance;
         private ITextProcessor _textProcessor;
 
-        public GetTextController(ITextInstance textInstance, ITextProcessor textProcessor)
+        public GetTextController(ITextProcessor textProcessor)
         {
-            _textInstance = textInstance;
             _textProcessor = textProcessor;
         }
         // To run the app with a secure connection, type the --urls http://localhost:5000 command
         [HttpPost]
-        public ITextInstance GetTextInstance()
+        public TextInstance PostTextInstance(TextInstance textInstance)
         {
-            _textProcessor.textProcessing(_textInstance);
-            return _textInstance;
+            _textInstance = textInstance;
+            _textInstance.text += "ff";
+            return _textInstance as TextInstance;
+            //_textProcessor.textProcessing(_textInstance);
         }
     }
 }

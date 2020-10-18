@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/dmitry/code/ProjectP/Shared/ProjectP.Shared.csproj",
+      "projectUniqueName": "/home/dmitry/code/ProjectP/ProjectP/Shared/ProjectP.Shared.csproj",
       "projectName": "ProjectP.Shared",
-      "projectPath": "/home/dmitry/code/ProjectP/Shared/ProjectP.Shared.csproj",
+      "projectPath": "/home/dmitry/code/ProjectP/ProjectP/Shared/ProjectP.Shared.csproj",
       "packagesPath": "/home/dmitry/.nuget/packages/",
-      "outputPath": "/home/dmitry/code/ProjectP/Shared/obj/",
+      "outputPath": "/home/dmitry/code/ProjectP/ProjectP/Shared/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/dmitry/.nuget/NuGet/NuGet.Config"
@@ -56,7 +56,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
       }
     }
   }
