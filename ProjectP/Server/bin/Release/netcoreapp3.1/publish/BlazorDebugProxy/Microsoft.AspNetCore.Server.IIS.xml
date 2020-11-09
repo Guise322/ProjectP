@@ -288,13 +288,13 @@
         <member name="P:Microsoft.AspNetCore.Server.IIS.CoreStrings.MaxRequestLimitWarning">
             <summary>Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength. HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS. You can disable the limit by either removing  ...</summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenFourAsciiByProjectPoUtf16AndCompareToChars(System.Char@,System.UInt32)">
+        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenFourAsciiBytesToUtf16AndCompareToChars(System.Char@,System.UInt32)">
             <summary>
             Given a DWORD which represents a buffer of 4 bytes, widens the buffer into 4 WORDs and
             compares them to the WORD buffer with machine endianness.
             </summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenTwoAsciiByProjectPoUtf16AndCompareToChars(System.Char@,System.UInt16)">
+        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenTwoAsciiBytesToUtf16AndCompareToChars(System.Char@,System.UInt16)">
             <summary>
             Given a WORD which represents a buffer of 2 bytes, widens the buffer into 2 WORDs and
             compares them to the WORD buffer with machine endianness.

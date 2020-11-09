@@ -1,7 +1,7 @@
 {
   "FilesToCompress": [
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/JykmOxR3hTAHx3usBRR5RWxedquy4eEHl7xpm7fUYoA=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/SuJZBOj0q0T3WjLPD0bCXXassO0KyOGnu_r25tWxap0=.hash",
       "Source": "\/home\/dmitry\/code\/ProjectP\/ProjectP\/Client\/obj\/Debug\/netstandard2.1\/blazor\/unlinked\/ProjectP.Client.dll",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/ProjectP.Client.dll.gz"
     },
@@ -191,7 +191,7 @@
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/Microsoft.Extensions.Logging.Abstractions.dll.gz"
     },
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/BWVgqYbZnalmlc8ib6DfuPL2mA4go73cZfIa9lgX9ko=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/MSCFwQasiOBiuplUG5wDhSX0JwvXV0CFa04q-AhKcnE=.hash",
       "Source": "\/home\/dmitry\/code\/ProjectP\/ProjectP\/Client\/obj\/Debug\/netstandard2.1\/blazor\/unlinked\/ProjectP.Shared.dll",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/ProjectP.Shared.dll.gz"
     },
@@ -266,12 +266,12 @@
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/Microsoft.JSInterop.WebAssembly.dll.gz"
     },
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/unMnV-rbCoXMiJmVsOtQUMmOHnsOg6RrOVOAy63D1Nc=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/R3Tyv75liHd-sAuA98eBeT_kAUZ12YGFK3aHprNPjKg=.hash",
       "Source": "\/home\/dmitry\/code\/ProjectP\/ProjectP\/Client\/obj\/Debug\/netstandard2.1\/blazor\/unlinked\/ProjectP.Client.pdb",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/ProjectP.Client.pdb.gz"
     },
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/RCEj0j2HxD9sSAeZqskTRTu1O5FR2vdcIecb_PKIfE8=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/aHXhwQ_BjN4AOyRZsS_SCe1hJ_HX40BLJx0G7UhTzCU=.hash",
       "Source": "\/home\/dmitry\/code\/ProjectP\/ProjectP\/Client\/obj\/Debug\/netstandard2.1\/blazor\/unlinked\/ProjectP.Shared.pdb",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/_bin\/ProjectP.Shared.pdb.gz"
     },
@@ -296,12 +296,12 @@
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/blazor.webassembly.js.gz"
     },
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/cptV7kCgbfqFVRvURqLpnXrFGHr_Ge_MmiMHXpG1dFs=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/ePym9mkxqoTd4WtIZ1geQJxFV-O8odAIOCDqxAEsXLI=.hash",
       "Source": "\/home\/dmitry\/code\/ProjectP\/ProjectP\/Client\/obj\/Debug\/netstandard2.1\/blazor\/blazor.boot.json",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/_framework\/blazor.boot.json.gz"
     },
     {
-      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/0RCDdKCiqJpHR1ipKi2UEzpNcdCztNw1U_uQxD-V1cg=.hash",
+      "InputSource": "obj\/Debug\/netstandard2.1\/integrity\/nnu8lNLmgH4fqtj_JMeziXmlXJY3ZzYLtzkAapktpyc=.hash",
       "Source": "\/home\/dmitry\/code\/ProjectP\/ProjectP\/Client\/obj\/Debug\/netstandard2.1\/blazor\/service-worker-assets.js",
       "Target": "obj\/Debug\/netstandard2.1\/compressed\/service-worker-assets.js.gz"
     }

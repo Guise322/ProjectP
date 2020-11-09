@@ -1,0 +1,9 @@
+/home/dmitry/code/ProjectP/ProjectP/Shared/bin/--Release/netstandard2.1/ProjectP.Shared.deps.json
+/home/dmitry/code/ProjectP/ProjectP/Shared/bin/--Release/netstandard2.1/ProjectP.Shared.dll
+/home/dmitry/code/ProjectP/ProjectP/Shared/bin/--Release/netstandard2.1/ProjectP.Shared.pdb
+/home/dmitry/code/ProjectP/ProjectP/Shared/obj/--Release/netstandard2.1/ProjectP.Shared.csprojAssemblyReference.cache
+/home/dmitry/code/ProjectP/ProjectP/Shared/obj/--Release/netstandard2.1/ProjectP.Shared.AssemblyInfoInputs.cache
+/home/dmitry/code/ProjectP/ProjectP/Shared/obj/--Release/netstandard2.1/ProjectP.Shared.AssemblyInfo.cs
+/home/dmitry/code/ProjectP/ProjectP/Shared/obj/--Release/netstandard2.1/ProjectP.Shared.csproj.CoreCompileInputs.cache
+/home/dmitry/code/ProjectP/ProjectP/Shared/obj/--Release/netstandard2.1/ProjectP.Shared.dll
+/home/dmitry/code/ProjectP/ProjectP/Shared/obj/--Release/netstandard2.1/ProjectP.Shared.pdb

@@ -1344,13 +1344,13 @@
             <paramref name="values"/>, and <paramref name="scores"/>.
             </para>
             <para>
-            The constructor is provided to enable unit ProjectPs of implementations of <see cref="T:Microsoft.AspNetCore.Routing.Matching.EndpointSelector"/>
+            The constructor is provided to enable unit tests of implementations of <see cref="T:Microsoft.AspNetCore.Routing.Matching.EndpointSelector"/>
             and <see cref="T:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy"/>.
             </para>
             </summary>
             <param name="endpoints">The list of endpoints, sorted in descending priority order.</param>
             <param name="values">The list of <see cref="T:Microsoft.AspNetCore.Routing.RouteValueDictionary"/> instances.</param>
-            <param name="scores">The list of endpoint scores. <see cref="P:Microsoft.AspNetCore.Routing.Matching.CandidaProjectPate.Score"/>.</param>
+            <param name="scores">The list of endpoint scores. <see cref="P:Microsoft.AspNetCore.Routing.Matching.CandidateState.Score"/>.</param>
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidateSet.Count">
             <summary>
@@ -1359,12 +1359,12 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidateSet.Item(System.Int32)">
             <summary>
-            Gets the <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidaProjectPate"/> associated with the candidate <see cref="T:Microsoft.AspNetCore.Http.Endpoint"/>
+            Gets the <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidateState"/> associated with the candidate <see cref="T:Microsoft.AspNetCore.Http.Endpoint"/>
             at <paramref name="index"/>.
             </summary>
             <param name="index">The candidate index.</param>
             <returns>
-            A reference to the <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidaProjectPate"/>. The result is returned by reference.
+            A reference to the <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidateState"/>. The result is returned by reference.
             </returns>
         </member>
         <member name="M:Microsoft.AspNetCore.Routing.Matching.CandidateSet.IsValidCandidate(System.Int32)">
@@ -1430,17 +1430,17 @@
             </para>
             </remarks>
         </member>
-        <member name="T:Microsoft.AspNetCore.Routing.Matching.CandidaProjectPate">
+        <member name="T:Microsoft.AspNetCore.Routing.Matching.CandidateState">
             <summary>
             The state associated with a candidate in a <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidateSet"/>.
             </summary>
         </member>
-        <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidaProjectPate.Endpoint">
+        <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidateState.Endpoint">
             <summary>
             Gets the <see cref="T:Microsoft.AspNetCore.Http.Endpoint"/>.
             </summary>
         </member>
-        <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidaProjectPate.Score">
+        <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidateState.Score">
             <summary>
             Gets the score of the <see cref="T:Microsoft.AspNetCore.Http.Endpoint"/> within the current
             <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidateSet"/>.
@@ -1457,7 +1457,7 @@
             </para>
             </remarks>
         </member>
-        <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidaProjectPate.Values">
+        <member name="P:Microsoft.AspNetCore.Routing.Matching.CandidateState.Values">
             <summary>
             Gets <see cref="T:Microsoft.AspNetCore.Routing.RouteValueDictionary"/> associated with the
             <see cref="T:Microsoft.AspNetCore.Http.Endpoint"/> and the current request.

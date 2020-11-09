@@ -751,9 +751,9 @@
 /home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/blazor/serviceworkers/wwwroot/service-worker.js
 /home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/blazor/service-worker-assets.js
 /home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/WkuXkEV--B1J2kYqjuSPxgHubOHALmA548PhKTed2JE=.hash
-/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/BWVgqYbZnalmlc8ib6DfuPL2mA4go73cZfIa9lgX9ko=.hash
-/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/RCEj0j2HxD9sSAeZqskTRTu1O5FR2vdcIecb_PKIfE8=.hash
-/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/JykmOxR3hTAHx3usBRR5RWxedquy4eEHl7xpm7fUYoA=.hash
-/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/unMnV-rbCoXMiJmVsOtQUMmOHnsOg6RrOVOAy63D1Nc=.hash
-/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/cptV7kCgbfqFVRvURqLpnXrFGHr_Ge_MmiMHXpG1dFs=.hash
-/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/0RCDdKCiqJpHR1ipKi2UEzpNcdCztNw1U_uQxD-V1cg=.hash
+/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/MSCFwQasiOBiuplUG5wDhSX0JwvXV0CFa04q-AhKcnE=.hash
+/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/aHXhwQ_BjN4AOyRZsS_SCe1hJ_HX40BLJx0G7UhTzCU=.hash
+/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/SuJZBOj0q0T3WjLPD0bCXXassO0KyOGnu_r25tWxap0=.hash
+/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/R3Tyv75liHd-sAuA98eBeT_kAUZ12YGFK3aHprNPjKg=.hash
+/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/ePym9mkxqoTd4WtIZ1geQJxFV-O8odAIOCDqxAEsXLI=.hash
+/home/dmitry/code/ProjectP/ProjectP/Client/obj/Debug/netstandard2.1/integrity/nnu8lNLmgH4fqtj_JMeziXmlXJY3ZzYLtzkAapktpyc=.hash

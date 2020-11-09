@@ -2,6 +2,7 @@
 @using System.Threading
 @using System.Threading.Tasks
 @using ProjectP.Shared
+@using System.Net.Http
 @inject HttpClient Http
 
 <h1>Hello, world!</h1><head>
@@ -10,7 +11,7 @@
 <body>
     Write some text.
     <div>
-        <textarea @bind="GetText" @bind:event="oninput" rows="20" cols="90"></textarea>
+        <textarea value="@GetText" @oninput="@ProcText" rows="20" cols="90"></textarea>
     </div>
 </body>
 
@@ -18,26 +19,13 @@ Welcome to your new app.
 
 @code {
     TextInstance instance = new TextInstance();
-    TextInstance fakeInstance = new TextInstance(){text = "hh"};
-    string getText;
-    public string GetText
+    TextInstance fakeInstance = new TextInstance(){Text = "hh"};
+    public string GetText { get; set; } = "gg";
+    public async Task ProcText(ChangeEventArgs args)
     {
-        get
-        {
-            return getText;
-        }
-        set
-        {
-            instance.text = value;
-            Task t = new Task(() => procText());
-            t.Start();
-            t.Wait();
-            getText = fakeInstance.text;
-        }
-    }
-    private async void procText()
-    {
+        instance.Text = args.Value.ToString();
         var response = await Http.PostAsJsonAsync("GText", instance);
-        fakeInstance = await response.Content.ReadFromJsonAsync<TextInstance>();   
+        fakeInstance = await response.Content.ReadFromJsonAsync<TextInstance>();
+        GetText = fakeInstance.Text;
     }
 }

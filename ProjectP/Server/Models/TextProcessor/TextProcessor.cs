@@ -11,12 +11,12 @@ namespace ProjectP.Server.Models.TextProcessor
     {
         public void textProcessing(ITextInstance textInstance)
         {
-            int wordsNumber = textInstance.text.Split(' ').Length;
+            int wordsNumber = textInstance.Text.Split(' ').Length;
             char[] с = new char[] { ' '};
             if (wordsNumber != 1)
-                textInstance.Words = textInstance.text.Split(с, wordsNumber - 1);
+                textInstance.Words = textInstance.Text.Split(с, wordsNumber - 1);
             else
-                textInstance.Words = textInstance.text.Split(с);
+                textInstance.Words = textInstance.Text.Split(с);
             WordProcessor wordProcessor = new WordProcessor(textInstance);
             wordProcessor.WordProcessing();
             wordProcessor.WritingOfText();

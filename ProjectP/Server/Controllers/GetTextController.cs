@@ -26,7 +26,7 @@ namespace ProjectP.Server.Controllers
         public TextInstance PostTextInstance(TextInstance textInstance)
         {
             _textInstance = textInstance;
-            _textInstance.text += "ff";
+            _textInstance.Text += "kk";
             return _textInstance as TextInstance;
             //_textProcessor.textProcessing(_textInstance);
         }

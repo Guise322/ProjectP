@@ -329,7 +329,7 @@
         </member>
         <member name="T:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.ISystemClock">
             <summary>
-            Abstracts the system clock to facilitate ProjectPing.
+            Abstracts the system clock to facilitate testing.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.ISystemClock.UtcNow">
@@ -379,13 +379,13 @@
             Retrieves the current UTC system time.
             </summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenFourAsciiByProjectPoUtf16AndCompareToChars(System.Char@,System.UInt32)">
+        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenFourAsciiBytesToUtf16AndCompareToChars(System.Char@,System.UInt32)">
             <summary>
             Given a DWORD which represents a buffer of 4 bytes, widens the buffer into 4 WORDs and
             compares them to the WORD buffer with machine endianness.
             </summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenTwoAsciiByProjectPoUtf16AndCompareToChars(System.Char@,System.UInt16)">
+        <member name="M:Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.StringUtilities.WidenTwoAsciiBytesToUtf16AndCompareToChars(System.Char@,System.UInt16)">
             <summary>
             Given a WORD which represents a buffer of 2 bytes, widens the buffer into 2 WORDs and
             compares them to the WORD buffer with machine endianness.
@@ -1481,7 +1481,7 @@
         <member name="P:Microsoft.AspNetCore.Server.Kestrel.Core.CoreStrings.Http2TellClientToCalmDown">
             <summary>A new stream was refused because this connection has too many streams that haven't finished processing. This may happen if many streams are aborted but not yet cleaned up.</summary>
         </member>
-        <member name="P:Microsoft.AspNetCore.Server.Kestrel.Core.CoreStrings.BadDeveloperCertificaProjectPate">
+        <member name="P:Microsoft.AspNetCore.Server.Kestrel.Core.CoreStrings.BadDeveloperCertificateState">
             <summary>The ASP.NET Core developer certificate is in an invalid state. To fix this issue, run the following commands 'dotnet dev-certs https --clean' and 'dotnet dev-certs https' to remove all existing ASP.NET Core development certificates and create a new untrust ...</summary>
         </member>
         <member name="T:Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode">

@@ -215,68 +215,68 @@
             <param name="inner">The wrapping <see cref="T:System.IO.Stream" />.</param>
             <param name="memoryThreshold">The maximum size to buffer in memory.</param>
         </member>
-        <member name="T:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream">
+        <member name="T:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream">
             <summary>
-            A <see cref="T:System.IO.Stream"/> that buffers content to be written to disk. Use <see cref="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.DrainBufferAsync(System.IO.Stream,System.Threading.CancellationToken)" />
+            A <see cref="T:System.IO.Stream"/> that buffers content to be written to disk. Use <see cref="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.DrainBufferAsync(System.IO.Stream,System.Threading.CancellationToken)" />
             to write buffered content to a target <see cref="T:System.IO.Stream" />.
             </summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.#ctor(System.Int32,System.Nullable{System.Int64},System.Func{System.String})">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.#ctor(System.Int32,System.Nullable{System.Int64},System.Func{System.String})">
             <summary>
-            Initializes a new instance of <see cref="T:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream"/>.
+            Initializes a new instance of <see cref="T:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream"/>.
             </summary>
             <param name="memoryThreshold">
             The maximum amount of memory in bytes to allocate before switching to a file on disk.
             Defaults to 32kb.
             </param>
             <param name="bufferLimit">
-            The maximum amouont of bytes that the <see cref="T:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream"/> is allowed to buffer.
+            The maximum amouont of bytes that the <see cref="T:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream"/> is allowed to buffer.
             </param>
             <param name="tempFileDirectoryAccessor">Provides the location of the directory to write buffered contents to.
             When unspecified, uses the value specified by the environment variable <c>ASPNETCORE_TEMP</c> if available, otherwise
             uses the value returned by <see cref="M:System.IO.Path.GetTempPath"/>.
             </param>
         </member>
-        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.CanRead">
+        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.CanRead">
             <inheritdoc />
         </member>
-        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.CanSeek">
+        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.CanSeek">
             <inheritdoc />
         </member>
-        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.CanWrite">
+        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.CanWrite">
             <inheritdoc />
         </member>
-        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.Length">
+        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.Length">
             <inheritdoc />
         </member>
-        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.Position">
+        <member name="P:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.Position">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.Seek(System.Int64,System.IO.SeekOrigin)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.Seek(System.Int64,System.IO.SeekOrigin)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.Read(System.Byte[],System.Int32,System.Int32)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.Read(System.Byte[],System.Int32,System.Int32)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.Write(System.Byte[],System.Int32,System.Int32)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.Write(System.Byte[],System.Int32,System.Int32)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.Flush">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.Flush">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.FlushAsync(System.Threading.CancellationToken)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.FlushAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.SetLength(System.Int64)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.SetLength(System.Int64)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.DrainBufferAsync(System.IO.Stream,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.DrainBufferAsync(System.IO.Stream,System.Threading.CancellationToken)">
             <summary>
             Drains buffered content to <paramref name="destination"/>.
             </summary>
@@ -284,10 +284,10 @@
             <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken" />.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous drain operation.</returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.Dispose(System.Boolean)">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.Dispose(System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriProjectPream.DisposeAsync">
+        <member name="M:Microsoft.AspNetCore.WebUtilities.FileBufferingWriteStream.DisposeAsync">
             <inheritdoc />
         </member>
         <member name="T:Microsoft.AspNetCore.WebUtilities.FileMultipartSection">

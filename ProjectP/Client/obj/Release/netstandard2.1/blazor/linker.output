@@ -14,6 +14,8 @@ obj/Release/netstandard2.1/blazor/linker/Microsoft.Extensions.Primitives.dll
 obj/Release/netstandard2.1/blazor/linker/Microsoft.JSInterop.dll
 obj/Release/netstandard2.1/blazor/linker/Microsoft.JSInterop.WebAssembly.dll
 obj/Release/netstandard2.1/blazor/linker/mscorlib.dll
+obj/Release/netstandard2.1/blazor/linker/ProjectP.Client.dll
+obj/Release/netstandard2.1/blazor/linker/ProjectP.Shared.dll
 obj/Release/netstandard2.1/blazor/linker/System.Core.dll
 obj/Release/netstandard2.1/blazor/linker/System.dll
 obj/Release/netstandard2.1/blazor/linker/System.Net.Http.dll
@@ -22,8 +24,6 @@ obj/Release/netstandard2.1/blazor/linker/System.Net.Http.WebAssemblyHttpHandler.
 obj/Release/netstandard2.1/blazor/linker/System.Runtime.CompilerServices.Unsafe.dll
 obj/Release/netstandard2.1/blazor/linker/System.Text.Encodings.Web.dll
 obj/Release/netstandard2.1/blazor/linker/System.Text.Json.dll
-obj/Release/netstandard2.1/blazor/linker/ProjectP.Client.dll
-obj/Release/netstandard2.1/blazor/linker/ProjectP.Shared.dll
 obj/Release/netstandard2.1/blazor/linker/WebAssembly.Bindings.dll
 obj/Release/netstandard2.1/blazor/linker/ProjectP.Client.pdb
 obj/Release/netstandard2.1/blazor/linker/ProjectP.Shared.pdb

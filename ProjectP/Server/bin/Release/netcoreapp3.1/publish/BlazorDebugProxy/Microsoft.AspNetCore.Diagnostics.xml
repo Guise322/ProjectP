@@ -504,11 +504,11 @@
         <member name="P:Microsoft.AspNetCore.Diagnostics.Resources.DiagnosticsPageHtml_Information">
             <summary>You are seeing this page because DiagnosticsPageMiddleware was added to your web application.</summary>
         </member>
-        <member name="P:Microsoft.AspNetCore.Diagnostics.Resources.DiagnosticsPageHtml_ProjectPErrorMessage">
-            <summary>ProjectP Error Message</summary>
+        <member name="P:Microsoft.AspNetCore.Diagnostics.Resources.DiagnosticsPageHtml_TestErrorMessage">
+            <summary>Test Error Message</summary>
         </member>
-        <member name="P:Microsoft.AspNetCore.Diagnostics.Resources.DiagnosticsPageHtml_ProjectPErrorSection">
-            <summary>ProjectP Error Page</summary>
+        <member name="P:Microsoft.AspNetCore.Diagnostics.Resources.DiagnosticsPageHtml_TestErrorSection">
+            <summary>Test Error Page</summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Diagnostics.Resources.DiagnosticsPageHtml_Title">
             <summary>Diagnostics Page</summary>
