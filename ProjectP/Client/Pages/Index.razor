@@ -5,7 +5,6 @@
 @using System.Net.Http
 @inject HttpClient Http
 
-<h1>Hello, world!</h1>
 <head>
     <h1>This is ProjectP!</h1>
 </head>
@@ -14,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <textarea class="form-control" value=@GetText @oninput=@ProcText rows="10"></textarea>
+                <div class="textarea" contenteditable="true" value=@GetText @oninput=@ProcText></div>
             </div>
         </div>    
     </div>
